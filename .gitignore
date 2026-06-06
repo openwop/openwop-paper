@@ -1,0 +1,14 @@
+# macOS / editor cruft
+.DS_Store
+*~
+.*.swp
+
+# LaTeX build intermediates (main.pdf is committed deliberately)
+*.aux
+*.log
+*.out
+*.xdv
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.toc

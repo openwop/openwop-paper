@@ -1,0 +1,980 @@
+{
+    "protocolVersion": "1.1",
+    "implementation": {
+        "name": "openwop-workflow-engine-sample",
+        "version": "0.1.0",
+        "vendor": "openwop-samples"
+    },
+    "supportedEnvelopes": [
+        "clarification.request",
+        "schema.request",
+        "schema.response",
+        "error",
+        "media.image",
+        "media.audio",
+        "media.file"
+    ],
+    "schemaVersions": {
+        "runEvent": 1,
+        "capabilities": 1,
+        "clarification.request": 1,
+        "schema.request": 1,
+        "schema.response": 1,
+        "error": 1,
+        "media.image": 1,
+        "media.audio": 1,
+        "media.file": 1
+    },
+    "limits": {
+        "clarificationRounds": 5,
+        "schemaRounds": 3,
+        "envelopesPerTurn": 32,
+        "maxNodeExecutions": 1000,
+        "maxRunDurationMs": 600000
+    },
+    "workspace": {
+        "supported": true,
+        "maxFileBytes": 65536
+    },
+    "kanban": {
+        "supported": true,
+        "features": [
+            "boards",
+            "columns",
+            "cards",
+            "card-move-trigger"
+        ]
+    },
+    "triggerBridge": {
+        "supported": true,
+        "subscriptionStates": [
+            "active",
+            "paused",
+            "failed",
+            "dead-lettered"
+        ],
+        "dedup": true,
+        "retryPolicy": {
+            "maxAttempts": 3,
+            "backoff": "fixed"
+        },
+        "sources": [
+            "queue"
+        ]
+    },
+    "supportedTransports": [
+        "rest",
+        "sse"
+    ],
+    "stream": {
+        "modes": [
+            "values",
+            "updates",
+            "messages",
+            "debug"
+        ]
+    },
+    "fixtures": [
+        "conformance-a2a-task-roundtrip",
+        "conformance-agent-channel-dispatch",
+        "conformance-agent-identity",
+        "conformance-agent-low-confidence",
+        "conformance-agent-memory-cross-tenant",
+        "conformance-agent-memory-redaction",
+        "conformance-agent-memory-roundtrip",
+        "conformance-agent-memory-ttl",
+        "conformance-agent-pack-export",
+        "conformance-agent-pack-handoff-schema-validation",
+        "conformance-agent-pack-install",
+        "conformance-agent-pack-provenance",
+        "conformance-agent-reasoning",
+        "conformance-agent-reasoning-streaming",
+        "conformance-approval",
+        "conformance-cancellable",
+        "conformance-cap-breach",
+        "conformance-capability-missing",
+        "conformance-channel-ttl",
+        "conformance-clarification",
+        "conformance-configurable-schema",
+        "conformance-conversation-capability-negotiation",
+        "conformance-conversation-lifecycle",
+        "conformance-conversation-replay",
+        "conformance-conversation-vs-clarification",
+        "conformance-delay",
+        "conformance-dispatch-cancellable-child",
+        "conformance-dispatch-cross-worker-handoff",
+        "conformance-dispatch-cross-worker-handoff-child-a",
+        "conformance-dispatch-cross-worker-handoff-child-b",
+        "conformance-dispatch-deterministic-fail-child",
+        "conformance-dispatch-input-mapping",
+        "conformance-dispatch-input-mapping-child",
+        "conformance-dispatch-input-mapping-no-default",
+        "conformance-dispatch-loop",
+        "conformance-dispatch-output-mapping",
+        "conformance-dispatch-output-mapping-child",
+        "conformance-dispatch-per-worker-override",
+        "conformance-envelope-nl-to-format-engaged",
+        "conformance-envelope-recovery-applied",
+        "conformance-envelope-refusal",
+        "conformance-envelope-retry-attempted",
+        "conformance-envelope-retry-exhausted",
+        "conformance-envelope-truncated",
+        "conformance-envelope-truncation-cap-exhaustion",
+        "conformance-failure",
+        "conformance-idempotent",
+        "conformance-identity",
+        "conformance-interrupt-auth-required",
+        "conformance-interrupt-external-event",
+        "conformance-interrupt-parent-child-cancel",
+        "conformance-interrupt-parent-child-cancel-child",
+        "conformance-interrupt-quorum",
+        "conformance-mcp-tool-roundtrip",
+        "conformance-message-reducer",
+        "conformance-model-capability-insufficient",
+        "conformance-multi-agent-confidence-escalation",
+        "conformance-multi-agent-handoff",
+        "conformance-multi-agent-handoff-child",
+        "conformance-multi-node",
+        "conformance-noop",
+        "conformance-orchestrator-dispatch",
+        "conformance-orchestrator-low-confidence",
+        "conformance-orchestrator-terminate",
+        "conformance-phase4-nondet-tool",
+        "conformance-phase4-replay-divergence",
+        "conformance-prompt-all-four-kinds",
+        "conformance-prompt-end-to-end",
+        "conformance-run-duration-breach",
+        "conformance-stream-text",
+        "conformance-subworkflow-child",
+        "conformance-subworkflow-input-mapping",
+        "conformance-subworkflow-input-mapping-child",
+        "conformance-subworkflow-input-mapping-no-default",
+        "conformance-subworkflow-mid-run-mutation",
+        "conformance-subworkflow-mid-run-mutation-child",
+        "conformance-subworkflow-parent",
+        "conformance-version-fold",
+        "conformance-wasm-pack-memory-cap-breach",
+        "conformance-wasm-pack-roundtrip",
+        "openwop-smoke-byok-roundtrip",
+        "openwop-smoke-cost-emit"
+    ],
+    "capabilities": {
+        "auth": {
+            "profiles": []
+        },
+        "secrets": {
+            "supported": true,
+            "scopes": [
+                "tenant",
+                "user",
+                "run"
+            ],
+            "resolution": "host-managed"
+        },
+        "aiProviders": {
+            "supported": [
+                "anthropic",
+                "openai",
+                "google"
+            ],
+            "byok": [
+                "anthropic",
+                "openai",
+                "google"
+            ],
+            "policies": {
+                "modes": [
+                    "disabled",
+                    "optional",
+                    "required",
+                    "restricted"
+                ],
+                "scopes": [
+                    "workspace",
+                    "project",
+                    "canvas-type"
+                ],
+                "errorCode": "provider_policy_denied"
+            },
+            "toolCalling": {
+                "supported": true,
+                "providers": [
+                    "anthropic"
+                ]
+            },
+            "embeddings": {
+                "supported": false
+            },
+            "imageGeneration": {
+                "supported": false
+            },
+            "videoGeneration": {
+                "supported": false
+            },
+            "maxInlineMediaBytes": 262144
+        },
+        "interrupts": {
+            "supported": true,
+            "kinds": [
+                "approval",
+                "clarification",
+                "refinement",
+                "cancellation",
+                "external-event"
+            ],
+            "profiles": [
+                "openwop-interrupt-cascade-cancel",
+                "openwop-interrupt-external-event"
+            ]
+        },
+        "replay": {
+            "supported": true,
+            "fork": false
+        },
+        "feedback": {
+            "supported": true,
+            "targets": [
+                "run",
+                "event",
+                "node"
+            ],
+            "signals": [
+                "rating",
+                "correction",
+                "label",
+                "flag"
+            ]
+        },
+        "agents": {
+            "supported": true,
+            "reasoning": {
+                "verbosity": "full",
+                "tokenLimit": 512,
+                "streaming": true
+            },
+            "manifestRuntime": {
+                "supported": true,
+                "handoffValidation": true
+            },
+            "roster": {
+                "supported": true,
+                "installScope": "tenant"
+            },
+            "orgChart": {
+                "supported": true,
+                "installScope": "tenant",
+                "departmentNesting": true,
+                "responsibilityView": true
+            }
+        },
+        "providerUsage": {
+            "supported": true,
+            "costEstimates": true,
+            "currency": "USD"
+        },
+        "prompts": {
+            "supported": true,
+            "endpointsSupported": true,
+            "mutableLibrary": true,
+            "agentBindings": true,
+            "templateKinds": [
+                "system",
+                "user",
+                "few-shot",
+                "schema-hint"
+            ],
+            "variableSources": [
+                "input",
+                "variable",
+                "secret",
+                "context"
+            ],
+            "maxTemplateBytes": 65536,
+            "observability": "full"
+        },
+        "envelopes": {
+            "reasoning": {
+                "supported": true,
+                "promptDirective": "advisory"
+            },
+            "tierOneSubsetCompliance": "warn",
+            "reliability": {
+                "supported": true,
+                "events": [
+                    "envelope.retry.attempted",
+                    "envelope.retry.exhausted",
+                    "envelope.refusal",
+                    "envelope.truncated",
+                    "envelope.recovery.applied",
+                    "envelope.nlToFormat.engaged"
+                ],
+                "maxRetryAttempts": 3,
+                "completion": {
+                    "distinguishesTruncation": true,
+                    "truncationBudgetMultiplier": 2
+                }
+            }
+        },
+        "modelCapabilities": {
+            "supported": true,
+            "advertised": [
+                "discriminator-enum",
+                "function-calling",
+                "long-context",
+                "reasoning",
+                "structured-output"
+            ],
+            "substitutionSupported": false
+        },
+        "memory": {
+            "supported": false,
+            "attribution": {
+                "supported": true,
+                "emitsWriteEvents": true
+            }
+        },
+        "conformance": {
+            "mockAgent": true
+        },
+        "webhooks": {
+            "supported": true,
+            "signed": true,
+            "durable": false
+        },
+        "observability": {
+            "otel": {
+                "namespace": "openwop"
+            }
+        },
+        "runtimeCapabilities": [
+            "artifacts.local",
+            "audit",
+            "observability",
+            "secrets"
+        ],
+        "hostSurfaces": [
+            {
+                "name": "host.a2a",
+                "supported": true,
+                "implementation": "workflow-engine",
+                "note": "RFC 0076 \u00a7A. A2A 0.3 JSON-RPC client from host/a2aSurface.ts \u2014 discover/send/stream/tasks/pushConfig against any peer A2A agent; wire state-form normalized to the pack vocabulary. Server-as-agent methods (publishAgentCard/emit*/pushSend) are demo stubs (sample host has no live A2A server endpoint)."
+            },
+            {
+                "name": "host.aiProviders",
+                "supported": true,
+                "implementation": "workflow-engine",
+                "note": "BYOK via /v1/host/sample/byok/secrets."
+            },
+            {
+                "name": "host.blobStorage",
+                "supported": true,
+                "implementation": "in-memory",
+                "note": "presign() returns a synthetic data: URL."
+            },
+            {
+                "name": "host.cache",
+                "supported": true,
+                "implementation": "in-memory"
+            },
+            {
+                "name": "host.canvas",
+                "supported": true,
+                "implementation": "workflow-engine",
+                "note": "Durable versioned shared-canvas store for vendor.myndhyve.canvas. read/write/create are real (optimistic-concurrency, shallow/deep/replace merge, field projection); crossCanvasInvoke spawns a real child run (depth/cycle guard, awaitTerminal, circuit breaker)."
+            },
+            {
+                "name": "host.chat",
+                "supported": true,
+                "implementation": "workflow-engine",
+                "note": "Bridges vendor.myndhyve.chat to the demo chat store (the same /v1/host/sample/chat tables the SPA reads). sendMessage/progressCard/updateCard run; the suspend-based gate nodes (phaseInputGate/approvalGate/clarificationGate) run via the ctx.suspend/ctx.interrupt primitive (re-invoke resume, interrupt.md)."
+            },
+            {
+                "name": "host.db.nosql",
+                "supported": true,
+                "implementation": "nested-map-document-store",
+                "note": "tenant \u2192 datasource/collection \u2192 doc. Exact-match filters only ($-operators refused); $set/$unset updates. Real impls use MongoDB / DynamoDB / Firestore / CosmosDB."
+            },
+            {
+                "name": "host.db.search",
+                "supported": true,
+                "implementation": "naive-bag-of-words",
+                "note": "Token-frequency relevance score. Real impls use Elasticsearch / OpenSearch / Meilisearch / Typesense."
+            },
+            {
+                "name": "host.db.sql",
+                "supported": true,
+                "implementation": "sqlite-in-memory",
+                "note": "better-sqlite3, one in-memory DB per tenant."
+            },
+            {
+                "name": "host.db.vector",
+                "supported": true,
+                "implementation": "brute-force-cosine",
+                "note": "O(n) cosine over an in-memory Map."
+            },
+            {
+                "name": "host.fs",
+                "supported": true,
+                "implementation": "sandboxed-local-fs",
+                "note": "Sandboxed under /app/data/host-fs."
+            },
+            {
+                "name": "host.interrupts",
+                "supported": true,
+                "implementation": "workflow-engine"
+            },
+            {
+                "name": "host.kanban",
+                "supported": true,
+                "implementation": "workflow-engine",
+                "note": "Bridges vendor.myndhyve.kanban to the demo kanban store (kanbanService.ts) \u2014 boards/cards shared with the builder UI. boardReview/timelinePlan/resourceMonitor are genuinely computed; automation rules persist in-process."
+            },
+            {
+                "name": "host.knowledge",
+                "supported": true,
+                "implementation": "workflow-engine",
+                "note": "Lexical RAG retrieval (token-frequency over a seeded demo corpus) for vendor.myndhyve.knowledge-tools. Real retrieve-with-citations; lexical not semantic (sample host ships no embedding model)."
+            },
+            {
+                "name": "host.kvStorage",
+                "supported": true,
+                "implementation": "in-memory",
+                "note": "Demo only. Restarts wipe state."
+            },
+            {
+                "name": "host.launchStudio",
+                "supported": true,
+                "implementation": "workflow-engine",
+                "note": "Multi-canvas studio backbone for vendor.myndhyve.launch-studio. getStudio returns a seeded demo studio; buildProjectContext/resolveLinkedArtifacts are pure derivations; task dispatch composes ctx.kanban."
+            },
+            {
+                "name": "host.mcp",
+                "supported": false,
+                "implementation": "workflow-engine",
+                "note": "RFC 0020 (Active). Sample-host MCP server mount at /v1/host/sample/mcp; advertise streamable-http transport. OFF by default \u2014 set OPENWOP_MCP_SERVER_ENABLED=true."
+            },
+            {
+                "name": "host.memory",
+                "supported": true,
+                "implementation": "in-memory",
+                "note": "Demo only. RFC 0004 read-side (list/get); host writes a run-summary on completion. Restarts wipe state."
+            },
+            {
+                "name": "host.messaging",
+                "supported": true,
+                "implementation": "in-memory"
+            },
+            {
+                "name": "host.observability",
+                "supported": true,
+                "implementation": "structured-logger",
+                "note": "Routes through the workflow-engine logger."
+            },
+            {
+                "name": "host.queue",
+                "supported": true,
+                "implementation": "in-memory"
+            },
+            {
+                "name": "host.tableStorage",
+                "supported": true,
+                "implementation": "in-memory",
+                "note": "Demo only. No indexes; query is O(n)."
+            },
+            {
+                "name": "host.triggers",
+                "supported": true,
+                "implementation": "workflow-engine",
+                "note": "Trigger entry nodes (webhook/schedule/cron/email/mailhook/rss/form) surface the run-scoped ctx.triggerData payload; runs are started by the RFC 0083 trigger bridge, scheduler, and kanban paths. webhook-respond durably records the reply via ctx.respondToWebhook."
+            },
+            {
+                "name": "host.webResearch",
+                "supported": true,
+                "implementation": "workflow-engine",
+                "note": "For vendor.myndhyve.web-research. fetchBatch is real (concurrent HTTP fetch + readable-text extraction); search is provider-gated \u2014 live when a BYOK secret web-search or OPENWOP_WEBSEARCH_API_KEY is set (Brave-shaped, OPENWOP_WEBSEARCH_BASE_URL override), else an honest demo result; research composes the two."
+            }
+        ],
+        "fs": {
+            "supported": true,
+            "sandboxRoot": "/app/data/host-fs",
+            "maxFileSizeBytes": 52428800
+        },
+        "kvStorage": {
+            "supported": true,
+            "maxKeyBytes": 1024,
+            "maxValueBytes": 1048576,
+            "maxTtlSeconds": 604800,
+            "atomicIncrement": true,
+            "compareAndSwap": true
+        },
+        "tableStorage": {
+            "supported": true,
+            "maxRowsPerTable": 100000,
+            "maxColumnsPerRow": 128,
+            "indexable": false,
+            "fullTextSearch": false
+        },
+        "queueBus": {
+            "supported": true,
+            "backends": [
+                "in-memory"
+            ],
+            "deadLetterSupported": true,
+            "stream": {
+                "supported": false,
+                "fromBeginning": false
+            }
+        },
+        "sql": {
+            "supported": true,
+            "transactions": true,
+            "drivers": [
+                "sqlite"
+            ]
+        },
+        "vectorStore": {
+            "supported": true,
+            "backends": [
+                "in-memory"
+            ]
+        },
+        "blobStorage": {
+            "supported": true,
+            "presignSupported": true,
+            "maxObjectBytes": 52428800
+        },
+        "cache": {
+            "supported": true,
+            "maxValueBytes": 1048576,
+            "maxTtlSeconds": 86400
+        },
+        "mcp": {
+            "supported": false,
+            "serverUrls": [],
+            "serverMount": {
+                "supported": false
+            }
+        }
+    },
+    "extensions": {
+        "sample.notes": "This is the openwop reference application sample. Not production-hardened."
+    },
+    "x-host-openwop-workforce": {
+        "tier": "experimental",
+        "workforces": {
+            "supported": true,
+            "readOnly": true
+        },
+        "governance": {
+            "policyTags": true,
+            "refusalBoundaries": true,
+            "approvalGates": true
+        },
+        "assurance": {
+            "replay": true,
+            "evals": false,
+            "shadow": false
+        },
+        "autonomyTiers": [
+            "review",
+            "guided",
+            "auto"
+        ]
+    },
+    "auth": {
+        "profiles": []
+    },
+    "secrets": {
+        "supported": true,
+        "scopes": [
+            "tenant",
+            "user",
+            "run"
+        ],
+        "resolution": "host-managed"
+    },
+    "aiProviders": {
+        "supported": [
+            "anthropic",
+            "openai",
+            "google"
+        ],
+        "byok": [
+            "anthropic",
+            "openai",
+            "google"
+        ],
+        "policies": {
+            "modes": [
+                "disabled",
+                "optional",
+                "required",
+                "restricted"
+            ],
+            "scopes": [
+                "workspace",
+                "project",
+                "canvas-type"
+            ],
+            "errorCode": "provider_policy_denied"
+        },
+        "toolCalling": {
+            "supported": true,
+            "providers": [
+                "anthropic"
+            ]
+        },
+        "embeddings": {
+            "supported": false
+        },
+        "imageGeneration": {
+            "supported": false
+        },
+        "videoGeneration": {
+            "supported": false
+        },
+        "maxInlineMediaBytes": 262144
+    },
+    "interrupts": {
+        "supported": true,
+        "kinds": [
+            "approval",
+            "clarification",
+            "refinement",
+            "cancellation",
+            "external-event"
+        ],
+        "profiles": [
+            "openwop-interrupt-cascade-cancel",
+            "openwop-interrupt-external-event"
+        ]
+    },
+    "replay": {
+        "supported": true,
+        "fork": false
+    },
+    "feedback": {
+        "supported": true,
+        "targets": [
+            "run",
+            "event",
+            "node"
+        ],
+        "signals": [
+            "rating",
+            "correction",
+            "label",
+            "flag"
+        ]
+    },
+    "agents": {
+        "supported": true,
+        "reasoning": {
+            "verbosity": "full",
+            "tokenLimit": 512,
+            "streaming": true
+        },
+        "manifestRuntime": {
+            "supported": true,
+            "handoffValidation": true
+        },
+        "roster": {
+            "supported": true,
+            "installScope": "tenant"
+        },
+        "orgChart": {
+            "supported": true,
+            "installScope": "tenant",
+            "departmentNesting": true,
+            "responsibilityView": true
+        }
+    },
+    "providerUsage": {
+        "supported": true,
+        "costEstimates": true,
+        "currency": "USD"
+    },
+    "prompts": {
+        "supported": true,
+        "endpointsSupported": true,
+        "mutableLibrary": true,
+        "agentBindings": true,
+        "templateKinds": [
+            "system",
+            "user",
+            "few-shot",
+            "schema-hint"
+        ],
+        "variableSources": [
+            "input",
+            "variable",
+            "secret",
+            "context"
+        ],
+        "maxTemplateBytes": 65536,
+        "observability": "full"
+    },
+    "envelopes": {
+        "reasoning": {
+            "supported": true,
+            "promptDirective": "advisory"
+        },
+        "tierOneSubsetCompliance": "warn",
+        "reliability": {
+            "supported": true,
+            "events": [
+                "envelope.retry.attempted",
+                "envelope.retry.exhausted",
+                "envelope.refusal",
+                "envelope.truncated",
+                "envelope.recovery.applied",
+                "envelope.nlToFormat.engaged"
+            ],
+            "maxRetryAttempts": 3,
+            "completion": {
+                "distinguishesTruncation": true,
+                "truncationBudgetMultiplier": 2
+            }
+        }
+    },
+    "modelCapabilities": {
+        "supported": true,
+        "advertised": [
+            "discriminator-enum",
+            "function-calling",
+            "long-context",
+            "reasoning",
+            "structured-output"
+        ],
+        "substitutionSupported": false
+    },
+    "memory": {
+        "supported": false,
+        "attribution": {
+            "supported": true,
+            "emitsWriteEvents": true
+        }
+    },
+    "conformance": {
+        "mockAgent": true
+    },
+    "webhooks": {
+        "supported": true,
+        "signed": true,
+        "durable": false
+    },
+    "observability": {
+        "otel": {
+            "namespace": "openwop"
+        }
+    },
+    "runtimeCapabilities": [
+        "artifacts.local",
+        "audit",
+        "observability",
+        "secrets"
+    ],
+    "hostSurfaces": [
+        {
+            "name": "host.a2a",
+            "supported": true,
+            "implementation": "workflow-engine",
+            "note": "RFC 0076 \u00a7A. A2A 0.3 JSON-RPC client from host/a2aSurface.ts \u2014 discover/send/stream/tasks/pushConfig against any peer A2A agent; wire state-form normalized to the pack vocabulary. Server-as-agent methods (publishAgentCard/emit*/pushSend) are demo stubs (sample host has no live A2A server endpoint)."
+        },
+        {
+            "name": "host.aiProviders",
+            "supported": true,
+            "implementation": "workflow-engine",
+            "note": "BYOK via /v1/host/sample/byok/secrets."
+        },
+        {
+            "name": "host.blobStorage",
+            "supported": true,
+            "implementation": "in-memory",
+            "note": "presign() returns a synthetic data: URL."
+        },
+        {
+            "name": "host.cache",
+            "supported": true,
+            "implementation": "in-memory"
+        },
+        {
+            "name": "host.canvas",
+            "supported": true,
+            "implementation": "workflow-engine",
+            "note": "Durable versioned shared-canvas store for vendor.myndhyve.canvas. read/write/create are real (optimistic-concurrency, shallow/deep/replace merge, field projection); crossCanvasInvoke spawns a real child run (depth/cycle guard, awaitTerminal, circuit breaker)."
+        },
+        {
+            "name": "host.chat",
+            "supported": true,
+            "implementation": "workflow-engine",
+            "note": "Bridges vendor.myndhyve.chat to the demo chat store (the same /v1/host/sample/chat tables the SPA reads). sendMessage/progressCard/updateCard run; the suspend-based gate nodes (phaseInputGate/approvalGate/clarificationGate) run via the ctx.suspend/ctx.interrupt primitive (re-invoke resume, interrupt.md)."
+        },
+        {
+            "name": "host.db.nosql",
+            "supported": true,
+            "implementation": "nested-map-document-store",
+            "note": "tenant \u2192 datasource/collection \u2192 doc. Exact-match filters only ($-operators refused); $set/$unset updates. Real impls use MongoDB / DynamoDB / Firestore / CosmosDB."
+        },
+        {
+            "name": "host.db.search",
+            "supported": true,
+            "implementation": "naive-bag-of-words",
+            "note": "Token-frequency relevance score. Real impls use Elasticsearch / OpenSearch / Meilisearch / Typesense."
+        },
+        {
+            "name": "host.db.sql",
+            "supported": true,
+            "implementation": "sqlite-in-memory",
+            "note": "better-sqlite3, one in-memory DB per tenant."
+        },
+        {
+            "name": "host.db.vector",
+            "supported": true,
+            "implementation": "brute-force-cosine",
+            "note": "O(n) cosine over an in-memory Map."
+        },
+        {
+            "name": "host.fs",
+            "supported": true,
+            "implementation": "sandboxed-local-fs",
+            "note": "Sandboxed under /app/data/host-fs."
+        },
+        {
+            "name": "host.interrupts",
+            "supported": true,
+            "implementation": "workflow-engine"
+        },
+        {
+            "name": "host.kanban",
+            "supported": true,
+            "implementation": "workflow-engine",
+            "note": "Bridges vendor.myndhyve.kanban to the demo kanban store (kanbanService.ts) \u2014 boards/cards shared with the builder UI. boardReview/timelinePlan/resourceMonitor are genuinely computed; automation rules persist in-process."
+        },
+        {
+            "name": "host.knowledge",
+            "supported": true,
+            "implementation": "workflow-engine",
+            "note": "Lexical RAG retrieval (token-frequency over a seeded demo corpus) for vendor.myndhyve.knowledge-tools. Real retrieve-with-citations; lexical not semantic (sample host ships no embedding model)."
+        },
+        {
+            "name": "host.kvStorage",
+            "supported": true,
+            "implementation": "in-memory",
+            "note": "Demo only. Restarts wipe state."
+        },
+        {
+            "name": "host.launchStudio",
+            "supported": true,
+            "implementation": "workflow-engine",
+            "note": "Multi-canvas studio backbone for vendor.myndhyve.launch-studio. getStudio returns a seeded demo studio; buildProjectContext/resolveLinkedArtifacts are pure derivations; task dispatch composes ctx.kanban."
+        },
+        {
+            "name": "host.mcp",
+            "supported": false,
+            "implementation": "workflow-engine",
+            "note": "RFC 0020 (Active). Sample-host MCP server mount at /v1/host/sample/mcp; advertise streamable-http transport. OFF by default \u2014 set OPENWOP_MCP_SERVER_ENABLED=true."
+        },
+        {
+            "name": "host.memory",
+            "supported": true,
+            "implementation": "in-memory",
+            "note": "Demo only. RFC 0004 read-side (list/get); host writes a run-summary on completion. Restarts wipe state."
+        },
+        {
+            "name": "host.messaging",
+            "supported": true,
+            "implementation": "in-memory"
+        },
+        {
+            "name": "host.observability",
+            "supported": true,
+            "implementation": "structured-logger",
+            "note": "Routes through the workflow-engine logger."
+        },
+        {
+            "name": "host.queue",
+            "supported": true,
+            "implementation": "in-memory"
+        },
+        {
+            "name": "host.tableStorage",
+            "supported": true,
+            "implementation": "in-memory",
+            "note": "Demo only. No indexes; query is O(n)."
+        },
+        {
+            "name": "host.triggers",
+            "supported": true,
+            "implementation": "workflow-engine",
+            "note": "Trigger entry nodes (webhook/schedule/cron/email/mailhook/rss/form) surface the run-scoped ctx.triggerData payload; runs are started by the RFC 0083 trigger bridge, scheduler, and kanban paths. webhook-respond durably records the reply via ctx.respondToWebhook."
+        },
+        {
+            "name": "host.webResearch",
+            "supported": true,
+            "implementation": "workflow-engine",
+            "note": "For vendor.myndhyve.web-research. fetchBatch is real (concurrent HTTP fetch + readable-text extraction); search is provider-gated \u2014 live when a BYOK secret web-search or OPENWOP_WEBSEARCH_API_KEY is set (Brave-shaped, OPENWOP_WEBSEARCH_BASE_URL override), else an honest demo result; research composes the two."
+        }
+    ],
+    "fs": {
+        "supported": true,
+        "sandboxRoot": "/app/data/host-fs",
+        "maxFileSizeBytes": 52428800
+    },
+    "kvStorage": {
+        "supported": true,
+        "maxKeyBytes": 1024,
+        "maxValueBytes": 1048576,
+        "maxTtlSeconds": 604800,
+        "atomicIncrement": true,
+        "compareAndSwap": true
+    },
+    "tableStorage": {
+        "supported": true,
+        "maxRowsPerTable": 100000,
+        "maxColumnsPerRow": 128,
+        "indexable": false,
+        "fullTextSearch": false
+    },
+    "queueBus": {
+        "supported": true,
+        "backends": [
+            "in-memory"
+        ],
+        "deadLetterSupported": true,
+        "stream": {
+            "supported": false,
+            "fromBeginning": false
+        }
+    },
+    "sql": {
+        "supported": true,
+        "transactions": true,
+        "drivers": [
+            "sqlite"
+        ]
+    },
+    "vectorStore": {
+        "supported": true,
+        "backends": [
+            "in-memory"
+        ]
+    },
+    "blobStorage": {
+        "supported": true,
+        "presignSupported": true,
+        "maxObjectBytes": 52428800
+    },
+    "cache": {
+        "supported": true,
+        "maxValueBytes": 1048576,
+        "maxTtlSeconds": 86400
+    },
+    "mcp": {
+        "supported": false,
+        "serverUrls": [],
+        "serverMount": {
+            "supported": false
+        }
+    }
+}

@@ -1,0 +1,238 @@
+{
+  "host": "openwop-app workflow-engine (SQLite, durable)",
+  "workflowId": "paper-interrupt-replay",
+  "runId": "24aa5992-786a-406c-8411-2b43a463e293",
+  "finalStatus": "completed",
+  "eventTypeSequence": [
+    "run.started",
+    "node.started",
+    "node.suspended",
+    "node.interrupt.resolved",
+    "run.resumed",
+    "node.completed",
+    "run.completed",
+    "memory.written"
+  ],
+  "eventCount": 8,
+  "events": [
+    {
+      "eventId": "26fe8248-284f-400e-8394-bb8a79312b75",
+      "runId": "24aa5992-786a-406c-8411-2b43a463e293",
+      "sequence": 1,
+      "type": "run.started",
+      "payload": {
+        "workflowId": "paper-interrupt-replay"
+      },
+      "timestamp": "2026-06-06T21:37:58.492Z"
+    },
+    {
+      "eventId": "a06da5b7-1ed9-4002-a6a6-8081f9c299da",
+      "runId": "24aa5992-786a-406c-8411-2b43a463e293",
+      "sequence": 2,
+      "type": "node.started",
+      "nodeId": "wait-for-external",
+      "payload": {},
+      "timestamp": "2026-06-06T21:37:58.495Z"
+    },
+    {
+      "eventId": "1b7f8336-0464-41a2-bd5a-029df2ce168e",
+      "runId": "24aa5992-786a-406c-8411-2b43a463e293",
+      "sequence": 3,
+      "type": "node.suspended",
+      "nodeId": "wait-for-external",
+      "payload": {
+        "interruptId": "75951c17f78c6cf0a39555aab88064e9",
+        "kind": "external-event"
+      },
+      "timestamp": "2026-06-06T21:37:58.499Z"
+    },
+    {
+      "eventId": "2fb3c48d-50c8-4cec-baac-07af870f4ec1",
+      "runId": "24aa5992-786a-406c-8411-2b43a463e293",
+      "sequence": 4,
+      "type": "node.interrupt.resolved",
+      "nodeId": "wait-for-external",
+      "payload": {
+        "interruptId": "75951c17f78c6cf0a39555aab88064e9",
+        "kind": "external-event"
+      },
+      "timestamp": "2026-06-06T21:38:08.732Z"
+    },
+    {
+      "eventId": "b211b7f8-bc38-4648-aa43-7ae34cdced7b",
+      "runId": "24aa5992-786a-406c-8411-2b43a463e293",
+      "sequence": 5,
+      "type": "run.resumed",
+      "payload": {
+        "resumedAtNode": "wait-for-external"
+      },
+      "timestamp": "2026-06-06T21:38:08.733Z"
+    },
+    {
+      "eventId": "c0e631d6-9e60-4d25-83b3-9adf612b5b2a",
+      "runId": "24aa5992-786a-406c-8411-2b43a463e293",
+      "sequence": 6,
+      "type": "node.completed",
+      "nodeId": "wait-for-external",
+      "payload": {
+        "outputs": {
+          "output": {
+            "orderId": "fixture-order-1",
+            "status": "completed"
+          }
+        }
+      },
+      "timestamp": "2026-06-06T21:38:08.734Z"
+    },
+    {
+      "eventId": "d2ac0565-e554-4767-8b72-65ebbf66f8e7",
+      "runId": "24aa5992-786a-406c-8411-2b43a463e293",
+      "sequence": 7,
+      "type": "run.completed",
+      "payload": {
+        "output": {
+          "orderId": "fixture-order-1",
+          "status": "completed"
+        }
+      },
+      "timestamp": "2026-06-06T21:38:08.735Z"
+    },
+    {
+      "eventId": "d8e12eb6-8c46-4992-9ae7-6db403d2912c",
+      "runId": "24aa5992-786a-406c-8411-2b43a463e293",
+      "sequence": 8,
+      "type": "memory.written",
+      "payload": {
+        "memoryRef": "tenant-memory",
+        "memoryId": "mem_2be89d8a-230",
+        "tags": [
+          "run-summary",
+          "run-id:24aa5992-786a-406c-8411-2b43a463e293",
+          "workflow:paper-interrupt-replay"
+        ]
+      },
+      "timestamp": "2026-06-06T21:38:08.735Z"
+    }
+  ],
+  "interruptCorrelation": {
+    "orderId": "fixture-order-1",
+    "status": "completed"
+  },
+  "debugBundleKeys": [
+    "runId",
+    "workflowId",
+    "status",
+    "events",
+    "truncated",
+    "metrics"
+  ],
+  "debugBundle": {
+    "runId": "24aa5992-786a-406c-8411-2b43a463e293",
+    "workflowId": "paper-interrupt-replay",
+    "status": "completed",
+    "events": [
+      {
+        "eventId": "26fe8248-284f-400e-8394-bb8a79312b75",
+        "runId": "24aa5992-786a-406c-8411-2b43a463e293",
+        "sequence": 1,
+        "type": "run.started",
+        "payload": {
+          "workflowId": "paper-interrupt-replay"
+        },
+        "timestamp": "2026-06-06T21:37:58.492Z"
+      },
+      {
+        "eventId": "a06da5b7-1ed9-4002-a6a6-8081f9c299da",
+        "runId": "24aa5992-786a-406c-8411-2b43a463e293",
+        "sequence": 2,
+        "type": "node.started",
+        "nodeId": "wait-for-external",
+        "payload": {},
+        "timestamp": "2026-06-06T21:37:58.495Z"
+      },
+      {
+        "eventId": "1b7f8336-0464-41a2-bd5a-029df2ce168e",
+        "runId": "24aa5992-786a-406c-8411-2b43a463e293",
+        "sequence": 3,
+        "type": "node.suspended",
+        "nodeId": "wait-for-external",
+        "payload": {
+          "interruptId": "75951c17f78c6cf0a39555aab88064e9",
+          "kind": "external-event"
+        },
+        "timestamp": "2026-06-06T21:37:58.499Z"
+      },
+      {
+        "eventId": "2fb3c48d-50c8-4cec-baac-07af870f4ec1",
+        "runId": "24aa5992-786a-406c-8411-2b43a463e293",
+        "sequence": 4,
+        "type": "node.interrupt.resolved",
+        "nodeId": "wait-for-external",
+        "payload": {
+          "interruptId": "75951c17f78c6cf0a39555aab88064e9",
+          "kind": "external-event"
+        },
+        "timestamp": "2026-06-06T21:38:08.732Z"
+      },
+      {
+        "eventId": "b211b7f8-bc38-4648-aa43-7ae34cdced7b",
+        "runId": "24aa5992-786a-406c-8411-2b43a463e293",
+        "sequence": 5,
+        "type": "run.resumed",
+        "payload": {
+          "resumedAtNode": "wait-for-external"
+        },
+        "timestamp": "2026-06-06T21:38:08.733Z"
+      },
+      {
+        "eventId": "c0e631d6-9e60-4d25-83b3-9adf612b5b2a",
+        "runId": "24aa5992-786a-406c-8411-2b43a463e293",
+        "sequence": 6,
+        "type": "node.completed",
+        "nodeId": "wait-for-external",
+        "payload": {
+          "outputs": {
+            "output": {
+              "orderId": "fixture-order-1",
+              "status": "completed"
+            }
+          }
+        },
+        "timestamp": "2026-06-06T21:38:08.734Z"
+      },
+      {
+        "eventId": "d2ac0565-e554-4767-8b72-65ebbf66f8e7",
+        "runId": "24aa5992-786a-406c-8411-2b43a463e293",
+        "sequence": 7,
+        "type": "run.completed",
+        "payload": {
+          "output": {
+            "orderId": "fixture-order-1",
+            "status": "completed"
+          }
+        },
+        "timestamp": "2026-06-06T21:38:08.735Z"
+      },
+      {
+        "eventId": "d8e12eb6-8c46-4992-9ae7-6db403d2912c",
+        "runId": "24aa5992-786a-406c-8411-2b43a463e293",
+        "sequence": 8,
+        "type": "memory.written",
+        "payload": {
+          "memoryRef": "tenant-memory",
+          "memoryId": "mem_2be89d8a-230",
+          "tags": [
+            "run-summary",
+            "run-id:24aa5992-786a-406c-8411-2b43a463e293",
+            "workflow:paper-interrupt-replay"
+          ]
+        },
+        "timestamp": "2026-06-06T21:38:08.735Z"
+      }
+    ],
+    "truncated": false,
+    "metrics": {
+      "eventCount": 8
+    }
+  }
+}

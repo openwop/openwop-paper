@@ -1,0 +1,88 @@
+{
+  "source": "reference host examples/hosts/in-memory (TypeScript), captured 2026-06-06",
+  "workflowId": "conformance-multi-node",
+  "runId": "run-1016725a-2aa4-48fd-9e58-1556d522d210",
+  "eventTypeSequence": [
+    "run.started",
+    "node.started",
+    "node.completed",
+    "node.started",
+    "node.completed",
+    "node.started",
+    "node.completed",
+    "run.completed"
+  ],
+  "events": [
+    {
+      "eventId": "run-1016725a-2aa4-48fd-9e58-1556d522d210-0",
+      "runId": "run-1016725a-2aa4-48fd-9e58-1556d522d210",
+      "type": "run.started",
+      "sequence": 0,
+      "payload": null,
+      "timestamp": "2026-06-06T19:06:16.897Z"
+    },
+    {
+      "eventId": "run-1016725a-2aa4-48fd-9e58-1556d522d210-1",
+      "runId": "run-1016725a-2aa4-48fd-9e58-1556d522d210",
+      "type": "node.started",
+      "sequence": 1,
+      "payload": null,
+      "timestamp": "2026-06-06T19:06:16.897Z",
+      "nodeId": "a"
+    },
+    {
+      "eventId": "run-1016725a-2aa4-48fd-9e58-1556d522d210-2",
+      "runId": "run-1016725a-2aa4-48fd-9e58-1556d522d210",
+      "type": "node.completed",
+      "sequence": 2,
+      "payload": null,
+      "timestamp": "2026-06-06T19:06:16.897Z",
+      "nodeId": "a"
+    },
+    {
+      "eventId": "run-1016725a-2aa4-48fd-9e58-1556d522d210-3",
+      "runId": "run-1016725a-2aa4-48fd-9e58-1556d522d210",
+      "type": "node.started",
+      "sequence": 3,
+      "payload": null,
+      "timestamp": "2026-06-06T19:06:16.897Z",
+      "nodeId": "b"
+    },
+    {
+      "eventId": "run-1016725a-2aa4-48fd-9e58-1556d522d210-4",
+      "runId": "run-1016725a-2aa4-48fd-9e58-1556d522d210",
+      "type": "node.completed",
+      "sequence": 4,
+      "payload": null,
+      "timestamp": "2026-06-06T19:06:16.897Z",
+      "nodeId": "b"
+    },
+    {
+      "eventId": "run-1016725a-2aa4-48fd-9e58-1556d522d210-5",
+      "runId": "run-1016725a-2aa4-48fd-9e58-1556d522d210",
+      "type": "node.started",
+      "sequence": 5,
+      "payload": null,
+      "timestamp": "2026-06-06T19:06:16.897Z",
+      "nodeId": "c"
+    },
+    {
+      "eventId": "run-1016725a-2aa4-48fd-9e58-1556d522d210-6",
+      "runId": "run-1016725a-2aa4-48fd-9e58-1556d522d210",
+      "type": "node.completed",
+      "sequence": 6,
+      "payload": null,
+      "timestamp": "2026-06-06T19:06:16.897Z",
+      "nodeId": "c"
+    },
+    {
+      "eventId": "run-1016725a-2aa4-48fd-9e58-1556d522d210-7",
+      "runId": "run-1016725a-2aa4-48fd-9e58-1556d522d210",
+      "type": "run.completed",
+      "sequence": 7,
+      "payload": null,
+      "timestamp": "2026-06-06T19:06:16.897Z"
+    }
+  ],
+  "note": "Real captured RunEvent log from a reference host (run lifecycle now captured reproducibly, per experiment-design.md). The Python host produced an identical event-type sequence \u2014 see ../portability/results.md."
+}

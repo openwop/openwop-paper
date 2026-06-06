@@ -1,0 +1,60 @@
+{
+  "workflowId": "conformance-delay",
+  "runId": "run-85f2d845-9782-432d-87b7-562303752c1f",
+  "terminalStatus": "completed",
+  "eventTypeSequence": [
+    "run.started",
+    "node.started",
+    "node.completed",
+    "run.completed"
+  ],
+  "eventCount": 4,
+  "artifacts": [],
+  "rawSnapshot": {
+    "runId": "run-85f2d845-9782-432d-87b7-562303752c1f",
+    "workflowId": "conformance-delay",
+    "status": "completed",
+    "inputs": {
+      "delayMs": 1000
+    },
+    "startedAt": "2026-06-06T19:06:16.899Z",
+    "endedAt": "2026-06-06T19:06:17.901Z",
+    "workspace": []
+  },
+  "rawEvents": [
+    {
+      "eventId": "run-85f2d845-9782-432d-87b7-562303752c1f-0",
+      "runId": "run-85f2d845-9782-432d-87b7-562303752c1f",
+      "type": "run.started",
+      "sequence": 0,
+      "payload": null,
+      "timestamp": "2026-06-06T19:06:16.899Z"
+    },
+    {
+      "eventId": "run-85f2d845-9782-432d-87b7-562303752c1f-1",
+      "runId": "run-85f2d845-9782-432d-87b7-562303752c1f",
+      "type": "node.started",
+      "sequence": 1,
+      "payload": null,
+      "timestamp": "2026-06-06T19:06:16.899Z",
+      "nodeId": "wait"
+    },
+    {
+      "eventId": "run-85f2d845-9782-432d-87b7-562303752c1f-2",
+      "runId": "run-85f2d845-9782-432d-87b7-562303752c1f",
+      "type": "node.completed",
+      "sequence": 2,
+      "payload": null,
+      "timestamp": "2026-06-06T19:06:17.900Z",
+      "nodeId": "wait"
+    },
+    {
+      "eventId": "run-85f2d845-9782-432d-87b7-562303752c1f-3",
+      "runId": "run-85f2d845-9782-432d-87b7-562303752c1f",
+      "type": "run.completed",
+      "sequence": 3,
+      "payload": null,
+      "timestamp": "2026-06-06T19:06:17.901Z"
+    }
+  ]
+}

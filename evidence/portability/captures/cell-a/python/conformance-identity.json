@@ -1,0 +1,5 @@
+{
+  "workflowId": "conformance-identity",
+  "error": "HTTP 422",
+  "detail": "{\"error\": \"capability_required\", \"message\": \"Workflow \\\"conformance-identity\\\" references core.identity, but this host does not advertise capabilities.identity: true.\", \"details\": {\"requiredCapability"
+}

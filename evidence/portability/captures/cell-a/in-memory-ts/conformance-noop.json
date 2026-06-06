@@ -1,0 +1,58 @@
+{
+  "workflowId": "conformance-noop",
+  "runId": "run-8282ff8a-736f-49b9-92bf-99c865c156e1",
+  "terminalStatus": "completed",
+  "eventTypeSequence": [
+    "run.started",
+    "node.started",
+    "node.completed",
+    "run.completed"
+  ],
+  "eventCount": 4,
+  "artifacts": [],
+  "rawSnapshot": {
+    "runId": "run-8282ff8a-736f-49b9-92bf-99c865c156e1",
+    "workflowId": "conformance-noop",
+    "status": "completed",
+    "inputs": {},
+    "startedAt": "2026-06-06T19:06:16.892Z",
+    "endedAt": "2026-06-06T19:06:16.892Z",
+    "workspace": []
+  },
+  "rawEvents": [
+    {
+      "eventId": "run-8282ff8a-736f-49b9-92bf-99c865c156e1-0",
+      "runId": "run-8282ff8a-736f-49b9-92bf-99c865c156e1",
+      "type": "run.started",
+      "sequence": 0,
+      "payload": null,
+      "timestamp": "2026-06-06T19:06:16.892Z"
+    },
+    {
+      "eventId": "run-8282ff8a-736f-49b9-92bf-99c865c156e1-1",
+      "runId": "run-8282ff8a-736f-49b9-92bf-99c865c156e1",
+      "type": "node.started",
+      "sequence": 1,
+      "payload": null,
+      "timestamp": "2026-06-06T19:06:16.892Z",
+      "nodeId": "noop"
+    },
+    {
+      "eventId": "run-8282ff8a-736f-49b9-92bf-99c865c156e1-2",
+      "runId": "run-8282ff8a-736f-49b9-92bf-99c865c156e1",
+      "type": "node.completed",
+      "sequence": 2,
+      "payload": null,
+      "timestamp": "2026-06-06T19:06:16.892Z",
+      "nodeId": "noop"
+    },
+    {
+      "eventId": "run-8282ff8a-736f-49b9-92bf-99c865c156e1-3",
+      "runId": "run-8282ff8a-736f-49b9-92bf-99c865c156e1",
+      "type": "run.completed",
+      "sequence": 3,
+      "payload": null,
+      "timestamp": "2026-06-06T19:06:16.892Z"
+    }
+  ]
+}

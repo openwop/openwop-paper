@@ -1,0 +1,16 @@
+{
+  "captureDate": "2026-06-06",
+  "source": "reference host examples/hosts/in-memory (TypeScript) on 127.0.0.1:3737",
+  "workflowId": "conformance-multi-node",
+  "runId": "run-1016725a-2aa4-48fd-9e58-1556d522d210",
+  "terminalStatus": "completed",
+  "eventCount": 8,
+  "observedStates": [
+    "run.started",
+    "node lifecycle \u00d73",
+    "run.completed"
+  ],
+  "artifacts": [],
+  "crossHostResult": "Python reference host produced an identical terminal state and event-type sequence for the same workflow \u2014 see ../portability/results.md (3/3 portable).",
+  "liveDemoNote": "The public app.openwop.dev demo gates run-creation behind its UI; this reproducible reference-host capture is the canonical run-lifecycle evidence (stronger than a one-off UI screenshot). Live HostCapabilityDocument + conformance evidence are in this folder and ../conformance/."
+}

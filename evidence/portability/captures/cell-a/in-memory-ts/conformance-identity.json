@@ -1,0 +1,68 @@
+{
+  "workflowId": "conformance-identity",
+  "runId": "run-f60b21aa-f907-43ec-8c57-28053b81523e",
+  "terminalStatus": "failed",
+  "eventTypeSequence": [
+    "run.started",
+    "node.started",
+    "node.failed",
+    "run.failed"
+  ],
+  "eventCount": 4,
+  "artifacts": [],
+  "rawSnapshot": {
+    "runId": "run-f60b21aa-f907-43ec-8c57-28053b81523e",
+    "workflowId": "conformance-identity",
+    "status": "failed",
+    "inputs": {},
+    "startedAt": "2026-06-06T19:06:16.895Z",
+    "endedAt": "2026-06-06T19:06:16.895Z",
+    "error": {
+      "code": "unsupported_node_type",
+      "message": "In-memory host does not implement node type \"core.identity\". This host supports core.noop, core.delay, and WASM-packaged types loaded from examples/packs/."
+    },
+    "workspace": []
+  },
+  "rawEvents": [
+    {
+      "eventId": "run-f60b21aa-f907-43ec-8c57-28053b81523e-0",
+      "runId": "run-f60b21aa-f907-43ec-8c57-28053b81523e",
+      "type": "run.started",
+      "sequence": 0,
+      "payload": null,
+      "timestamp": "2026-06-06T19:06:16.895Z"
+    },
+    {
+      "eventId": "run-f60b21aa-f907-43ec-8c57-28053b81523e-1",
+      "runId": "run-f60b21aa-f907-43ec-8c57-28053b81523e",
+      "type": "node.started",
+      "sequence": 1,
+      "payload": null,
+      "timestamp": "2026-06-06T19:06:16.895Z",
+      "nodeId": "echo"
+    },
+    {
+      "eventId": "run-f60b21aa-f907-43ec-8c57-28053b81523e-2",
+      "runId": "run-f60b21aa-f907-43ec-8c57-28053b81523e",
+      "type": "node.failed",
+      "sequence": 2,
+      "payload": {
+        "code": "unsupported_node_type",
+        "typeId": "core.identity"
+      },
+      "timestamp": "2026-06-06T19:06:16.895Z",
+      "nodeId": "echo"
+    },
+    {
+      "eventId": "run-f60b21aa-f907-43ec-8c57-28053b81523e-3",
+      "runId": "run-f60b21aa-f907-43ec-8c57-28053b81523e",
+      "type": "run.failed",
+      "sequence": 3,
+      "payload": {
+        "code": "unsupported_node_type",
+        "message": "In-memory host does not implement node type \"core.identity\". This host supports core.noop, core.delay, and WASM-packaged types loaded from examples/packs/."
+      },
+      "timestamp": "2026-06-06T19:06:16.895Z"
+    }
+  ]
+}

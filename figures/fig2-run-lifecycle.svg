@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="470" viewBox="0 0 800 470" font-family="Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="a" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#333"/></marker>
+  </defs>
+  <rect width="800" height="470" fill="#ffffff"/>
+  <text x="400" y="26" text-anchor="middle" font-size="15" font-weight="bold">Figure 2 — Run lifecycle (states driven by RunEvents on the EventLog)</text>
+
+  <!-- created -->
+  <rect x="40" y="70" width="120" height="48" rx="6" fill="#eef3fb" stroke="#39516e"/>
+  <text x="100" y="99" text-anchor="middle" font-size="13">created</text>
+  <!-- running -->
+  <rect x="270" y="70" width="140" height="48" rx="6" fill="#eef3fb" stroke="#39516e"/>
+  <text x="340" y="99" text-anchor="middle" font-size="13">running</text>
+  <line x1="160" y1="94" x2="268" y2="94" stroke="#333" marker-end="url(#a)"/>
+  <text x="214" y="86" text-anchor="middle" font-size="11" fill="#39516e">run.started</text>
+  <!-- node loop -->
+  <path d="M340,70 C320,40 360,40 350,68" fill="none" stroke="#333" marker-end="url(#a)"/>
+  <text x="430" y="52" text-anchor="middle" font-size="11" fill="#555">node.started / node.completed (&#215;N)</text>
+
+  <!-- interrupted -->
+  <rect x="270" y="180" width="140" height="48" rx="6" fill="#fbf6ea" stroke="#7a6a1f"/>
+  <text x="340" y="209" text-anchor="middle" font-size="13">interrupted</text>
+  <line x1="320" y1="118" x2="320" y2="178" stroke="#333" marker-end="url(#a)"/>
+  <text x="250" y="152" font-size="11" fill="#7a6a1f">run.interrupted</text>
+  <line x1="372" y1="178" x2="372" y2="120" stroke="#333" marker-end="url(#a)"/>
+  <text x="380" y="152" font-size="11" fill="#7a6a1f">run.resumed</text>
+
+  <!-- terminal states -->
+  <rect x="520" y="60" width="150" height="44" rx="6" fill="#eaf5ec" stroke="#2f5d3a"/>
+  <text x="595" y="87" text-anchor="middle" font-size="13">completed</text>
+  <rect x="520" y="118" width="150" height="44" rx="6" fill="#f7eaea" stroke="#7a2f2f"/>
+  <text x="595" y="145" text-anchor="middle" font-size="13">failed</text>
+  <rect x="520" y="176" width="150" height="44" rx="6" fill="#f1eef7" stroke="#5a3f7a"/>
+  <text x="595" y="203" text-anchor="middle" font-size="13">cancelled</text>
+  <line x1="410" y1="86" x2="518" y2="82" stroke="#333" marker-end="url(#a)"/>
+  <text x="464" y="74" text-anchor="middle" font-size="11" fill="#2f5d3a">run.completed</text>
+  <line x1="410" y1="100" x2="518" y2="138" stroke="#333" marker-end="url(#a)"/>
+  <text x="470" y="128" text-anchor="middle" font-size="11" fill="#7a2f2f">run.failed</text>
+  <line x1="410" y1="108" x2="518" y2="196" stroke="#333" marker-end="url(#a)"/>
+  <text x="455" y="176" text-anchor="middle" font-size="11" fill="#5a3f7a">run.cancelled</text>
+  <text x="595" y="40" text-anchor="middle" font-size="11" fill="#555">terminal states</text>
+
+  <!-- fork / replay -->
+  <rect x="270" y="300" width="400" height="50" rx="6" fill="#ffffff" stroke="#2f5d3a" stroke-dasharray="4 3"/>
+  <text x="470" y="322" text-anchor="middle" font-size="12">fork(mode: replay) — re-read recorded pins (do not re-resolve)</text>
+  <text x="470" y="340" text-anchor="middle" font-size="12" fill="#2f5d3a">&#8594; new Run reconstructed at checkpoint</text>
+  <line x1="595" y1="104" x2="595" y2="298" stroke="#2f5d3a" stroke-dasharray="4 3" marker-end="url(#a)"/>
+
+  <!-- captured-sequence note -->
+  <text x="400" y="410" text-anchor="middle" font-size="11.5" fill="#333" font-style="italic">Captured identically on the TypeScript and Python reference hosts (conformance-multi-node):</text>
+  <text x="400" y="430" text-anchor="middle" font-size="11.5" font-family="Consolas, monospace">run.started &#8594; (node.started &#8594; node.completed) &#215;3 &#8594; run.completed</text>
+</svg>
