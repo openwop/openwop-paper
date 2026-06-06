@@ -12,3 +12,6 @@
 *.fdb_latexmk
 *.synctex.gz
 *.toc
+
+# internal working docs — kept local, never published to the public repo
+review/
