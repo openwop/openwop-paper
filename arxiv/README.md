@@ -1,6 +1,6 @@
 # arXiv venue draft — build instructions
 
-This folder is the **arXiv submission draft** of the manuscript, generated from `../OpenWOP_Scholarly_Paper_Manuscript_integrated.docx` (the integrated content: all EDITs, Related Work, 40 references, 6 tables, 3 figures). arXiv has no mandated template or page limit and is **not** anonymized, so this is a clean self-contained `article`-class LaTeX source.
+This folder is the **arXiv submission draft** of the manuscript, generated from `../OpenWOP_A_Vendor_Neutral_Protocol_for_Durable_Portable_Agentic_Workflow_Orchestration.docx` (the integrated content: all EDITs, Related Work, 40 references, 6 tables, 3 figures). arXiv has no mandated template or page limit and is **not** anonymized, so this is a clean self-contained `article`-class LaTeX source.
 
 ## Files
 - `main.tex` — the full, **self-contained** paper. All 3 figures are **native TikZ** (drawn in-document), the bibliography is a manual `thebibliography`, no `.bib` and **no external image files** needed.

@@ -23,13 +23,13 @@ Tufts, David S. (2026). *OpenWOP: A Vendor-Neutral Protocol for Durable, Portabl
 
 ## Start here
 - **Read the paper:** [`arxiv/main.pdf`](arxiv/main.pdf) (rendered) — build instructions + compile status in [`arxiv/README.md`](arxiv/README.md).
-- **Edit the paper:** [`arxiv/main.tex`](arxiv/main.tex) (the authoritative source; self-contained, no external image files) or the Word version [`OpenWOP_Scholarly_Paper_Manuscript_integrated.docx`](OpenWOP_Scholarly_Paper_Manuscript_integrated.docx).
+- **Edit the paper:** [`arxiv/main.tex`](arxiv/main.tex) (the authoritative source; self-contained, no external image files) or the Word version [`OpenWOP_A_Vendor_Neutral_Protocol_for_Durable_Portable_Agentic_Workflow_Orchestration.docx`](OpenWOP_A_Vendor_Neutral_Protocol_for_Durable_Portable_Agentic_Workflow_Orchestration.docx).
 
 ## Layout
 | Path | What |
 |---|---|
 | [`arxiv/`](arxiv/) | **The submission draft** — `main.tex`, compiled `main.pdf`, build `README.md`. |
-| [`OpenWOP_..._integrated.docx`](OpenWOP_Scholarly_Paper_Manuscript_integrated.docx) | Current manuscript in Word (all content integrated). |
+| [`OpenWOP_..._Orchestration.docx`](OpenWOP_A_Vendor_Neutral_Protocol_for_Durable_Portable_Agentic_Workflow_Orchestration.docx) | Current manuscript in Word (all content integrated). |
 | [`references.md`](references.md) | Annotated 40-entry bibliography with verification provenance (source of truth for citations). |
 | [`related-work-draft.md`](related-work-draft.md) | Related Work section, markdown master (mirrors the `.tex`/`.docx`). |
 | [`evidence/`](evidence/) | Captured evidence (see below). |
