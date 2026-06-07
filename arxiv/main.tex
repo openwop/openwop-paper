@@ -7,6 +7,7 @@
 \usepackage{graphicx}
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta,positioning}
+\usepackage{float} % [H] pins tables/figures inline with their sections
 \usepackage{array}
 \usepackage{enumitem}
 \usepackage[hidelinks]{hyperref}
@@ -15,7 +16,7 @@
 % Figures compile with OR without the converted PDFs (convert paper/figures/*.svg).
 \newcommand{\paperfig}[2]{\IfFileExists{#1}{\includegraphics[width=\linewidth]{#1}}%
 {\fbox{\parbox{0.95\linewidth}{\centering\vspace{1.4em}\itshape #2\\[2pt]\textnormal{[figure placeholder --- convert the matching \texttt{figures/*.svg} to PDF]}\vspace{1.4em}}}}}
-\title{OpenWOP as a Vendor-Neutral Workflow Orchestration Protocol}
+\title{OpenWOP: A Vendor-Neutral Protocol for Durable, Portable Agentic Workflow Orchestration}
 \author{David S. Tufts\\
 MyndHyve Inc.\\
 \emph{\small OpenWOP project steward (see Positionality, Section~1)}\\
@@ -29,9 +30,9 @@ Grand Rapids, Michigan, USA\\
 Multi-agent AI systems increasingly require durable, observable, interruptible, replayable, and portable workflow execution across heterogeneous hosts. This paper argues that a vendor-neutral open workflow orchestration protocol may be a necessary infrastructure layer for such systems. OpenWOP is examined as a candidate protocol because it standardizes the workflow run as the primary unit of orchestration, together with host capability discovery, run events, interrupts, artifacts, replay, observability, and conformance behavior. The paper is organized around three analytic dimensions: standardization, interoperability, and portability. It distinguishes OpenWOP from adjacent protocols: A2A supports inter-agent collaboration, while MCP supports tool, resource, prompt, and context integration. These protocols may compose in a full agentic architecture, but the paper's argument concerns the distinct need for open workflow orchestration. Implementation and conformance evidence strengthen the claim: the OpenWOP project includes a reference workflow-engine application and a public conformance leaderboard that records compatible hosts, advertised profiles, and scenario results. We further report a reproducible cross-language portability result: the same workflow definition executed across an independent TypeScript host and a Python host yields identical terminal state and event-log structure for core workflows. We treat these as evidence of implementability and internal consistency, not as proof of broad adoption or productivity gains. The contribution is a protocol-level argument and validation agenda for evaluating whether OpenWOP can reduce orchestration-layer fragmentation and support portable intelligent software workflows.
 \end{abstract}
 \section*{1. Introduction}
-Agentic software systems are moving beyond isolated tool calls or single-agent sessions. They increasingly coordinate multiple agents, external tools, human approvals, policy checks, artifact generation, event streams, and long-running execution. This creates an orchestration-layer problem: teams need workflows that can be started, observed, interrupted, resumed, replayed, audited, and moved across systems without binding the workflow semantics to a single vendor or runtime.
+Agentic software systems are moving beyond isolated tool calls or single-agent sessions. They increasingly coordinate multiple agents, external tools, human approvals, policy checks, artifact generation, event streams, and long-running execution. This creates an orchestration-layer problem: teams need workflows that can be started, observed, interrupted, resumed, replayed, audited, and moved across systems without binding the workflow semantics to a single vendor or runtime. The key abstraction is the workflow Run: a durable execution instance whose lifecycle, event history, interrupts, artifacts, replay behavior, and conformance evidence can be observed across compliant hosts.
 
-The central thesis of this paper is that a vendor-neutral open protocol for multi-agent workflow orchestration can accelerate intelligent software development by standardizing workflow communication, reducing integration complexity, and enabling portability across tools, systems, and organizational boundaries. This should be read as a scholarly argument and research hypothesis, not as a fully established empirical claim. The paper therefore distinguishes protocol-level claims from adoption and productivity claims that require further study.
+The central thesis of this paper is that a vendor-neutral open protocol for multi-agent workflow orchestration can plausibly reduce orchestration-layer friction in intelligent software development by standardizing workflow communication, reducing integration complexity, and enabling portability across tools, systems, and organizational boundaries. This should be read as a scholarly argument and research hypothesis, not as a fully established empirical claim. The paper therefore distinguishes protocol-level claims from adoption and productivity claims that require further study.
 
 OpenWOP is a useful case because its specification corpus frames it as an open protocol for portable, durable, AI-native workflow execution across hosts [1]. Independent surveys of the agent-protocol landscape distinguish tool/context integration (MCP) and agent-to-agent collaboration (A2A) from durable workflow control [31, 32]; OpenWOP occupies the last of these. It does not replace A2A or MCP; it fills the orchestration-layer gap that remains when multi-step agentic work must be durable, observable, replayable, and portable.
 
@@ -77,7 +78,7 @@ Positioning summary. Against durable-execution runtimes, OpenWOP is the wire con
 \section*{5. OpenWOP Protocol Kernel}
 Rather than restate the entire v1 specification corpus, we focus on a minimal protocol kernel. The core abstraction is the Run: a durable execution instance that can be created, observed, interrupted, resumed, completed, failed, cancelled, replayed, or forked.
 
-\begin{table}[!htbp]\centering\footnotesize
+\begin{table}[H]\centering\footnotesize
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.307\textwidth}>{\raggedright\arraybackslash}p{0.307\textwidth}>{\raggedright\arraybackslash}p{0.307\textwidth}}\hline
 \textbf{Kernel construct} & \textbf{Protocol role} & \textbf{Paper relevance} \\\hline
 Run & Primary unit of durable workflow execution & Replaces vague workflow language with a concrete unit of standardization \\\hline
@@ -102,7 +103,7 @@ Why these constructs, and why this few. The kernel is not an arbitrary selection
 \end{itemize}
 Removing any one construct reintroduces a vendor-specific surface at that seam; adding agent cognition or tool protocols would exceed the boundary and duplicate MCP and A2A. The kernel is thus the fixed point adjacent systems only partially provide: durable-execution runtimes have a Run and an event history but no portable discovery, definition, or conformance contract; workflow standards have a definition but no event-log, interrupt, or conformance semantics; MCP and A2A have neither a Run nor an EventLog. OpenWOP's contribution is precisely the union none of them expose as a shared, conformance-tested contract, and that union is what cross-host portability requires.
 
-\begin{figure}[!htbp]\centering
+\begin{figure}[H]\centering
 \begin{tikzpicture}[every node/.style={font=\small},>=Latex,node distance=16mm]
 \node[draw,rounded corners,inner sep=3pt] (cr) {created};
 \node[draw,rounded corners,inner sep=3pt,right=of cr] (run) {running};
@@ -126,7 +127,7 @@ Removing any one construct reintroduces a vendor-specific surface at that seam; 
 \section*{6. Secondary Scope Boundaries: A2A and MCP}
 A2A and MCP are secondary here; they matter because they prevent overclaiming. A2A addresses independent agents discovering and delegating work to one another. MCP addresses model, tool, resource, prompt, and context integration. OpenWOP addresses durable workflow orchestration. Recent protocol surveys catalogue this layered landscape and treat the three as complementary rather than substitutes [31, 32].
 
-\begin{figure}[!htbp]\centering
+\begin{figure}[H]\centering
 \begin{tikzpicture}[every node/.style={font=\small},>=Latex]
 \node[draw,rounded corners,inner sep=3pt] (a) at (0,3.2) {Agent A};
 \node[draw,rounded corners,inner sep=3pt] (b) at (6.8,3.2) {Agent B};
@@ -143,7 +144,7 @@ A2A and MCP are secondary here; they matter because they prevent overclaiming. A
 \end{tikzpicture}
 \caption{The three agent-era protocols are complementary, not substitutes. MCP standardizes an agent's vertical access to tools, resources, prompts, and context; A2A standardizes horizontal agent-to-agent delegation; OpenWOP standardizes the durable client-host workflow-control boundary that wraps a multi-step Run.}
 \end{figure}
-\begin{table}[!htbp]\centering\footnotesize
+\begin{table}[H]\centering\footnotesize
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.307\textwidth}>{\raggedright\arraybackslash}p{0.307\textwidth}>{\raggedright\arraybackslash}p{0.307\textwidth}}\hline
 \textbf{Question} & \textbf{Best protocol boundary} & \textbf{Why this matters for the paper} \\\hline
 Should one agent ask another agent to do work? & A2A & This is collaboration, not workflow orchestration. \\\hline
@@ -155,12 +156,14 @@ The evidence basis is now stronger than a purely conceptual proposal. The projec
 
 The public conformance page is more directly usable as standards evidence. It describes a live record of OpenWOP-compatible hosts, their advertised compatibility profiles, and conformance scenario results. It also states that a host's place in the matrix is both a claim and evidence: the claim is the advertised profile, and the evidence is the conformance result published with the host or in the repository [2].
 
-\begin{table}[!htbp]\centering\footnotesize
+\begin{table}[H]\centering\footnotesize
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.307\textwidth}>{\raggedright\arraybackslash}p{0.307\textwidth}>{\raggedright\arraybackslash}p{0.307\textwidth}}\hline
 \textbf{Evidence source} & \textbf{Supports} & \textbf{Does not yet prove} \\\hline
 OpenWOP v1 spec corpus & Protocol scope and wire-contract intent & Adoption or implementation quality \\\hline
-workflow-engine reference/demo app & Implementability and practical representation of the protocol & Cross-host portability or production deployment maturity \\\hline
+Workflow-engine reference/demo app & Implementability and practical representation of the protocol & Production-deployment maturity or broad adoption \\\hline
 Conformance leaderboard & Host compatibility claims, profiles, and scenario evidence & Universal conformance, ecosystem-wide adoption, or long-term stability \\\hline
+TypeScript + Python host result & Cross-language core portability (identical terminal state + event-log structure) & Third-party (non-steward) portability \\\hline
+Interrupt/resume capture (durable host) & HITL lifecycle implementability (suspend, correlation-validated resume, replay-debug) & General workflow coverage \\\hline
 A2A/MCP/OpenWOP comparison document [3] & Scope boundaries and complementary architecture & Need for OpenWOP by itself \\\hline
 \end{tabular}\end{table}
 \section*{8. Standardization, Interoperability, and Portability}
@@ -182,7 +185,7 @@ The experiment also surfaced a real divergence. The conformance-identity workflo
 
 Two limits bound this result. First, both hosts are steward-authored: this establishes cross-language consistency, not third-party independence. Second, the workflows are small and exercise only core execution; portability of interrupt/resume, replay/fork, and artifact-bearing workflows remains to be demonstrated across durable hosts. Full portability across genuinely independent hosts therefore remains a hypothesis, but it now rests on a reproducible result rather than assertion.
 
-\begin{figure}[!htbp]\centering
+\begin{figure}[H]\centering
 \begin{tikzpicture}[every node/.style={font=\scriptsize},>=Latex]
 \node[draw,inner sep=3pt] (e0) {e0: run.started};
 \node[draw,inner sep=3pt,right=0mm of e0] (e1) {e1: node.started};
@@ -200,7 +203,7 @@ Two limits bound this result. First, both hosts are steward-authored: this estab
 \section*{9. Validation Agenda}
 We frame validation as a ladder from minimum to stronger evidence per target. As of this version we have reached the stronger rung for implementability (a runnable reference host), event-log fidelity (schema-validated logs), interrupt/resume (an automated suspend--resume capture on a durable host), and portability for core workflows (the same definition on two independent-language hosts); the open rungs are an independent, non-steward host and a measured integration-complexity comparison.
 
-\begin{table}[!htbp]\centering\footnotesize
+\begin{table}[H]\centering\footnotesize
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.307\textwidth}>{\raggedright\arraybackslash}p{0.307\textwidth}>{\raggedright\arraybackslash}p{0.307\textwidth}}\hline
 \textbf{Validation target} & \textbf{Minimum evidence} & \textbf{Stronger evidence (status this version)} \\\hline
 Implementability & Reference workflow-engine demo shows run-oriented UI and protocol concepts & Runnable reference host with published commands and fixtures --- \emph{reached} \\\hline
@@ -211,7 +214,7 @@ Portability & Host capability comparison & Same workflow on two language hosts; 
 Integration reduction & Qualitative adapter mapping & Before/after code or adapter-count comparison --- \emph{open} \\\hline
 \end{tabular}\end{table}
 \section*{10. Claims and Evidence Discipline}
-\begin{table}[!htbp]\centering\footnotesize
+\begin{table}[H]\centering\footnotesize
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.307\textwidth}>{\raggedright\arraybackslash}p{0.307\textwidth}>{\raggedright\arraybackslash}p{0.307\textwidth}}\hline
 \textbf{Claim} & \textbf{Current treatment} & \textbf{Required next evidence} \\\hline
 OpenWOP defines a durable workflow orchestration protocol & Spec-supported claim & Continue citing spec corpus and kernel constructs \\\hline
@@ -227,24 +230,11 @@ We make the limitations explicit. First, a reference implementation and demo app
 
 Construct validity. Our portability result operationalizes 'portable' as equivalence of terminal RunState and canonical RunEvent type-sequence after normalizing host-local non-determinism. This captures observable-contract equivalence, but it is narrower than full portability: it does not establish semantic equivalence of arbitrary workflows, equivalence of artifact contents beyond the cases tested, performance or operational portability, or developer-experience portability. Two hosts could agree on the measured sequence while differing in untested behavior. We therefore scope the portability claim to the constructs the tested workflows exercise, and treat the measure as a deliberate, falsifiable proxy rather than a complete definition. Because both hosts are steward-authored (see Positionality, Section 1), the result speaks to cross-language consistency of one author's implementations, not to reproducibility by an independent party.
 
-\section*{12. Conclusion}
+\section*{12. Reproducibility and Artifact Availability}
+An evidence artifact accompanies this paper. It contains the captured live HostCapabilityDocument; a conformance-leaderboard snapshot (host rows, advertised profiles, suite version, and pass rates); a reference-host run-event log and a durable-host interrupt/resume plus replay-debug capture (suspend $\to$ correlation-validated external resume $\to$ \texttt{run.completed}, including the HTTP~422 mismatch path); the raw cross-host portability captures and experiment design (3/3 core workflows yield identical terminal state and event-log structure across an independent TypeScript and Python host, plus a capability-rejection divergence finding); host-setup instructions; and the 40-entry bibliography, each entry verified against an authoritative source. Two items remain open and are reported as such: independent external-reviewer feedback (a reviewer packet is prepared), and a cross-host \emph{durable} portability comparison together with deterministic fork-from-checkpoint replay.
+
+\section*{13. Conclusion}
 A vendor-neutral workflow orchestration protocol is a plausible infrastructure mechanism for reducing fragmentation in agentic software systems. OpenWOP should be evaluated as a protocol for durable workflow runs, not as a replacement for agent-to-agent collaboration, tool/context integration, or workflow runtimes. Its strongest scholarly contribution is the combination of a run-centered protocol kernel, observable event logs, human checkpoint semantics, replay/debug support, host capability discovery, and conformance evidence. This manuscript converts the earlier conceptual argument into an artifact-backed submission: demo and interrupt transcripts, a conformance snapshot, and a cross-host portability experiment accompany it. The decisive next evidence is a non-steward host and independent external review.
-
-\section*{13. Reproducibility and Artifact Status}
-The items that earlier drafts listed as immediate next steps have been carried out; the accompanying evidence artifact records the results, so they are reported here as status rather than as pending work.
-
-\begin{table}[!htbp]\centering\footnotesize
-\begin{tabular}{>{\raggedright\arraybackslash}p{0.46\textwidth}>{\raggedright\arraybackslash}p{0.46\textwidth}}\hline
-\textbf{Item} & \textbf{Status} \\\hline
-Demo / run-lifecycle evidence & Done --- a reference-host run-event log, the live HostCapabilityDocument, and (on a durable host) the full interrupt/resume lifecycle (suspend $\to$ signed-token, correlation-validated external resume $\to$ \texttt{run.completed}, including the HTTP~422 mismatch path) plus the replay/debug bundle are captured. Deterministic fork-from-checkpoint replay remains future work. \\\hline
-Conformance snapshot & Done --- leaderboard host rows, advertised profiles, suite version, and pass rates. \\\hline
-Workflow-engine setup path & Done --- reference-host run commands, repository paths, and known limitations documented in the artifact. \\\hline
-Artifact package + README & Done --- reviewer-facing README plus the evidence tree. \\\hline
-References normalized & Done --- 40-entry bibliography, each entry verified against its authoritative source. \\\hline
-Cross-host portability & Done (core) --- the same workflow definition yields identical terminal state and event-log structure across an independent TypeScript host and a Python host (3/3 core workflows), plus a capability-rejection divergence finding. \\\hline
-External review & Reviewer packet prepared; feedback pending (the one step that requires external participants). \\\hline
-Venue package & Done --- this arXiv-ready source (compiles to a 12-page PDF), the Word manuscript, an artifact archive, a cover note, and arXiv submission metadata. A shorter workshop-length version is left to a specific workshop venue's template, as arXiv imposes no page limit. \\\hline
-\end{tabular}\end{table}
 \begin{thebibliography}{99}
 \raggedright  % ragged-right reference entries: no interword stretching -> no underfull-hbox warnings
 \bibitem[1]{ref1} OpenWOP v1 specification corpus. \url{https://openwop.dev/spec/v1/}.
