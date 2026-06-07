@@ -1,9 +1,25 @@
 # OpenWOP — Scholarly Paper
 
-Project root for the paper **"OpenWOP as a Vendor-Neutral Workflow Orchestration Protocol."**
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20576239.svg)](https://doi.org/10.5281/zenodo.20576239)
+
+Project root for the paper **"OpenWOP: A Vendor-Neutral Protocol for Durable, Portable Agentic Workflow Orchestration."**
 Author: David S. Tufts (MyndHyve Inc.), OpenWOP project steward.
 
-> **Status (2026-06-06):** a **compile-clean arXiv draft is built** — [`arxiv/main.tex`](arxiv/main.tex) → [`arxiv/main.pdf`](arxiv/main.pdf) (12 pp, 0 errors / 0 warnings, native-TikZ figures, 40 verified references). All evidence is captured; the related-work section and references are integrated. Remaining work is venue-specific formatting and the optional Cell B experiment (see [`review/finalization-plan.md`](review/finalization-plan.md)).
+> **Published 2026-06-07 on Zenodo** — DOI [10.5281/zenodo.20576239](https://doi.org/10.5281/zenodo.20576239), licensed CC BY 4.0. An arXiv version is pending author endorsement (cs.SE). The **compile-clean source is built** — [`arxiv/main.tex`](arxiv/main.tex) → [`arxiv/main.pdf`](arxiv/main.pdf) (12 pp, 0 errors / 0 warnings, native-TikZ figures, 40 verified references). All evidence is captured; the related-work section and references are integrated. Remaining work is venue-specific formatting and the optional Cell B experiment (see [`review/finalization-plan.md`](review/finalization-plan.md)).
+
+## How to cite
+Tufts, David S. (2026). *OpenWOP: A Vendor-Neutral Protocol for Durable, Portable Agentic Workflow Orchestration.* Zenodo. https://doi.org/10.5281/zenodo.20576239
+
+```bibtex
+@misc{tufts2026openwop,
+  author    = {Tufts, David S.},
+  title     = {{OpenWOP: A Vendor-Neutral Protocol for Durable, Portable Agentic Workflow Orchestration}},
+  year      = {2026},
+  publisher = {Zenodo},
+  doi       = {10.5281/zenodo.20576239},
+  url       = {https://doi.org/10.5281/zenodo.20576239}
+}
+```
 
 ## Start here
 - **Read the paper:** [`arxiv/main.pdf`](arxiv/main.pdf) (rendered) — build instructions + compile status in [`arxiv/README.md`](arxiv/README.md).
