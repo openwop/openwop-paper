@@ -205,23 +205,23 @@ We frame validation as a ladder from minimum to stronger evidence per target. As
 
 \begin{table}[h]\centering\footnotesize
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.307\textwidth}>{\raggedright\arraybackslash}p{0.307\textwidth}>{\raggedright\arraybackslash}p{0.307\textwidth}}\hline
-\textbf{Validation target} & \textbf{Minimum evidence} & \textbf{Stronger evidence} \\\hline
-Implementability & Reference workflow-engine demo shows run-oriented UI and protocol concepts & Runnable reference host with published commands and fixtures \\\hline
-Event-log fidelity & Sample observed run events and terminal state & Replayable event log with schema validation \\\hline
-Interrupt/resume semantics & Screenshot or transcript of pause/resume flow & Automated test that verifies deterministic resume behavior \\\hline
-Conformance & Public leaderboard row and scenario results & Independent host passing core profile scenarios \\\hline
-Portability & Host capability comparison & Same workflow executed on two compliant hosts with equivalent artifacts \\\hline
-Integration reduction & Qualitative adapter mapping & Before/after code or adapter-count comparison \\\hline
+\textbf{Validation target} & \textbf{Minimum evidence} & \textbf{Stronger evidence (status this version)} \\\hline
+Implementability & Reference workflow-engine demo shows run-oriented UI and protocol concepts & Runnable reference host with published commands and fixtures --- \emph{reached} \\\hline
+Event-log fidelity & Sample observed run events and terminal state & Replayable event log with schema validation --- \emph{reached} \\\hline
+Interrupt/resume semantics & Screenshot or transcript of pause/resume flow & Automated suspend--resume capture on a durable host (incl. the 422 negative path) --- \emph{reached} \\\hline
+Conformance & Public leaderboard row and scenario results (reached) & Independent host passing core profile scenarios --- \emph{open} \\\hline
+Portability & Host capability comparison & Same workflow on two language hosts; terminal state + event sequence equivalent (artifacts untested) --- \emph{reached for core} \\\hline
+Integration reduction & Qualitative adapter mapping & Before/after code or adapter-count comparison --- \emph{open} \\\hline
 \end{tabular}\end{table}
 \section*{10. Claims and Evidence Discipline}
 \begin{table}[h]\centering\footnotesize
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.307\textwidth}>{\raggedright\arraybackslash}p{0.307\textwidth}>{\raggedright\arraybackslash}p{0.307\textwidth}}\hline
 \textbf{Claim} & \textbf{Current treatment} & \textbf{Required next evidence} \\\hline
 OpenWOP defines a durable workflow orchestration protocol & Spec-supported claim & Continue citing spec corpus and kernel constructs \\\hline
-OpenWOP complements A2A and MCP & Scope-supported claim & Keep secondary; cite comparison document \\\hline
-OpenWOP is implementable in practice & Reference-implementation- and run-capture-supported & Captured live HostCapabilityDocument, conformance snapshot, and a real reference-host run-event log \\\hline
-OpenWOP conformance can be evaluated & Conformance-page-supported claim & Add snapshot of host row, profile, scenario results \\\hline
-OpenWOP improves portability & Demonstrated for core workflows across two language implementations (Cell A) & Extend to interrupt/replay (Cell B, durable hosts) and to an independent non-steward host \\\hline
+OpenWOP complements A2A and MCP & Scope-supported claim & Keep secondary; cite the independent protocol surveys [31, 32] \\\hline
+OpenWOP is implementable in practice & Reference-implementation- and run-capture-supported: captured HostCapabilityDocument, conformance snapshot, and reference- plus durable-host run logs & Independent (non-steward) deployment; production maturity \\\hline
+OpenWOP conformance can be evaluated & Conformance-snapshot-supported: host rows, profiles, suite version, and pass rates captured & An independent host passing the core profile \\\hline
+OpenWOP improves portability & Demonstrated for core workflows across two language hosts; durable-host interrupt/resume captured (Cell A) & Cross-host durable comparison (a second durable host) and an independent non-steward host \\\hline
 OpenWOP reduces integration complexity & Hypothesis & Adapter count, code size, or integration-effort comparison \\\hline
 OpenWOP accelerates intelligent software development & Long-term research claim & Empirical study or case evidence \\\hline
 \end{tabular}\end{table}
