@@ -1,0 +1,222 @@
+% Working title — alternates in papers/methodology/abstract-and-claims.md
+% "Contracts at Machine Speed: An Inverted SDLC for an Agent-Operated Software Factory"
+% Genre: experience report. Preprint-first (arXiv cs.SE/cs.AI/cs.DC + Zenodo) -> ICSE SEIP / FSE Industry.
+% Build: pdflatex main.tex && pdflatex main.tex   (or `make`, or Tectonic, or Overleaf)
+% Preamble copied verbatim from ../../arxiv/main.tex (the protocol paper) — keep in sync.
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning}
+\usepackage{float} % [H] pins tables/figures inline with their sections
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage[hidelinks]{hyperref}
+\usepackage{url}
+\urlstyle{same}
+% Figures compile with OR without the converted PDFs (convert figures/methodology/*.svg).
+\newcommand{\paperfig}[2]{\IfFileExists{#1}{\includegraphics[width=\linewidth]{#1}}%
+{\fbox{\parbox{0.95\linewidth}{\centering\vspace{1.4em}\itshape #2\\[2pt]\textnormal{[figure placeholder --- draw as TikZ or convert \texttt{figures/methodology/*.svg} to PDF]}\vspace{1.4em}}}}}
+\newcommand{\TODO}[1]{\textbf{\textcolor{red}{[TODO: #1]}}\typeout{TODO: #1}}
+\usepackage{xcolor}
+\lstset{basicstyle=\ttfamily\small,frame=single,breaklines=true,columns=fullflexible}
+
+\title{Contracts at Machine Speed:\\ An Inverted SDLC for an Agent-Operated Software Factory}
+\author{David S. Tufts\\
+MyndHyve Inc.\\
+\emph{\small Project steward (see Positionality, Section~1)}\\
+Grand Rapids, Michigan, USA\\
+\url{https://davidtufts.me}\quad\url{https://www.linkedin.com/in/davidtufts}}
+\date{2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Autonomous AI agents now perform much of the work in a software life cycle, but the
+literature on agentic software engineering treats agent coordination as a problem \emph{within}
+a single development workflow. The unsolved problem is coordination \emph{across} independent
+services: when an agent building one feature needs another service to change its interface.
+We report on a methodology in which autonomous agents propose, negotiate, and adopt
+versioned wire-contract changes across a multi-service estate---to our knowledge the first
+end-to-end account of agent-driven contract evolution at machine speed. Each shared service
+publishes a versioned contract; embedded per-service architect agents negotiate changes over
+a coordination bus through a governed RFC process (Draft~$\rightarrow$~Active~$\rightarrow$~Accepted,
+with risk-scaled review windows); and every change is verified by a conformance suite. A second
+mechanism makes the verification trustworthy---\emph{honesty by construction}: a service advertises
+a capability only when it is reachable in live state, and a strict conformance mode mechanically
+fails any advertised-but-unimplemented claim. The work sits within an \emph{inverted SDLC} in which
+agent compression of Create and Operate moves the binding effort to Plan and Validate, and an
+operating model of mission-focused Builder Teams whose shared functions act as Contract Guardians by
+embedding standards into the contracts themselves. We present a retrospective over a governance
+corpus of roughly one hundred RFCs and one hundred seventy architecture decision records,
+demonstrate the honesty-enforcement mechanism reproducibly, trace one agent-negotiated contract
+change end to end, and release the corpus and harness templates as an artifact. As a single-steward,
+single-estate experience report we make no causal or efficacy claim, and we present economics only as
+a transparent, non-causal model.
+\end{abstract}
+
+\section*{1. Introduction}
+% Frame: the Inverted SDLC. Hook + thesis + Positionality up front (mirror the protocol paper).
+\TODO{Open on the Inverted SDLC: traditional ~80\% Operate / 10--15\% Create; agents compress
+both; effort moves to Plan \& Validate; service contracts make that shift enforceable. Cite the
+Shift-Up framework [SHIFTUP] as the established frame and the vibe-coding survey [VIBE] for
+validate-by-outcome.}
+
+\TODO{State the thesis: cross-service, agent-negotiated, machine-speed contract evolution is the
+gap the agentic-SE literature does not fill (coordination there is intra-workflow [TOSEM, AGENTPROG]).}
+
+\paragraph{Terminology.} % Defuse the naming collisions BEFORE a reviewer does.
+\TODO{Disambiguate: our ``contract'' = a versioned service/API wire contract, NOT the
+resource-governance ``Agent Contract'' of [AGENTCONTRACT]. Our ``AI software factory'' = a
+\emph{methodology} for agents building features across a multi-service estate, NOT NVIDIA's
+infrastructure ``AI factory'' [NVIDIA] nor the DoD/Platform One DevSecOps ``software factory.''
+The nearest published neighbor is McKinsey's ``agentic SDLC''/``agent factories'' [MCKINSEY], which
+denotes factories that \emph{produce} agents.}
+
+\paragraph{Positionality.} % Threat-to-validity control, stated up front. Reuse the protocol paper's stance.
+\TODO{This manuscript is authored by the steward of the estate under study, not an independent third
+party; the corpus and agents analyzed are steward-produced and partly agent-produced. Treat all
+material as evidence of implementability and internal consistency, never third-party validation. AI
+was used to produce both the corpus and this manuscript; disclose which parts and how reviewed.}
+
+\section*{2. Problem: Coordinating Change in an Agent-Built Estate}
+\TODO{The three failure modes when integration knowledge is left implicit at agent scale: silent
+contract drift, dishonest capability claims, uncoordinated rollouts. Frame as what breaks when
+Validate is not continuous contract conformance.}
+
+\section*{3. Contribution}
+% The C1--C10 claims (see abstract-and-claims.md), ORDERED BY NOVELTY (lead with C1/C2).
+This paper makes the following contributions, each tagged with its evidence tier
+(\textbf{D}emonstrated / \textbf{O}bserved / \textbf{A}rgued):
+\begin{enumerate}[leftmargin=*]
+  \item \textbf{(C1, novel)} Agent-negotiated, cross-service \emph{versioned-contract evolution} over a
+        coordination bus under a governed RFC lifecycle. \TODO{cite the gap: [A2A, MCP, AGENTPROTO] only
+        discover capabilities or select a version; none negotiate contract changes.}
+  \item \textbf{(C2, novel)} An RFC change process (comment windows, status lifecycle) executed \emph{by}
+        agents at machine speed.
+  \item \textbf{(C3, demonstrated)} \emph{Honesty by construction}: advertisement bound to live state +
+        strict conformance fails dishonest claims. \TODO{scope to ``the agent-protocol setting'' per
+        Target-A finding, or claim unqualified if the 3rd sweep clears it.}
+  \item \textbf{(C4--C9)} The contract gate (``friction partner''); the ADR-local/RFC-external split
+        (cite + out-distance [SHIFTUP]); the reproducible governance corpus; the Builder-Team /
+        Contract-Guardian operating model; the agentic harness; the inverted-SDLC framing.
+  \item \textbf{(C10, model)} A transparent, non-causal economic framing (Section~12).
+\end{enumerate}
+
+\section*{4. Related Work}
+% Anchored by related-work-and-novelty.md. Flag source tiers (peer-reviewed vs preprint vs vendor).
+\TODO{Four bodies: (A) agentic SE [TOSEM, AGENTPROG, MICROSVC, APIFIRST] --- coordination is
+intra-workflow; (B) contract/API governance [TYPESAFE, CDVO] --- largely AI-free baselines;
+(C) the inverted-SDLC / spec-driven frame [SHIFTUP, VIBE]; (D) agent infrastructure
+[IOA, AGENTIC-SC, AGENTCONTRACT]. Carve the delta against [SHIFTUP] explicitly (it reframes ADRs as
+guardrails but has no local/external split, no wire contracts).}
+
+\section*{5. The Operating Model: Builder Teams in an Architect Mesh}
+\TODO{Builder Teams (Product Owner / UX Designer / AI Engineer); shared functions as Contract
+Guardians embedding standards as contract validation rules, not review queues. Team-topologies /
+platform-engineering lineage.}
+
+\section*{6. The Process: Discovery and the Build Loop}
+\TODO{Discovery (deep research -> multi-persona PRD lenses {Spec, Schema, Security, Conformance,
+Compatibility} -> contract-as-friction -> dependency-aware roadmap -> ADR/RFC split -> architect
+ratification). Then the Build Loop as a listing:}
+\begin{lstlisting}[caption={The build loop (per ADR + ratified RFC, in dependency order).},label={lst:loop}]
+for each ADR and ratified RFC (in dependency order):
+  for each implementation phase:
+    architect       # check phase design vs built code and local ADRs
+    goal            # autonomous implementation of a feature or contract clause
+    verify-contract # automated check of implementation vs contract schema
+    ux-review       # check UI vs design-system contract
+    merge           # merge behind a feature toggle
+\end{lstlisting}
+
+\section*{7. The Architecture}
+\TODO{Local feature lifecycle (roadmap -> ADR -> feature package -> catalog/toggle) ->
+the contract gate (three buckets; the ``friction partner'') -> contract governance (RFC lifecycle,
+risk-scaled windows) -> the architect mesh + coordination bus.}
+\begin{figure}[H]\centering
+  \paperfig{figures/methodology/fig-contract-gate.pdf}{The contract gate: host-extension / rides-accepted / touches-the-wire, wired to a failing test.}
+  \caption{The contract gate as a forcing function.}\label{fig:gate}
+\end{figure}
+
+\section*{8. Honesty by Construction}
+\TODO{Validate \emph{as} continuous contract conformance: the discovery $\leftrightarrow$ live-state
+$\leftrightarrow$ strict-conformance loop. This section hosts Study~B (Section~10).}
+
+\section*{9. The Agentic Harness}
+\TODO{Context-as-contracts, skills-as-consumers, hooks-as-obligations, memory. The transferable
+artifact; ship templates with the corpus release. Cite AGENTS.md/CLAUDE.md-style context conventions
+and [SHIFTUP] as lineage.}
+
+\section*{10. Evidence: Corpus Retrospective and the Honesty Experiment}
+\TODO{Study A: mine the RFC + ADR + conformance history --- lifecycle times, contract-gate bucket
+distribution, ADR-before-code adherence, conformance growth. Headline metric: \% of features that
+resolved at the gate with no wire change. Study B: the reproducible advertise-without-implement ->
+strict-mode-fails -> implement -> passes experiment, captured into evidence/methodology/.}
+
+\section*{11. Evidence: An Agent-Mediated Contract Change}
+\TODO{Study C: trace one real wire change end to end with redacted bus transcripts (the swimlane,
+drawn as TikZ --- not ASCII). Study D: descriptive operational stats (human-touch points, wall-clock
+to estate-wide adoption, changes handled with zero human intervention).}
+\begin{figure}[H]\centering
+  \paperfig{figures/methodology/fig-change-sequence.pdf}{Consumer -> bus -> owner: a contract change traced end to end.}
+  \caption{An agent-negotiated contract change, end to end.}\label{fig:seq}
+\end{figure}
+
+\section*{12. Economic Framing (Descriptive, Non-Causal)}
+% QUARANTINED. Glass-box model, n, measured-vs-modeled, confounds inline. NOT in the abstract headline.
+\TODO{State the value-recovery formula in full so a reviewer can recompute it; report n and window;
+separate measured from modeled; name confounds (selection bias, no control, blended-rate abstraction).
+Bracket with the independent evidence: METR RCT [METR] ($-19\%$) and the Management Science 3-RCT [MSRCT]
+($+26\%$). Per the provenance finding, either cite the exact (vendor) source for any ROI figure and
+label it vendor-funded, or drop the figure.}
+
+\section*{13. Claims and Evidence Discipline}
+\TODO{The demonstrated / observed / argued ladder; map every claim in Section~3 to its tier.}
+
+\section*{14. Limitations and Threats to Validity}
+\TODO{Solo steward, single estate, AI-authored corpus, self-evaluation bias, ROI confounds, the
+perception-reality gap demonstrated by [METR]. Honesty-by-construction novelty bounded to the
+agent-protocol setting unless the adjacent-domain sweep clears it.}
+
+\section*{15. Validation Agenda}
+\TODO{What independent adoption would test; pre-registered hypotheses; the second-host / second-team
+experiments that would move claims from observed/argued to demonstrated.}
+
+\section*{16. Reproducibility and Artifact Availability}
+\TODO{The released governance corpus (scrubbed RFCs/ADRs/conformance history + redacted bus transcripts),
+analysis scripts that regenerate Study~A's numbers, and the agentic-harness templates. CC BY + Zenodo
+artifact DOI. Note the scrub boundary (secrets, tenant identifiers, internal hostnames).}
+
+\section*{17. Conclusion}
+\TODO{The wager: govern at machine speed by moving human judgment into the contract, so review becomes
+continuous and automatic rather than a queue.}
+
+\begin{thebibliography}{99}
+\small
+\bibitem[TOSEM]{tosem} J.~He, C.~Treude, D.~Lo. ``LLM-Based Multi-Agent Systems for Software Engineering: Literature Review, Vision and the Road Ahead.'' ACM TOSEM, 2025. arXiv:2404.04834.
+\bibitem[AGENTPROG]{agentprog} Y.~Wang et al. ``AI Agentic Programming: A Survey.'' arXiv:2508.11126, 2025. \emph{(preprint)}
+\bibitem[MICROSVC]{microsvc} ``Specification Complexity in Microservice-Based Applications.'' arXiv:2508.20119, 2025. \emph{(preprint)}
+\bibitem[APIFIRST]{apifirst} ``From Specification to Service: Accelerating API-First Development Using Multi-Agent Systems.'' arXiv:2510.19274, 2025. \emph{(preprint)}
+\bibitem[TYPESAFE]{typesafe} J.~Costa~Seco et al. ``Robust Contract Evolution in a Type-Safe MicroServices Architecture.'' \textlangle Programming\textrangle{} 2020. arXiv:2002.06185.
+\bibitem[CDVO]{cdvo} ``A Compatibility-Driven Version Orchestrator for Microservice Contract Evolution.'' MDPI Digital 5(3):27, 2025.
+\bibitem[SHIFTUP]{shiftup} V.~Lipsanen, T.~Mikkonen et al. ``Shift-Up: A Framework for Software Engineering Guardrails in AI-native Software Development.'' VibeX 2026. arXiv:2604.20436. \emph{(preprint; initial findings)}
+\bibitem[VIBE]{vibe} Y.~Ge et al. ``A Survey of Vibe Coding with LLMs.'' arXiv:2510.12399, 2025. \emph{(preprint)}
+\bibitem[IOA]{ioa} ``Internet of Agents.'' IEEE TCCN, 2025. arXiv:2505.07176.
+\bibitem[AGENTIC-SC]{agenticsc} ``Agentic Services Computing.'' arXiv:2509.24380, 2025. \emph{(preprint)}
+\bibitem[AGENTCONTRACT]{agentcontract} ``Agent Contracts: A Formal Framework for Resource-Bounded Autonomous AI Systems.'' COINE/AAMAS 2026. arXiv:2601.08815.
+\bibitem[A2A]{a2a} Agent2Agent (A2A) Protocol Specification, v1.0, 2026. \url{https://a2a-protocol.org/latest/specification/}. \emph{(primary spec)}
+\bibitem[AGENTPROTO]{agentproto} ``A Survey of AI Agent Protocols (MCP/ACP/A2A/ANP).'' arXiv:2505.02279, 2025. \emph{(preprint)}
+\bibitem[METR]{metr} METR. ``Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity'' (RCT). 2025. arXiv:2507.09089. \emph{(independent)}
+\bibitem[MSRCT]{msrct} Z.~Cui, M.~Demirer, S.~Jaffe et al. ``The Effects of Generative AI on High-Skilled Work: Evidence from Three Field Experiments with Software Developers.'' Management Science, 2025. \emph{(peer-reviewed; vendor tool)}
+\bibitem[MCKINSEY]{mckinsey} McKinsey. ``Rewiring software delivery for the agentic era.'' 2025. \emph{(vendor/consultancy)}
+\bibitem[NVIDIA]{nvidia} NVIDIA. ``AI Factory'' white paper (agentic AI control plane). \emph{(vendor; infrastructure sense)}
+\end{thebibliography}
+
+\end{document}
