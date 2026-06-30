@@ -53,14 +53,14 @@ novel.
 |---|---|---|---|---|
 | C1 | **Agent-negotiated contract evolution**: embedded per-service architect agents propose and negotiate *versioned wire-contract* changes over a coordination bus, under a governed RFC lifecycle (Draft→Active→Accepted) with risk-scaled windows | **O** + D-trace | **N** | Study C trace + redacted bus transcripts. *R2-CONFIRMED gap: across MCP/A2A/ACP/ANP (survey arXiv:2505.02279 + A2A/MCP specs) agents only discover capabilities or select a version — none negotiate contract changes ("a new URI MUST be created for breaking changes" = out-of-band). Strongest novelty.* |
 | C2 | **An RFC process run BY agents at machine speed** — a human-style change process (comment windows, status lifecycle) executed by agents across the estate | **O** + A | **N** | Study A lifecycle stats. *Closest adjacency: Agentic Services Computing "Evolution" phase (governs agent lifecycles, not a contract-change process).* |
-| C3 | **Honesty by construction**: advertisement bound to live state + strict conformance makes a dishonest capability claim mechanically impossible | **D** | **P** | Study B. *Delta vs. capability discovery (IoA; A2A AgentCard is cacheable static metadata, no conformance). **R2 caveat (2-1 vote):** confirmed absent in agent-protocol literature, but service-mesh/OpenAPI/AsyncAPI conformance gating not swept — **scope to "agent-protocol setting" OR run a 3rd sweep** before claiming "first."* |
+| C3 | **Honesty by construction**: advertisement bound to live state + strict conformance makes a dishonest capability claim mechanically impossible | **D** | **P** (settled R3) | Study B. **R3: the fail-on-dishonest *gate* has prior art — cite Ramollari/Dranidis/Simons (X-machine publication gate) + PactFlow BDCT (`can-i-deploy`).** Our delta = binding advertisement to *continuous live runtime reachability* (per-request, from live host state) in an *autonomous multi-agent estate*. **Present as the reproducible demo, NOT a "first" novelty claim.** |
 | C4 | **The contract gate** classifies change into host-extension / rides-accepted / touches-the-wire at planning time; the strict schema is a "friction partner" that forces explicit decisions | **O** + A | **P** | Study A bucket distribution. *Delta vs. Shift-Up's guardrails: the three-way machine-speed classification wired to a failing test.* |
 | C5 | **ADR-local vs RFC-external governance split** applied to agent-driven change | **O** + A | **P** | *Cite Shift-Up (ADRs as GenAI guardrails); delta = the two-tier host-decision vs wire-spec split, which Shift-Up does not have.* |
 | C6 | **A reproducible governance corpus** (~100 RFCs, ~170 ADRs, versioned conformance, interop matrix, discovery docs) released as an analyzable artifact | **D** | **N** | Released artifact + analysis scripts (Study A). *The corpus itself is a contribution.* |
 | C7 | **Operating model**: Builder Teams in an Architect Mesh with shared functions as Contract Guardians (standards as contract rules, not review queues) | **O** + A | **P** | Description of actual teams. *Delta = org-functions-as-guardian-agents; mechanism (standards-as-rules) has prior art.* |
 | C8 | **The Agentic Harness** (context-as-contracts, skills-as-consumers, hooks-as-obligations, memory) as a transferable artifact | **A** + D | **P** | Released harness templates. *Cite Shift-Up / AGENTS.md-style context conventions as lineage.* |
 | C9 | **Inverted SDLC**: effort shifts to Plan/Validate; the methodology makes the shift non-catastrophic | **A** + O | **B** | *Cite Shift-Up + vibe-coding survey explicitly — this frame is established prior art; our contribution is the cross-service governance that operationalizes it.* |
-| C10 | **Economic framing**: under a stated value-recovery model the approach is associated with a large return (transparent, non-causal) | **O/A** | **B** | Study E — glass-box model, *n*, confounds named. *Contextualize against METR (−19%) and the Management Science RCT (+26%).* |
+| C10 | **Economic framing**: a transparent, non-causal model of where the methodology recovers value | **A** | **B** | Study E. **R3: DROP the "11.6:1 / $86-hr / workday-a-week" figures — all three are UNATTRIBUTABLE** (Forrester TEIs report 433%/376% and study Enterprise Cloud + Advanced Security, not Copilot). Bracket any model strictly with the citable independents: METR (−19%) and Cui et al., *Management Science* 2026, DOI 10.1287/mnsc.2025.00535 (+26.08%). |
 
 **Non-claims (state explicitly to pre-empt reviewers):** we do **not** claim a controlled
 efficacy result, generalization beyond one estate, or a causal ROI. These are deferred to
@@ -119,8 +119,9 @@ the first end-to-end report of running that wager across a real multi-service es
 - [x] Round-2 resolved: **C1 (agent-negotiated contract evolution) is the confirmed lead
       novelty** (A2A/MCP/ANP don't negotiate contract changes); the paper **may coin "AI
       software factory" as a methodology term** (unclaimed; cite McKinsey "agentic SDLC").
-- [ ] **C3 decision:** either scope the honesty-by-construction novelty to "the agent-protocol
-      setting" OR commission a 3rd sweep (service-mesh / OpenAPI / AsyncAPI conformance
-      gating, capability-based security) to claim it unqualified.
-- [ ] **ROI decision (C10):** locate the exact Forrester TEI (or other report) behind 11.6:1 /
-      $86/hr and label it vendor-funded, OR drop the figures. They are not independently sourceable.
+- [x] **C3 decision — RESOLVED (R3):** the fail-on-dishonest gate has prior art (Ramollari et al.;
+      PactFlow BDCT). C3 is reframed as the *reproducible demo* of a **live-state-bound** honesty gate
+      in a **multi-agent estate** — cite both priors; do NOT claim "first."
+- [x] **ROI decision (C10) — RESOLVED (R3):** the 11.6:1 / $86-hr / workday-a-week figures are
+      **unattributable → dropped.** Economic framing now brackets strictly with METR (−19%) and
+      Cui et al., *Management Science* 2026 (DOI 10.1287/mnsc.2025.00535, +26.08%).

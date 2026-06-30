@@ -89,12 +89,17 @@ Related Work section and the honesty of its novelty claims.
 
 ### E. Productivity / ROI evidence (for the Economic-framing section)
 - **METR RCT** (independent non-profit, 2025; arXiv:2507.09089). 16 experienced OSS devs, 246
-  real tasks → **19% slower** with AI; perceived +20%. *The single most important
-  independent counterweight.*
-- **Cui, Demirer, Jaffe et al. — "Effects of Generative AI on High-Skilled Work"**
-  (Management Science 2025; 3 RCTs, 4,867 devs). Copilot → **+26.08% (SE 10.3%)** completed
-  tasks. *Peer-reviewed; measures task count, not value.*
-- **DORA 2024**, **GitHub Copilot study** (github.blog) — *vendor/secondary*; cite as such.
+  real tasks → **19% slower** with AI; forecast +24%, *still believed +20% after being slowed.*
+  *The single most important independent counterweight — and the proof self-reported ROI is unreliable.*
+- **Cui, Demirer, Jaffe, Musolff, Peng & Salz — "The Effects of Generative AI on High-Skilled
+  Work: Evidence from Three Field Experiments"** (*Management Science*, INFORMS, 2026; DOI
+  10.1287/mnsc.2025.00535; 3 RCTs, 4,867 devs). Copilot → **+26.08% completed tasks**.
+  *Peer-reviewed; measures task count, not value.* **Cite the INFORMS DOI — NOT the earlier
+  pubpub preprint (1,974 devs).**
+- **R3 — the three vendor figures are UNATTRIBUTABLE → drop them.** "11.6:1 ROI" cannot be
+  sourced (the Forrester TEIs report **433% / 376% ROI** and study **GitHub Enterprise Cloud +
+  Advanced Security, NOT Copilot**); "$86/hr blended rate" and "1 in 3 devs save a workday/week"
+  are not locatable in any named report. *Use METR + Cui et al. as the citable bracket instead.*
 
 ---
 
@@ -105,7 +110,7 @@ novelty. Each row gives the strongest contradicting source.
 
 | Claim | Verdict | Strongest contradicting source | The defensible delta to carve |
 |---|---|---|---|
-| **(a) Honesty-by-construction** (advertisement bound to live state + strict conformance fails dishonest claims) | **Partially anticipated → CONFIRMED-with-caveat (R2)** | Internet of Agents (capability discovery); **A2A spec** — AgentCard is *cacheable static metadata*, decoupled from live state, with only implicit "error on use," no conformance | Confirmed absent across MCP/A2A/ANP. **Caveat:** R2 did NOT deeply sweep service-mesh / OpenAPI-AsyncAPI conformance gating / capability-based security — residual prior-art risk there. **Soften wording to "not present in the agent-protocol literature" OR run a 3rd targeted sweep before claiming first.** |
+| **(a) Honesty-by-construction** (advertisement bound to live state + strict conformance fails dishonest claims) | **PARTIALLY ANTICIPATED (R3 — settled; do NOT claim "first")** | **Ramollari, Dranidis & Simons** — X-machine broker admits only services whose *live implementation* matches their advertised model; **PactFlow BDCT** — `can-i-deploy` blocks deploy on provider self-verification failure | **R3 verdict: the fail-on-dishonest *gate* has clear SOA/CDC prior art** (also CDC "fail-on-missing-functionality," Hallé et al. runtime verification). Cite Ramollari + PactFlow. **Residual novelty = binding advertisement to _continuous live runtime reachability_ (advertise-only-when-currently-reachable, per-request) inside an _autonomous multi-agent contract-evolution estate_** — no surveyed source does this. C3 is the *reproducible demo*, not a novelty headline. |
 | **(b) Per-service architect agents negotiating versioned contract changes over a bus** | **Largely novel → CONFIRMED (R2), strongest candidate** | A2A/MCP/ACP/ANP comparative survey (arXiv:2505.02279) + A2A & MCP primary specs | **R2 verdict: real, unfilled gap.** All four protocols only *discover* capabilities, *select* a protocol version/extension, or negotiate *modality* — none propose/negotiate/version CHANGES to a shared contract ("a new URI MUST be created for breaking changes" = authored out-of-band). ANP's Meta-Protocol Negotiator aligns protocols, not contract amendments. **Lead the paper here.** |
 | **(c) An RFC process (Draft→Active→Accepted, risk-scaled windows) run BY agents at machine speed** | **Novel** (no prior art found) | Agentic Services Computing "Evolution" phase (adjacency only) | Adjacency governs agent lifecycles, not a contract-change comment-window process at agent speed. R2 corroborates: no protocol carries a contract-change process. |
 | **(d) ADR-local vs RFC-external governance split for agent-driven change** | **Partially anticipated** | **Shift-Up** (ADRs as GenAI guardrails) | Shift-Up does ADR-as-guardrail but **not** the two-tier host-decision vs wire-spec split. Cite it explicitly; the split is yours. |
@@ -144,22 +149,65 @@ four resolved; three favor the paper, one (Q3) carries a residual caveat.
 - **ACNBP — Agent Capability Negotiation & Binding Protocol** (arXiv:2506.13590) — *a research proposal*, noted: negotiates capability binding, still **not** versioned-contract-change negotiation (does not fill the gap; cite to show the gap is being noticed).
 - ROI provenance: GitHub "Sea Change" paper (arXiv:2306.15033), GitHub Copilot study (github.blog), Forrester TEI landing pages — all **vendor**; METR (arXiv:2507.09089) the lone independent.
 
-**Two residual follow-ups (optional, before final submission):**
-1. A focused sweep of **service-mesh / OpenAPI / AsyncAPI conformance gating + capability-based security** to fully close the Q3 honesty-enforcement novelty (currently the weakest verdict).
-2. Locate the **exact Forrester TEI (or other report)** behind 11.6:1 / $86/hr, or formally drop the figures.
+**Both residual follow-ups were RESOLVED in Round 3 (below).**
 
 ---
 
-## Targeted follow-up searches still worth running (the report's open questions)
-1. **"AI software factory" as a *methodology* term** — McKinsey ("rewiring software delivery
-   for the agentic era") is the closest mainstream articulation; do a dedicated sweep
-   (McKinsey/GitLab/Accenture/ThoughtWorks) to either claim or cede the term.
-2. **A2A / MCP agent-to-agent *contract negotiation*** — confirm the (b) gap with a targeted
-   Google A2A + MCP sweep before asserting novelty in print.
-3. **Honesty-enforcement prior art** — confirm nobody couples capability advertisement to
-   live state with a fail-on-dishonest conformance mode, to firm up (a).
-4. **Provenance of the 11.6:1 / workday-a-week figures** — locate and label the actual
-   (vendor) source; do not present as independent.
+## Round 3 — the last two questions, settled
+
+Third deep-research pass (100 agents, two targets). Both parked decisions now resolved.
+
+### Target A — honesty-by-construction prior art (outside the agent-protocol corpus)
+
+**Verdict: PARTIALLY ANTICIPATED. Do not claim "first" for the mechanism.** The
+fail-on-dishonest-claim *gate* is established in the SOA / contract-testing literature:
+
+- **Ramollari, Dranidis & Simons, "Reliable Web Service Publication and Discovery through
+  Model-Based Testing and Verification"** (Sheffield) — *the strongest contradicting source.*
+  A broker derives a complete **X-machine** test set from the provider's *advertised* behavioural
+  model, runs it against the **live implementation**, and admits **only passing services** to the
+  registry. An explicit publication-time *fail-on-non-conforming-claim* gate, motivated precisely
+  by "WSDL/UDDI cannot guarantee advertised == implemented."
+- **PactFlow Bi-Directional Contract Testing** — `can-i-deploy` **blocks deployment** when a
+  provider's self-verification against its advertised OpenAPI fails (self-verification is optional,
+  so the binding is conditional).
+- Also: **Pact / Spring Cloud Contract** provider verification fails on "missing functionality";
+  **Hallé et al.** runtime verification detects doc-vs-implementation divergence (reactive, call-time);
+  **capability-based security** binds a token to backed authority (adjacent, not the gate).
+
+**The residual, defensible novelty** (cite the above, then carve this): binding advertisement to
+**continuous live runtime reachability** — advertise-only-when-currently-reachable, assembled from
+live host state *per request* (not a one-time registry/deploy check) — **inside an autonomous,
+multi-agent, wire-contract-evolution estate.** No surveyed source binds advertisement to live
+execution state, and none does so in a multi-agent governance setting. → **Reframe C3 as the
+*reproducible demonstration* of a live-state-bound honesty gate, explicitly extending Ramollari et
+al. / PactFlow BDCT; it is not a standalone novelty claim.**
+
+### Target B — provenance of the ROI figures
+
+**Verdict: all three UNATTRIBUTABLE → drop them (or label as explicitly unverifiable).**
+
+- **"11.6:1 ROI"** — cannot be sourced. The Forrester TEIs report **433% ROI** ($136.8M NPV) and an
+  earlier **376%**, and study **GitHub Enterprise Cloud + Advanced Security, not Copilot**. Neither
+  equals 11.6:1.
+- **"$86/hr blended rate"** and **"1 in 3 developers save a full workday/week"** — not locatable in
+  any named report (Forrester TEI, Octoverse, GitHub surveys, McKinsey, GitClear, DORA, Atlassian).
+  *Absence of evidence, not positive refutation — a dedicated GitHub-survey/ROI-calculator hunt could
+  still surface a vendor lineage.*
+- **Replace with the citable bracket:** METR RCT (−19%, n=16) and **Cui, Demirer, Jaffe, Musolff,
+  Peng & Salz, *Management Science* 2026, DOI 10.1287/mnsc.2025.00535** (3 RCTs, 4,867 devs, +26.08%
+  tasks). Cite the **INFORMS DOI**, not the pubpub preprint.
+
+**New citable sources from Round 3:**
+- **Ramollari, Dranidis & Simons**, "Reliable Web Service Publication and Discovery through Model-Based
+  Testing and Verification" (Univ. Sheffield) — *primary, peer-reviewed*; the honesty-gate prior art.
+- **PactFlow Bi-Directional Contract Testing** docs — *secondary/product*; the deploy-blocking gate.
+- **Cui et al., *Management Science* 2026**, DOI 10.1287/mnsc.2025.00535 — the corrected citation for +26.08%.
+
+**One residual open question (rating-relevant, not blocking):** does any *post-2010* work extend the
+Sheffield X-machine publication gate to *continuous runtime re-certification*? If so it would narrow the
+live-state delta further. Low priority — current framing already concedes the gate and claims only the
+live-state + multi-agent combination.
 
 ---
 
