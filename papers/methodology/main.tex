@@ -163,22 +163,83 @@ causal-ROI claim: the estate has a single change-control authority (Section~14),
 deferred to a validation agenda (Section~15).
 
 \section*{4. Related Work}
-% Anchored by related-work-and-novelty.md. Flag source tiers (peer-reviewed vs preprint vs vendor).
-\TODO{Four bodies: (A) agentic SE [TOSEM, AGENTPROG, MICROSVC, APIFIRST] --- coordination is
-intra-workflow; (B) contract/API governance [TYPESAFE, CDVO] --- largely AI-free baselines;
-(C) the inverted-SDLC / spec-driven frame [SHIFTUP, VIBE]; (D) agent infrastructure
-[IOA, AGENTIC-SC, AGENTCONTRACT]. Carve the delta against [SHIFTUP] explicitly (it reframes ADRs as
-guardrails but has no local/external split, no wire contracts).}
+This methodology sits at the intersection of four bodies of work; we organize related work by what
+each does \emph{not} cover, since the contribution is their combination rather than any single
+mechanism. Source maturity varies and we flag it --- peer-reviewed venues, recent preprints, and
+vendor material are not equal evidence.
+
+\paragraph{Agentic software engineering.} A systematic review by He et al.\ maps LLM multi-agent
+systems across the software life cycle and characterizes the field as not yet autonomous, scalable, or
+trustworthy [TOSEM]; companion surveys describe agents that plan, use tools, and execute multi-step
+tasks within a single workflow [AGENTPROG]. Where such systems build services they do so at
+single-service scope --- e.g.\ multi-agent generation of an OpenAPI specification and its server
+[APIFIRST] --- and even strong agents degrade sharply as one microservice's specification complexity
+grows [MICROSVC]. None of this work addresses coordination of contract \emph{change} across independent
+services, which is our subject.
+
+\paragraph{Contract and API governance.} The deterministic baseline our agent layer sits atop is well
+developed and largely AI-free: type systems that statically prevent breaking microservice-contract
+changes [TYPESAFE], and orchestration unifying semantic versioning, contract testing, and CI/CD
+[CDVO]. We adopt these as the substrate, not as competitors; the intersection with LLMs is nascent.
+
+\paragraph{The inverted SDLC and spec-driven development.} The closest framing prior art is Shift-Up,
+which reinterprets executable requirements, architecture models, and \emph{architecture decision
+records} as guardrails for AI-native development and reports human effort shifting toward design and
+validation [SHIFTUP]; vibe-coding surveys formalize outcome-based validation [VIBE]. We build directly
+on this frame. Our delta is twofold, and we state it plainly so it is not mistaken: Shift-Up treats
+ADRs as single-project guardrails, whereas we add (i) a two-tier governance split between a local ADR
+and an \emph{external}, cross-service RFC, and (ii) versioned wire contracts with a conformance bar ---
+neither of which Shift-Up has.
+
+\paragraph{Agent infrastructure and honesty enforcement.} Capability discovery is established agent
+infrastructure [IOA] and governed agent-service lifecycles have been proposed [AGENTIC-SC]; the term
+``agent contract'' in this literature denotes resource-bounded execution, not API contracts
+[AGENTCONTRACT]. Closest to our honesty mechanism, the service-oriented-computing literature already
+gates publication on conformance --- a broker admitting only services whose live implementation matches
+their advertised model [RELWS], and bi-directional contract testing that blocks deployment on a
+provider's failed self-verification [PACTFLOW]. We therefore do \emph{not} claim the fail-on-dishonest
+gate as novel; our increment (Section~8) is binding the advertisement to \emph{continuous live runtime
+state}, re-evaluated per request, within an autonomous multi-agent estate. Finally, the operating model
+(Section~5) echoes team-topologies and platform-engineering practice; the inversion --- embedding
+shared-function standards \emph{into the contract} rather than a review queue --- is what adapts that
+lineage to an agent-operated estate.% TODO add a team-topologies citation
 
 \section*{5. The Operating Model: Builder Teams in an Architect Mesh}
-\TODO{Builder Teams (Product Owner / UX Designer / AI Engineer); shared functions as Contract
-Guardians embedding standards as contract validation rules, not review queues. Team-topologies /
-platform-engineering lineage.}
+To sustain machine-speed change without a matching growth in process, the estate replaces siloed
+departments with small, mission-focused \emph{Builder Teams} that form around a problem and dissolve
+when it is solved. A minimal team is three roles: a \emph{Product Owner}, who defines the business
+need and proposes new contracts or RFCs; a \emph{UX Designer}, who owns research, design quality, and
+the design-system contract; and an \emph{AI Engineer}, who runs the factory loop (Section~6) to
+implement local logic and integrate external contracts. Teams operate inside an \emph{Architect Mesh}:
+they reach shared functions --- architecture, security, operations, legal --- not through standing
+approvals but by requesting changes through the same RFC channel any consumer uses.
+
+The shared functions are \emph{Contract Guardians} rather than review bottlenecks. Instead of gating
+every change through a queue, a guardian embeds its standard \emph{as a validation rule inside the
+contract or the local template}: a mandatory security check becomes a clause enforced automatically on
+every change, not a hand-off. This is the organizational expression of the principle that runs through
+the whole methodology --- move the human judgment into the contract, so review is continuous and
+automatic. The result is that the central platform stays thin: it sets conventions, not approvals,
+and the volume of coordination scales with the contracts rather than with a review headcount.
 
 \section*{6. The Process: Discovery and the Build Loop}
-\TODO{Discovery (deep research -> multi-persona PRD lenses {Spec, Schema, Security, Conformance,
-Compatibility} -> contract-as-friction -> dependency-aware roadmap -> ADR/RFC split -> architect
-ratification). Then the Build Loop as a listing:}
+Discovery precedes the build loop and has six parts. (1)~\emph{Deep research}: every feature begins as
+a question, and a research agent grounds the initial requirements against the market and the existing
+estate. (2)~\emph{Multi-persona requirements}: a requirements agent reviews the proposal through five
+expert lenses --- specification, schema, security, conformance, and compatibility --- the same
+five-architect pass used to author an RFC. (3)~\emph{The contract as friction}: because agreeable
+models tend to smooth over ambiguity, the strict, machine-readable contract is deliberately used as a
+``friction partner'' that forces explicit structural decisions a prose specification would defer.
+(4)~\emph{A dependency-aware roadmap}: features are sequenced against a dependency graph, and a feature
+cannot be built until the external contracts it depends on are ratified and its local foundations are
+in place. (5)~\emph{The ADR/RFC split}: internal decisions are recorded as local architecture decision
+records, while any change to a shared interface is raised as an external RFC (Section~7).
+(6)~\emph{Architect ratification}: an architect agent is the last gate before building --- for local
+work it confirms the plan matches existing ADRs; for an external change it checks the proposed contract
+change for compatibility before ratifying the RFC.
+
+Once a local ADR is accepted and any required RFCs are ratified, the build loop (Listing~\ref{lst:loop})
+executes the implementation, with the contracts and local schemas as the orchestrators.
 \begin{lstlisting}[caption={The build loop (per ADR + ratified RFC, in dependency order).},label={lst:loop}]
 for each ADR and ratified RFC (in dependency order):
   for each implementation phase:
@@ -188,24 +249,69 @@ for each ADR and ratified RFC (in dependency order):
     ux-review       # check UI vs design-system contract
     merge           # merge behind a feature toggle
 \end{lstlisting}
+Each pass is short and merges behind a feature toggle, so a half-built feature is dark rather than
+broken. Three reviewer roles --- architect, code-review, and UX-review --- act as contract verifiers,
+checking local code against its ADR constraints and any external-facing surface against the ratified
+contract; \texttt{verify-contract} is the automated conformance check that makes ``validate'' mean
+contract conformance (Section~8) rather than output inspection.
 
 \section*{7. The Architecture}
-\TODO{Local feature lifecycle (roadmap -> ADR -> feature package -> catalog/toggle) ->
-the contract gate (three buckets; the ``friction partner'') -> contract governance (RFC lifecycle,
-risk-scaled windows) -> the architect mesh + coordination bus.}
+A feature travels a fixed local lifecycle before it can touch a shared interface: a roadmap item
+becomes an accepted ADR, which becomes a self-contained feature package, which is surfaced behind a
+runtime toggle. The hinge between local and remote is the \emph{contract gate} (Figure~\ref{fig:gate}):
+at planning time every change is classified into one of three buckets --- a non-normative host
+extension, a feature that rides an already-accepted contract, or a change that touches the wire and
+therefore requires a new RFC. The classification is consequential because advertising a capability
+whose contract change is not accepted is a dishonest wire claim that the conformance suite will fail
+(Section~8); the gate is thus wired to a test, not to a policy an agent can forget. Empirically the
+gate is highly selective: of 159 classifiable decision records in our estate, 155 (97.5\%) resolved
+without a new wire RFC (Section~10).
+
+Changes that do reach the wire are governed by an RFC lifecycle --- \texttt{Draft} (under discussion),
+\texttt{Active} (accepted, wire shape locked), \texttt{Accepted} (implemented and covered by
+conformance) --- with comment windows scaled to risk: additive, breaking, and safety-fix changes
+receive progressively longer windows. Per-service \emph{architect agents} carry this process,
+negotiating changes with one another over a coordination bus under a single human change-control
+authority. The strict, machine-readable schema doubles as the ``friction partner'' of Section~6 --- it
+is the artifact that forces an agent to make a structural decision explicit rather than defer it.
 \begin{figure}[H]\centering
   \paperfig{figures/methodology/fig-contract-gate.pdf}{The contract gate: host-extension / rides-accepted / touches-the-wire, wired to a failing test.}
   \caption{The contract gate as a forcing function.}\label{fig:gate}
 \end{figure}
 
 \section*{8. Honesty by Construction}
-\TODO{Validate \emph{as} continuous contract conformance: the discovery $\leftrightarrow$ live-state
-$\leftrightarrow$ strict-conformance loop. This section hosts Study~B (Section~10).}
+The methodology's central safety property is that \emph{validation is continuous contract conformance}
+and that a host cannot misrepresent itself. Three mechanisms compose into a loop. A host
+\emph{advertises} its capabilities at a discovery endpoint, and the advertisement is assembled from
+\emph{live execution state}, so a capability appears only when its implementation is actually
+reachable. A \emph{conformance suite} verifies, for each advertised capability, that the host honors
+it. And a \emph{strict mode} turns the gate inward: a capability that is advertised but not honored
+becomes a hard test failure rather than a silent skip. The three together make the dishonest case
+unreachable --- a system cannot advertise what it does not implement without failing its own suite.
+
+We are careful about novelty here. Gating publication or deployment on conformance is established in
+service-oriented computing and contract testing [RELWS, PACTFLOW] (Section~4); what we add is the
+binding of the advertisement to \emph{continuous} live runtime state, re-evaluated per request rather
+than at a one-time registry or deploy check, inside an estate where the publishers are agents.
+Section~10 demonstrates the mechanism reproducibly on a live host: driven purely by whether its
+capability is backed, the host passes strict conformance when it advertises and implements, and fails
+when it advertises without delivering.
 
 \section*{9. The Agentic Harness}
-\TODO{Context-as-contracts, skills-as-consumers, hooks-as-obligations, memory. The transferable
-artifact; ship templates with the corpus release. Cite AGENTS.md/CLAUDE.md-style context conventions
-and [SHIFTUP] as lineage.}
+The base model is a commodity; what distinguishes an estate is the \emph{agentic harness} --- the
+version-controlled system of context, skills, and hooks through which agents act, and the most directly
+transferable artifact of this work. Four elements compose it. \emph{Context as contracts}: the
+documents agents rely on --- architecture notes, decision records, working agreements --- are written
+as machine-readable rules, and an agent loads the specific versions relevant to its task rather than an
+undifferentiated prompt. \emph{Skills as contract-consumers}: reusable agent skills (plan, architect,
+review) interact with local code and external services strictly through their published boundaries.
+\emph{Hooks as obligations}: blocking or warning checks are encoded as non-negotiable clauses in a
+workflow or a shared contract --- a mandatory security gate is a hook, not a reminder.
+\emph{Memory}: project state survives session resets, kept aligned with the current decision records
+and active RFCs. The harness applies the methodology's own principle to the agents themselves: their
+context, capabilities, and obligations are contracts. We release templates for it with the corpus
+(Section~16); the conventions echo emerging context-file practice (\texttt{AGENTS.md} /
+\texttt{CLAUDE.md} files) and the guardrail framing of [SHIFTUP].
 
 \section*{10. Evidence: Corpus Retrospective and the Honesty Experiment}
 \paragraph{Study A (corpus retrospective; \emph{Observed}).} A deterministic analysis of the
