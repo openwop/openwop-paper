@@ -55,10 +55,11 @@ agent compression of Create and Operate moves the binding effort to Plan and Val
 operating model of mission-focused Builder Teams whose shared functions act as Contract Guardians by
 embedding standards into the contracts themselves. We present a retrospective over a governance
 corpus of 110 RFCs and 164 architecture decision records,
-demonstrate the honesty-enforcement mechanism reproducibly, trace one agent-negotiated contract
-change end to end, and release the corpus and harness templates as an artifact. As a single-steward,
-single-estate experience report we make no causal or efficacy claim, and we present economics only as
-a transparent, non-causal model.
+demonstrate the honesty-enforcement mechanism reproducibly, and trace contract changes graduating
+across two distinct hosts on a dual-witness conformance bar, releasing the corpus and harness
+templates as an artifact. As a single-steward experience report --- the two hosts share change
+control --- we make no independent-validation, causal, or efficacy claim, and we present economics
+only as a transparent, non-causal model.
 \end{abstract}
 
 \section*{1. Introduction}
@@ -175,13 +176,42 @@ validation pass and report inter-rater agreement before final submission. Add co
 advertise-without-implement $\rightarrow$ strict-mode-fails $\rightarrow$ implement $\rightarrow$ passes
 experiment, captured into \texttt{evidence/methodology/}.}
 
-\section*{11. Evidence: An Agent-Mediated Contract Change}
-\TODO{Study C: trace one real wire change end to end with redacted bus transcripts (the swimlane,
-drawn as TikZ --- not ASCII). Study D: descriptive operational stats (human-touch points, wall-clock
-to estate-wide adoption, changes handled with zero human intervention).}
+\section*{11. Evidence: Cross-Host Contract Evolution}
+\paragraph{The estate (two hosts, one wire contract).} The methodology is exercised across two
+genuinely distinct codebases and production deployments that advertise the same wire contract at
+their \texttt{.well-known/openwop} discovery documents: the open reference host
+\textbf{openwop-app} (\texttt{workflow-engine}, \texttt{app.openwop.dev}) and the steward's product
+host \textbf{MyndHyve} (\texttt{workflow-runtime}, a separate Firebase codebase at
+\texttt{api.myndhyve.ai}). A change graduates \texttt{Active}~$\rightarrow$~\texttt{Accepted} only
+when a \emph{second} host advertises the capability and passes its gated conformance scenarios
+\emph{non-vacuously} (\texttt{OPENWOP\_REQUIRE\_BEHAVIOR=true}) --- the \emph{dual-witness bar}.
+Adoption is coordinated by separate per-repo agent sessions exchanging handoff artifacts over a
+message bus; the agents implement, advertise, and run conformance on each host, and the steward is
+the single change-control authority that flips status (\emph{agent-executed, steward-supervised}).
+Full trace and citations in \texttt{evidence/cross-host-case/}.
+
+\paragraph{Worked example --- RFC 0050 (SAML/SCIM).} Authored \texttt{Draft} 2026-05-24 from a real
+product need; full wire surface landed and promoted to \texttt{Active} 2026-06-01; graduated
+\texttt{Accepted} the same day when MyndHyve advertised
+\texttt{auth.profiles:[openwop-auth-saml,openwop-auth-scim]} and passed the gated legs
+\textbf{19/19 non-vacuously} (the count rose 13$\rightarrow$19 once the IdP engaged the behavioral
+legs), with all seven SAML negative variants (incl.\ signature-wrapping) rejected live. At scale the
+record is routine: one cohort graduated \textbf{8 RFCs Draft$\rightarrow$Accepted in a day} on a
+single MyndHyve revision (28~PASS / 0~FAIL), and recent changes (RFC 0095, 0099, 0100, 0102, 0103,
+0105/0106) graduated as dual-witness pairs.
+
+\paragraph{Honest non-adoption (the gate is real).} The same estate records \emph{retractions} and
+\emph{opt-outs}: MyndHyve advertised one capability \texttt{(maxNodeExecutions)} in error and
+\emph{honestly retracted} it; several RFCs sit at documented host opt-outs; a fail-loud host correctly
+\emph{rejected} malformed packs. A dishonest advertisement is removed, not left standing --- the
+honesty-by-construction loop (Section~10) observed at estate scale.
+
+\TODO{Draw Fig.~\ref{fig:seq} as a TikZ swimlane (spec $\rightarrow$ openwop-app $\rightarrow$
+MyndHyve, dual-witness). Add Study D operational stats (human-touch points, wall-clock to dual-witness,
+zero-intervention count) mined from the handoff docs + PR history.}
 \begin{figure}[H]\centering
-  \paperfig{figures/methodology/fig-change-sequence.pdf}{Consumer -> bus -> owner: a contract change traced end to end.}
-  \caption{An agent-negotiated contract change, end to end.}\label{fig:seq}
+  \paperfig{figures/methodology/fig-change-sequence.pdf}{spec -> openwop-app -> MyndHyve: a wire change graduating on the dual-witness bar.}
+  \caption{Cross-host contract evolution: a change graduates only on a second host's non-vacuous conformance.}\label{fig:seq}
 \end{figure}
 
 \section*{12. Economic Framing (Descriptive, Non-Causal)}
@@ -198,10 +228,20 @@ and the peer-reviewed Management Science 3-RCT [MSRCT] ($+26.08\%$ tasks, 4{,}86
 \TODO{The demonstrated / observed / argued ladder; map every claim in Section~3 to its tier.}
 
 \section*{14. Limitations and Threats to Validity}
-\TODO{Solo steward, single estate, AI-authored corpus, self-evaluation bias, the perception-reality
-gap demonstrated by [METR]. State plainly that the honesty-gate mechanism is anticipated by [RELWS,
-PACTFLOW] and our contribution is its live-state-bound, multi-agent form; that the economic model is
-non-causal with no control; and that no claimed productivity figure is independently sourced.}
+\paragraph{Single change-control authority (the central threat).} The estate spans two genuinely
+distinct codebases and deployments (Section~11), which is real cross-host portability evidence ---
+but both are operated by the same steward. In the project's own evidence-tier taxonomy this is
+\textbf{Tier~2 (steward-affiliated sibling host)}, explicitly \emph{not} Tier~3 (independent
+organization); no Tier-3 host exists. We therefore present the dual-witness records as evidence of
+cross-codebase \emph{implementability}, never as independent third-party validation. (Historical RFC
+and changelog wording calls the sibling host ``non-steward''; the governance taxonomy later corrected
+that label and we use the corrected one.) A Tier-3 host plus independent external review is the
+decisive next evidence --- deferred to the Validation Agenda (Section~15).
+\TODO{Also: AI-authored corpus + AI-assisted manuscript (disclose); self-evaluation and selection
+bias; the perception-reality gap demonstrated by [METR]; the contract-gate metric is a prose-mined
+heuristic pending a manual coding pass; the honesty-gate mechanism is anticipated by [RELWS, PACTFLOW]
+and our contribution is its live-state-bound, multi-agent form; the economic model is non-causal with
+no control and no claimed productivity figure is independently sourced.}
 
 \section*{15. Validation Agenda}
 \TODO{What independent adoption would test; pre-registered hypotheses; the second-host / second-team

@@ -393,7 +393,9 @@ already endorsed) — it unblocks both papers.
 - [ ] Confirm **genre = experience report**, preprint-first, SEIP/Industry as the venue target.
 - [ ] Confirm we may **release a scrubbed governance corpus** (RFCs/ADRs/conformance/redacted bus transcripts) as a Zenodo artifact — or set the redaction boundary if not.
 - [ ] Confirm **single-author** (you) with an AI-use disclosure, or add co-authors.
-- [ ] Pick the **one real wire change** to use as the Study C case study.
+- [x] **Study C change picked + written:** RFC 0050 (SAML/SCIM), traced across the **openwop-app +
+      MyndHyve** two-host estate (the dual-witness bar). See `evidence/cross-host-case/`. The estate
+      framing is now "single-steward, two-host (Tier-2)" — not "single-estate".
 - [ ] Provide the **ROI model inputs** for Study E: how many pilots (*n*), how many developers, over what window, the full value-recovery formula behind 11.6:1, and whether the workday/week figure is survey- or telemetry-derived. Without these, the economics stay qualitative.
 - [ ] Confirm we can **release the Agentic Harness templates** (skill/hook/context-contract scaffolding) alongside the corpus — this is the transferable artifact reviewers will value most.
 
