@@ -54,7 +54,7 @@ fails any advertised-but-unimplemented claim. The work sits within an \emph{inve
 agent compression of Create and Operate moves the binding effort to Plan and Validate, and an
 operating model of mission-focused Builder Teams whose shared functions act as Contract Guardians by
 embedding standards into the contracts themselves. We present a retrospective over a governance
-corpus of roughly one hundred RFCs and one hundred seventy architecture decision records,
+corpus of 110 RFCs and 164 architecture decision records,
 demonstrate the honesty-enforcement mechanism reproducibly, trace one agent-negotiated contract
 change end to end, and release the corpus and harness templates as an artifact. As a single-steward,
 single-estate experience report we make no causal or efficacy claim, and we present economics only as
@@ -158,10 +158,22 @@ artifact; ship templates with the corpus release. Cite AGENTS.md/CLAUDE.md-style
 and [SHIFTUP] as lineage.}
 
 \section*{10. Evidence: Corpus Retrospective and the Honesty Experiment}
-\TODO{Study A: mine the RFC + ADR + conformance history --- lifecycle times, contract-gate bucket
-distribution, ADR-before-code adherence, conformance growth. Headline metric: \% of features that
-resolved at the gate with no wire change. Study B: the reproducible advertise-without-implement ->
-strict-mode-fails -> implement -> passes experiment, captured into evidence/methodology/.}
+\paragraph{Study A (corpus retrospective; \emph{Observed}).} A deterministic analysis of the
+governance corpus (script + per-item data in \texttt{evidence/corpus-analysis/}; snapshot
+\texttt{openwop@d7a635b6}, \texttt{openwop-app@bfcddc7d}). The RFC corpus is $n=110$ (107 Accepted,
+2 Active, 1 Draft), of which 104 record at least one lifecycle transition. The decision-record corpus
+is $n=164$ (144 implemented, 11 Accepted, 6 Superseded, 2 Proposed, 1 Withdrawn); 64 (39\%) carry a
+formal correction note, quantifying the ``correct, don't rewrite history'' discipline. The headline
+result is the \emph{contract-gate distribution}: of 159 classifiable decision records, \textbf{127
+(80\%) required no new wire RFC} (85 host-extension, 42 riding an already-accepted RFC) versus 32
+(20\%) wire-touching --- the empirical evidence for the gate's selectivity (C1, C2). \TODO{This is a
+prose-mined \emph{heuristic} classification (precedence-ordered, 5 unclassified); add the manual
+validation pass and report inter-rater agreement before final submission. Add conformance growth
+(scenarios per accepted RFC) via git-history mining (point-in-time: v1.37.0, 370 scenarios, 82 fixtures).}
+
+\paragraph{Study B (honesty experiment; \emph{Demonstrated}).} \TODO{The reproducible
+advertise-without-implement $\rightarrow$ strict-mode-fails $\rightarrow$ implement $\rightarrow$ passes
+experiment, captured into \texttt{evidence/methodology/}.}
 
 \section*{11. Evidence: An Agent-Mediated Contract Change}
 \TODO{Study C: trace one real wire change end to end with redacted bus transcripts (the swimlane,
