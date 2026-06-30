@@ -329,8 +329,9 @@ already-accepted RFC) versus only \textbf{4 (2.5\%) wire-touching}. (The heurist
 $\sim$8$\times$ over-count of the wire-touching bucket --- it matched ``new RFC'' inside ``\emph{no}
 new RFC'' --- and the resulting 57\% heuristic/audit agreement are reported in full; the corrected
 figure makes the gate \emph{more} selective than the heuristic suggested, evidencing C1/C2.)
-\TODO{Add conformance growth (scenarios per accepted RFC) via git-history mining (point-in-time:
-v1.37.0, 370 scenarios, 82 fixtures).}
+The conformance suite at this snapshot is version 1.37.0 (370 scenarios, 82 fixtures); its growth over
+time --- scenarios added per accepted RFC --- is a planned git-history extension to this point-in-time
+count.
 
 \paragraph{Study B (honesty experiment; \emph{Demonstrated}).} A reference host whose
 \texttt{workflowChainPacks} advertisement is recomputed from live execution state
@@ -396,24 +397,41 @@ conditions. First, it is enabled by \emph{single-maintainer governance with waiv
 brake for the multi-reviewer case, which is not yet exercised, so the honest claim is that the
 methodology removes the \emph{implementation/integration} bottleneck, not that governed review takes
 zero time. Second, a span is a \emph{recorded-activity} window, not human-effort time, and we make no
-human-hours-saved claim from it (Section~12). \TODO{Draw Fig.~\ref{fig:seq} as a TikZ swimlane.}
+human-hours-saved claim from it (Section~12).
+% figure work remaining: render fig:seq as a TikZ swimlane (spec -> openwop-app -> MyndHyve).
 \begin{figure}[H]\centering
   \paperfig{figures/methodology/fig-change-sequence.pdf}{spec -> openwop-app -> MyndHyve: a wire change graduating on the dual-witness bar.}
   \caption{Cross-host contract evolution: a change graduates only on a second host's non-vacuous conformance.}\label{fig:seq}
 \end{figure}
 
 \section*{12. Economic Framing (Descriptive, Non-Causal)}
-% QUARANTINED. Glass-box model, n, measured-vs-modeled, confounds inline. NOT in the abstract headline.
-% RESOLVED (R3): the "11.6:1 / $86-hr / workday-a-week" figures are UNATTRIBUTABLE -> dropped.
-% Present ONLY a transparent internal model bracketed by the citable independents.
-\TODO{If an internal value-recovery model is shown, state its formula, n, and window in full and label
-it non-causal; name confounds (selection bias, no control, blended-rate abstraction, the perception
-gap [METR] demonstrated). Do NOT reproduce the unsourceable vendor figures. Bracket strictly with the
-independent evidence: METR RCT [METR] ($-19\%$, and the proof self-reported productivity is unreliable)
-and the peer-reviewed Management Science 3-RCT [MSRCT] ($+26.08\%$ tasks, 4{,}867 devs).}
+We deliberately make no quantified return-on-investment claim. The figures that circulate for
+agent-assisted development --- large multipliers, ``a day a week saved'' --- could not be sourced to
+any independent study in our review; the nearest vendor analyses report different magnitudes for a
+different product scope, and the strongest independent evidence is contradictory: a randomized
+controlled trial found experienced developers \emph{19\% slower} with early-2025 tooling while
+believing themselves faster [METR], whereas a peer-reviewed three-experiment study of GitHub Copilot
+found a 26\% increase in completed tasks [MSRCT]. We therefore present economics only as a qualitative
+framing: the methodology's claimed value is the removal of integration rework (the gate of Section~7
+keeps most change off the wire) and of broken-integration debugging (the honesty loop of Section~8),
+redirecting effort toward design and validation (Section~6). Any monetary model built on this should
+state its formula, sample, and window explicitly, separate measured from modeled inputs, and treat the
+result as non-causal --- there is no control group, and self-reported productivity is demonstrably
+unreliable [METR]. We leave such a model to operators with their own cost data and decline to publish a
+figure we cannot independently support.
 
 \section*{13. Claims and Evidence Discipline}
-\TODO{The demonstrated / observed / argued ladder; map every claim in Section~3 to its tier.}
+To keep the contribution legible we tag each claim of Section~3 with the strongest evidence we actually
+have, and resist inflating the tier. \emph{Demonstrated} means a reproducible artifact or experiment a
+reader can re-run: C3 (the honesty experiment, Section~10) and the released corpus underpinning C4 and
+C6. \emph{Observed} means descriptive statistics mined from the real corpus: the contract-gate
+distribution (C4), the RFC velocity supporting C2 and C9 (Section~11), and the cross-host graduation
+record evidencing C1 and C2 (Section~11). \emph{Argued} means design rationale we believe but have not
+measured: the operating model (C5, C7), the harness (C8), and the inverted-SDLC framing (C9, which also
+rests on prior art). Where a claim's honest tier is weaker than a reader might assume, we say so at the
+claim rather than in a footnote: honesty-by-construction is \emph{demonstrated} but not \emph{novel}
+(Section~8); the velocity is \emph{observed} but conditioned on single-maintainer governance
+(Section~11); and the economic framing is \emph{argued} only, with no figure (Section~12).
 
 \section*{14. Limitations and Threats to Validity}
 \paragraph{Single change-control authority (the central threat).} The estate spans two genuinely
@@ -425,24 +443,59 @@ cross-codebase \emph{implementability}, never as independent third-party validat
 and changelog wording calls the sibling host ``non-steward''; the governance taxonomy later corrected
 that label and we use the corrected one.) A Tier-3 host plus independent external review is the
 decisive next evidence --- deferred to the Validation Agenda (Section~15).
-\TODO{Also: AI-authored corpus + AI-assisted manuscript (disclose); self-evaluation and selection
-bias; the perception-reality gap demonstrated by [METR]; the contract-gate metric is a prose-mined
-heuristic pending a manual coding pass; the honesty-gate mechanism is anticipated by [RELWS, PACTFLOW]
-and our contribution is its live-state-bound, multi-agent form; the economic model is non-causal with
-no control and no claimed productivity figure is independently sourced.}
+\paragraph{Other threats.} Several further limitations bound the result. The corpus under study, and a
+substantial part of this manuscript, were produced by the agents the paper describes; we disclose this
+and rely on human review, but it admits a self-evaluation bias we cannot fully exclude, and a selection
+bias in which changes became case studies. The headline contract-gate figure rests on a classification
+we audited from each record's explicit gate declaration (Section~10); 5 of 164 records remain
+unclassified, and the audit is itself an automated re-reading, not independent human coding. The
+honesty-gate mechanism is anticipated by prior conformance-publication gates [RELWS, PACTFLOW]; our
+contribution is narrowly its continuous-live-state, multi-agent form (Section~8). The velocity result
+is conditioned on single-maintainer governance with waived comment windows (Section~11). And the
+economic framing is non-causal with no control; no productivity figure we are aware of is
+independently sourced [METR, MSRCT]. None of these individually undermines the core contribution ---
+agent-negotiated cross-service contract evolution with mechanical honesty --- but together they bound
+it to a single rich case rather than a generalization.
 
 \section*{15. Validation Agenda}
-\TODO{What independent adoption would test; pre-registered hypotheses; the second-host / second-team
-experiments that would move claims from observed/argued to demonstrated.}
+The decisive next evidence is a \emph{Tier-3} host: an implementation built and operated by an
+organization with no affiliation to the steward, advertising the contract and passing conformance on
+its own infrastructure. That single step would move the cross-host claims (C1, C2) from
+implementability to genuine third-party adoption, and would exercise the risk-scaled comment windows
+that single-maintainer governance currently waives (Section~11). Beyond it, three studies would test
+the methodology rather than describe it: (i)~an independent team adopting the agentic harness on an
+unrelated estate, to test transferability (C8); (ii)~a controlled comparison of feature delivery with
+and without the contract gate, to convert the velocity \emph{observation} into a causal claim and
+ground an economic model (C10); and (iii)~human inter-rater coding of the contract-gate
+classification, to replace our automated audit (Section~10). We state these as the pre-registered shape
+of the validation we cannot yet perform, so the gap between what we demonstrate and what we argue stays
+explicit.
 
 \section*{16. Reproducibility and Artifact Availability}
-\TODO{The released governance corpus (scrubbed RFCs/ADRs/conformance history + redacted bus transcripts),
-analysis scripts that regenerate Study~A's numbers, and the agentic-harness templates. CC BY + Zenodo
-artifact DOI. Note the scrub boundary (secrets, tenant identifiers, internal hostnames).}
+We release the analyzed governance corpus and the evidence harness as an artifact under a permissive
+license with a Zenodo DOI: the RFC and decision-record corpora, the conformance-result history, the
+analysis scripts that regenerate every number in Sections~10--11 from the corpus snapshots cited there,
+the honesty-experiment harness (Section~10), and the agentic-harness templates (Section~9). The scripts
+are deterministic and stamp the corpus commit into their output, so a reader re-derives our figures or
+detects drift. Two boundaries are stated honestly: cross-host bus transcripts and operational captures
+are \emph{scrubbed} of secrets, tenant identifiers, and internal hostnames before release; and the
+second host is closed source, so its evidence is the published per-RFC conformance record rather than
+its code. Everything needed to reproduce the \emph{observed} and \emph{demonstrated} claims is in the
+artifact; the \emph{argued} claims are, by construction, not reproducible and are labeled as such.
 
 \section*{17. Conclusion}
-\TODO{The wager: govern at machine speed by moving human judgment into the contract, so review becomes
-continuous and automatic rather than a queue.}
+The wager of this work is simple to state. When agents propose and apply software changes faster than
+humans can review them, the way to keep a multi-service estate coherent is not to put a human in the
+path of every change but to \emph{move the human judgment into the contract} --- to encode standards as
+conformance rules, make capability advertisement honest by construction, and let agents negotiate
+change within those rails through a governed process they execute themselves. We have described that
+methodology; shown, across a real 110-RFC, two-host estate, that it keeps 97.5\% of change off the wire
+while graduating the rest on a dual-witness conformance bar; and demonstrated reproducibly that a host
+cannot lie about what it implements without failing its own tests. We have been equally explicit about
+what we have not shown: a single steward operates both hosts, the corpus and this paper are partly
+agent-authored, and no causal or economic claim is supported. Those are the boundaries an independent
+Tier-3 host would dissolve. We offer the methodology, the corpus, and the harness as a starting point
+for that test.
 
 \begin{thebibliography}{99}
 \small
