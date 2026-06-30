@@ -32,10 +32,11 @@ Genre: experience report (preprint-first → ICSE SEIP / FSE Industry).
 > Teams** whose shared functions act as Contract Guardians by embedding standards into the
 > contracts themselves. We present a retrospective over a governance corpus of 110 RFCs and
 > 164 architecture decision records, demonstrate the honesty-enforcement mechanism
-> reproducibly, trace one agent-negotiated contract change end to end, and release the corpus
-> and harness templates as an artifact. As a single-steward, single-estate experience
-> report we make no causal or efficacy claim, and we present economics only as a transparent,
-> non-causal model.
+> reproducibly, and trace contract changes graduating across two distinct hosts on a
+> dual-witness conformance bar, releasing the corpus and harness templates as an artifact.
+> As a single-steward experience report — the two hosts share change control — we make no
+> independent-validation, causal, or efficacy claim, and we present economics only as a
+> transparent, non-causal model.
 
 ---
 
@@ -51,7 +52,7 @@ novel.
 
 | # | Claim | Tier | Novelty | Evidence / prior-art delta |
 |---|---|---|---|---|
-| C1 | **Agent-negotiated contract evolution**: embedded per-service architect agents propose and negotiate *versioned wire-contract* changes over a coordination bus, under a governed RFC lifecycle (Draft→Active→Accepted) with risk-scaled windows | **O** + D-trace | **N** | Study C trace + redacted bus transcripts. *R2-CONFIRMED gap: across MCP/A2A/ACP/ANP (survey arXiv:2505.02279 + A2A/MCP specs) agents only discover capabilities or select a version — none negotiate contract changes ("a new URI MUST be created for breaking changes" = out-of-band). Strongest novelty.* |
+| C1 | **Agent-negotiated contract evolution**: embedded per-service architect agents propose and negotiate *versioned wire-contract* changes over a coordination bus, under a governed RFC lifecycle (Draft→Active→Accepted) with risk-scaled windows | **D-trace** + O | **N** | **Study C (`evidence/cross-host-case/`): real cross-host trace** — RFC 0050 graduates `Accepted` when MyndHyve (a second host) advertises + passes conformance 19/19 non-vacuously; the dual-witness bar. *R2-CONFIRMED gap: across MCP/A2A/ACP/ANP agents only discover capabilities or select a version — none negotiate contract changes. Strongest novelty.* |
 | C2 | **An RFC process run BY agents at machine speed** — a human-style change process (comment windows, status lifecycle) executed by agents across the estate | **O** + A | **N** | Study A lifecycle stats. *Closest adjacency: Agentic Services Computing "Evolution" phase (governs agent lifecycles, not a contract-change process).* |
 | C3 | **Honesty by construction**: advertisement bound to live state + strict conformance makes a dishonest capability claim mechanically impossible | **D** | **P** (settled R3) | Study B. **R3: the fail-on-dishonest *gate* has prior art — cite Ramollari/Dranidis/Simons (X-machine publication gate) + PactFlow BDCT (`can-i-deploy`).** Our delta = binding advertisement to *continuous live runtime reachability* (per-request, from live host state) in an *autonomous multi-agent estate*. **Present as the reproducible demo, NOT a "first" novelty claim.** |
 | C4 | **The contract gate** classifies change into host-extension / rides-accepted / touches-the-wire at planning time; the strict schema is a "friction partner" that forces explicit decisions | **O** + A | **P** | Study A bucket distribution. *Delta vs. Shift-Up's guardrails: the three-way machine-speed classification wired to a failing test.* |
