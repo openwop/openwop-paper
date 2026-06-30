@@ -226,9 +226,17 @@ single MyndHyve revision (28~PASS / 0~FAIL), and recent changes (RFC 0095, 0099,
 \emph{rejected} malformed packs. A dishonest advertisement is removed, not left standing --- the
 honesty-by-construction loop (Section~10) observed at estate scale.
 
-\TODO{Draw Fig.~\ref{fig:seq} as a TikZ swimlane (spec $\rightarrow$ openwop-app $\rightarrow$
-MyndHyve, dual-witness). Add Study D operational stats (human-touch points, wall-clock to dual-witness,
-zero-intervention count) mined from the handoff docs + PR history.}
+\paragraph{Study D (velocity; \emph{Observed}).} Mining the dates recorded in each RFC's
+lifecycle field (script + per-RFC data in \texttt{evidence/operational-stats/}), the entire
+110-RFC program ran in \textbf{$\sim$54 days}, and over the 107 Accepted RFCs the authored-to-Accepted
+span has a \textbf{median of 0 days} (mean 1.1, max 12): \textbf{56\% graduated same-day}, 76\% within
+one day, 97\% within seven. This is the machine-speed signal --- but it must be read with two
+conditions. First, it is enabled by \emph{single-maintainer governance with waived comment windows}
+(Study A: 40 RFCs note a waived/bootstrap window); the risk-scaled windows (Section~8) are the designed
+brake for the multi-reviewer case, which is not yet exercised, so the honest claim is that the
+methodology removes the \emph{implementation/integration} bottleneck, not that governed review takes
+zero time. Second, a span is a \emph{recorded-activity} window, not human-effort time, and we make no
+human-hours-saved claim from it (Section~12). \TODO{Draw Fig.~\ref{fig:seq} as a TikZ swimlane.}
 \begin{figure}[H]\centering
   \paperfig{figures/methodology/fig-change-sequence.pdf}{spec -> openwop-app -> MyndHyve: a wire change graduating on the dual-witness bar.}
   \caption{Cross-host contract evolution: a change graduates only on a second host's non-vacuous conformance.}\label{fig:seq}
