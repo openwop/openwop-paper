@@ -63,42 +63,86 @@ only as a transparent, non-causal model.
 \end{abstract}
 
 \section*{1. Introduction}
-% Frame: the Inverted SDLC. Hook + thesis + Positionality up front (mirror the protocol paper).
-\TODO{Open on the Inverted SDLC: traditional ~80\% Operate / 10--15\% Create; agents compress
-both; effort moves to Plan \& Validate; service contracts make that shift enforceable. Cite the
-Shift-Up framework [SHIFTUP] as the established frame and the vibe-coding survey [VIBE] for
-validate-by-outcome.}
+In a conventional software life cycle most engineering effort is spent operating and maintaining what
+already exists; creating new code is a minority of the work, and planning and validation a smaller
+minority still. Large-language-model agents invert this distribution. As agents absorb both the
+writing of code and much of the operational toil, the binding constraint migrates to the front of the
+life cycle --- to deciding \emph{what} to build and \emph{verifying} that what was built conforms to
+its specification. We call this the \emph{inverted SDLC}. The framing itself is not new: the Shift-Up
+framework argues that machine-readable requirements, architecture models, and architecture decision
+records act as guardrails that stabilize agent behavior and shift human effort toward design and
+validation [SHIFTUP], and surveys of ``vibe coding'' describe developers validating agent output by
+observing outcomes rather than reading code line by line [VIBE]. Our concern is what makes that shift
+\emph{safe across more than one service}.
 
-\TODO{State the thesis: cross-service, agent-negotiated, machine-speed contract evolution is the
-gap the agentic-SE literature does not fill (coordination there is intra-workflow [TOSEM, AGENTPROG]).}
+The agentic-software-engineering literature is substantial but treats agent coordination as a problem
+\emph{within} a single development workflow: planning, tool use, and multi-step execution inside one
+repository or task [TOSEM, AGENTPROG]. The problem we address is orthogonal and, to our knowledge,
+unaddressed: coordination \emph{across} independent services, when an agent building one feature needs
+another service to change its published interface. Current agent-interaction protocols do not fill
+this gap --- across MCP, A2A, and related schemes agents discover capabilities and select a protocol
+version, but none provide a mechanism to propose, negotiate, or version \emph{changes} to a shared
+service contract [A2A, AGENTPROTO]. We report on a methodology in which autonomous agents propose,
+negotiate, and adopt versioned wire-contract changes across a multi-service estate, governed by a
+Request-for-Comments (RFC) process the agents themselves execute, and verified by a conformance suite
+whose strict mode makes a dishonest capability claim mechanically fail. We describe the architecture,
+the operating model, and the agentic harness; we present a retrospective over a real governance
+corpus of 110 RFCs and 164 architecture decision records; we demonstrate the honesty mechanism
+reproducibly; and we trace contract changes graduating across two distinct hosts.
 
-\paragraph{Terminology.} % Defuse the naming collisions BEFORE a reviewer does.
-\TODO{Disambiguate: our ``contract'' = a versioned service/API wire contract, NOT the
-resource-governance ``Agent Contract'' of [AGENTCONTRACT]. Our ``AI software factory'' = a
-\emph{methodology} for agents building features across a multi-service estate, NOT NVIDIA's
-infrastructure ``AI factory'' [NVIDIA] nor the DoD/Platform One DevSecOps ``software factory.''
-The nearest published neighbor is McKinsey's ``agentic SDLC''/``agent factories'' [MCKINSEY], which
-denotes factories that \emph{produce} agents.}
+\paragraph{Terminology.} Three terms in this area are overloaded, and we fix our usage now. By
+\emph{contract} we mean a versioned service or API \emph{wire contract} --- the externally observable
+interface between services --- not the resource-governance ``agent contract'' (token, time, and budget
+bounds on execution) of the multi-agent-systems literature [AGENTCONTRACT]. By \emph{AI software
+factory} we mean a \emph{methodology} for autonomous agents building features across a multi-service
+estate; this is distinct from the vendor sense of ``AI factory'' as model-serving infrastructure
+[NVIDIA] and from the DoD / Platform One ``software factory'' as a DevSecOps pipeline. The nearest
+published neighbor is the ``agentic SDLC'' / ``agent factories'' framing [MCKINSEY], which denotes
+central capabilities that \emph{produce} agents rather than an estate the agents \emph{evolve}.
 
-\paragraph{Positionality.} % Threat-to-validity control, stated up front. Reuse the protocol paper's stance.
-\TODO{This manuscript is authored by the steward of the estate under study, not an independent third
-party; the corpus and agents analyzed are steward-produced and partly agent-produced. Treat all
-material as evidence of implementability and internal consistency, never third-party validation. AI
-was used to produce both the corpus and this manuscript; disclose which parts and how reviewed.}
+\paragraph{Positionality.} This manuscript is authored by the steward of the estate under study, not
+an independent third party. The protocol corpus, the conformance suite, and both host implementations
+are steward-produced, and a substantial fraction of the corpus --- and of this manuscript --- was
+produced by the very agents the paper studies, under human review. We therefore treat all material as
+evidence of \emph{implementability and internal consistency}, never as third-party validation or
+adoption, and we flag throughout where a claim would require an independent party to establish. We
+disclose the use of AI assistance explicitly because it is also our subject; Section~14 states which
+artifacts were agent-produced and how they were reviewed. This stance is a deliberate
+threat-to-validity control, stated up front so the evidence below is read correctly.
 
 \section*{2. Problem: Coordinating Change in an Agent-Built Estate}
-\TODO{The three failure modes when integration knowledge is left implicit at agent scale: silent
-contract drift, dishonest capability claims, uncoordinated rollouts. Frame as what breaks when
-Validate is not continuous contract conformance.}
+When integration knowledge lives in people's heads and in code review, a service's consumers learn of
+an interface change through conversation, convention, and the occasional broken build. In an estate
+where agents propose and apply changes faster than humans can review them, that implicit knowledge
+fails in three ways, each acute at machine speed:
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Silent contract drift.} A service changes its wire shape and its consumers discover
+        the break in production, because nothing forced the change to be declared against a shared,
+        versioned contract.
+  \item \textbf{Dishonest capability claims.} A service advertises a capability it does not actually
+        honor --- through optimism, staleness, or a half-finished change --- and integrators build
+        against a fiction.
+  \item \textbf{Uncoordinated rollouts.} A breaking change ships before consumers can adopt it, or
+        consumers are never told it exists.
+\end{itemize}
+These are survivable when a human reviewer sits in the path of every change; they are not survivable
+when the proposer is an agent and the reviewer would have to be one too. The methodology in this paper
+is organized around a single response: \emph{make the contract the locus of coordination, and make
+conformance to it continuous and automatic} --- so that ``validate'' is no longer ``did the output
+look right?'' but ``does this implementation still satisfy every contract it touches?'' The remaining
+sections develop that response and the evidence for it.
 
 \section*{3. Contribution}
 % The C1--C10 claims (see abstract-and-claims.md), ORDERED BY NOVELTY (lead with C1/C2).
 This paper makes the following contributions, each tagged with its evidence tier
 (\textbf{D}emonstrated / \textbf{O}bserved / \textbf{A}rgued):
 \begin{enumerate}[leftmargin=*]
-  \item \textbf{(C1, novel)} Agent-negotiated, cross-service \emph{versioned-contract evolution} over a
-        coordination bus under a governed RFC lifecycle. \TODO{cite the gap: [A2A, MCP, AGENTPROTO] only
-        discover capabilities or select a version; none negotiate contract changes.}
+  \item \textbf{(C1, novel)} Agent-negotiated, cross-service \emph{versioned-contract evolution}:
+        embedded per-service architect agents propose and negotiate changes to versioned wire
+        contracts over a coordination bus, under a governed RFC lifecycle. We are not aware of prior
+        work in which agents negotiate versioned \emph{service-contract} changes; the agent-protocol
+        literature provides capability discovery and version selection but no contract-change
+        negotiation [A2A, AGENTPROTO] (Section~4).
   \item \textbf{(C2, novel)} An RFC change process (comment windows, status lifecycle) executed \emph{by}
         agents at machine speed.
   \item \textbf{(C3, demonstrated --- not a ``first'' claim)} \emph{Honesty by construction}:
@@ -112,6 +156,11 @@ This paper makes the following contributions, each tagged with its evidence tier
         Contract-Guardian operating model; the agentic harness; the inverted-SDLC framing.
   \item \textbf{(C10, model)} A transparent, non-causal economic framing (Section~12).
 \end{enumerate}
+Claims C1, C2, C4, and C6 are evidenced by a released, re-runnable governance corpus
+(Sections~10--11); C3 is demonstrated by a reproducible experiment (Section~10); C5 and C7--C9 are
+argued from the design and the operating record. We make no controlled-efficacy, generalization, or
+causal-ROI claim: the estate has a single change-control authority (Section~14), and these are
+deferred to a validation agenda (Section~15).
 
 \section*{4. Related Work}
 % Anchored by related-work-and-novelty.md. Flag source tiers (peer-reviewed vs preprint vs vendor).
