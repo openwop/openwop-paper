@@ -170,7 +170,12 @@ ${mdRow(adrStatus)}
 - ADRs carrying a **correction note** (a decision revisited/overturned in flight): **${corrections}** (${pct(corrections, adrs.length)}).
 - ADRs with no parseable \`Status:\` line: **${adrStatus.Missing || 0}**.
 
-### Contract-gate classification (HEURISTIC) — the headline metric
+### Contract-gate classification (HEURISTIC — SUPERSEDED, see \`gate-audit.md\`)
+> ⚠ **This broad whole-text heuristic OVER-COUNTS \`new-rfc\` ~8× (it matches "new RFC"
+> inside "NO new RFC"). The validated figure is in \`gate-audit.md\`: audited, the gate is
+> 97.5% no-new-wire-RFC (only 4 ADRs are wire-touching), not the ~80% below.** The table
+> below is retained only to show the heuristic the audit corrected.
+
 Of the ${adrs.length} ADRs, the transparent classifier (rules in \`analyze-corpus.mjs\`)
 assigns each to one bucket; **${adrGate.unclassified || 0}** could not be classified from
 text and need manual coding.
