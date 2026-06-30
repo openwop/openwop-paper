@@ -165,12 +165,17 @@ governance corpus (script + per-item data in \texttt{evidence/corpus-analysis/};
 2 Active, 1 Draft), of which 104 record at least one lifecycle transition. The decision-record corpus
 is $n=164$ (144 implemented, 11 Accepted, 6 Superseded, 2 Proposed, 1 Withdrawn); 64 (39\%) carry a
 formal correction note, quantifying the ``correct, don't rewrite history'' discipline. The headline
-result is the \emph{contract-gate distribution}: of 159 classifiable decision records, \textbf{127
-(80\%) required no new wire RFC} (85 host-extension, 42 riding an already-accepted RFC) versus 32
-(20\%) wire-touching --- the empirical evidence for the gate's selectivity (C1, C2). \TODO{This is a
-prose-mined \emph{heuristic} classification (precedence-ordered, 5 unclassified); add the manual
-validation pass and report inter-rater agreement before final submission. Add conformance growth
-(scenarios per accepted RFC) via git-history mining (point-in-time: v1.37.0, 370 scenarios, 82 fixtures).}
+result is the \emph{contract-gate distribution}. A first-pass whole-text heuristic over-counted
+wire-touching changes; a validation pass that classifies each record from its \emph{explicit}
+RFC-gate declaration --- with the residual hand-coded (script and audit in
+\texttt{evidence/corpus-analysis/gate-audit.md}) --- corrects it: of 159 classifiable decision
+records, \textbf{155 (97.5\%) required no new wire RFC} (120 host-extension, 35 riding an
+already-accepted RFC) versus only \textbf{4 (2.5\%) wire-touching}. (The heuristic's
+$\sim$8$\times$ over-count of the wire-touching bucket --- it matched ``new RFC'' inside ``\emph{no}
+new RFC'' --- and the resulting 57\% heuristic/audit agreement are reported in full; the corrected
+figure makes the gate \emph{more} selective than the heuristic suggested, evidencing C1/C2.)
+\TODO{Add conformance growth (scenarios per accepted RFC) via git-history mining (point-in-time:
+v1.37.0, 370 scenarios, 82 fixtures).}
 
 \paragraph{Study B (honesty experiment; \emph{Demonstrated}).} A reference host whose
 \texttt{workflowChainPacks} advertisement is recomputed from live execution state
