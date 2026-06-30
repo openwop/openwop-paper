@@ -100,9 +100,12 @@ This paper makes the following contributions, each tagged with its evidence tier
         discover capabilities or select a version; none negotiate contract changes.}
   \item \textbf{(C2, novel)} An RFC change process (comment windows, status lifecycle) executed \emph{by}
         agents at machine speed.
-  \item \textbf{(C3, demonstrated)} \emph{Honesty by construction}: advertisement bound to live state +
-        strict conformance fails dishonest claims. \TODO{scope to ``the agent-protocol setting'' per
-        Target-A finding, or claim unqualified if the 3rd sweep clears it.}
+  \item \textbf{(C3, demonstrated --- not a ``first'' claim)} \emph{Honesty by construction}:
+        advertisement bound to live state + strict conformance fails dishonest claims. The
+        fail-on-dishonest \emph{gate} is anticipated by model-based publication gates [RELWS] and
+        bi-directional contract testing [PACTFLOW]; our increment is binding advertisement to
+        \emph{continuous live runtime reachability} within an autonomous multi-agent
+        contract-evolution estate, demonstrated reproducibly (Section~10).
   \item \textbf{(C4--C9)} The contract gate (``friction partner''); the ADR-local/RFC-external split
         (cite + out-distance [SHIFTUP]); the reproducible governance corpus; the Builder-Team /
         Contract-Guardian operating model; the agentic harness; the inverted-SDLC framing.
@@ -171,19 +174,22 @@ to estate-wide adoption, changes handled with zero human intervention).}
 
 \section*{12. Economic Framing (Descriptive, Non-Causal)}
 % QUARANTINED. Glass-box model, n, measured-vs-modeled, confounds inline. NOT in the abstract headline.
-\TODO{State the value-recovery formula in full so a reviewer can recompute it; report n and window;
-separate measured from modeled; name confounds (selection bias, no control, blended-rate abstraction).
-Bracket with the independent evidence: METR RCT [METR] ($-19\%$) and the Management Science 3-RCT [MSRCT]
-($+26\%$). Per the provenance finding, either cite the exact (vendor) source for any ROI figure and
-label it vendor-funded, or drop the figure.}
+% RESOLVED (R3): the "11.6:1 / $86-hr / workday-a-week" figures are UNATTRIBUTABLE -> dropped.
+% Present ONLY a transparent internal model bracketed by the citable independents.
+\TODO{If an internal value-recovery model is shown, state its formula, n, and window in full and label
+it non-causal; name confounds (selection bias, no control, blended-rate abstraction, the perception
+gap [METR] demonstrated). Do NOT reproduce the unsourceable vendor figures. Bracket strictly with the
+independent evidence: METR RCT [METR] ($-19\%$, and the proof self-reported productivity is unreliable)
+and the peer-reviewed Management Science 3-RCT [MSRCT] ($+26.08\%$ tasks, 4{,}867 devs).}
 
 \section*{13. Claims and Evidence Discipline}
 \TODO{The demonstrated / observed / argued ladder; map every claim in Section~3 to its tier.}
 
 \section*{14. Limitations and Threats to Validity}
-\TODO{Solo steward, single estate, AI-authored corpus, self-evaluation bias, ROI confounds, the
-perception-reality gap demonstrated by [METR]. Honesty-by-construction novelty bounded to the
-agent-protocol setting unless the adjacent-domain sweep clears it.}
+\TODO{Solo steward, single estate, AI-authored corpus, self-evaluation bias, the perception-reality
+gap demonstrated by [METR]. State plainly that the honesty-gate mechanism is anticipated by [RELWS,
+PACTFLOW] and our contribution is its live-state-bound, multi-agent form; that the economic model is
+non-causal with no control; and that no claimed productivity figure is independently sourced.}
 
 \section*{15. Validation Agenda}
 \TODO{What independent adoption would test; pre-registered hypotheses; the second-host / second-team
@@ -214,8 +220,10 @@ continuous and automatic rather than a queue.}
 \bibitem[A2A]{a2a} Agent2Agent (A2A) Protocol Specification, v1.0, 2026. \url{https://a2a-protocol.org/latest/specification/}. \emph{(primary spec)}
 \bibitem[AGENTPROTO]{agentproto} ``A Survey of AI Agent Protocols (MCP/ACP/A2A/ANP).'' arXiv:2505.02279, 2025. \emph{(preprint)}
 \bibitem[METR]{metr} METR. ``Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity'' (RCT). 2025. arXiv:2507.09089. \emph{(independent)}
-\bibitem[MSRCT]{msrct} Z.~Cui, M.~Demirer, S.~Jaffe et al. ``The Effects of Generative AI on High-Skilled Work: Evidence from Three Field Experiments with Software Developers.'' Management Science, 2025. \emph{(peer-reviewed; vendor tool)}
-\bibitem[MCKINSEY]{mckinsey} McKinsey. ``Rewiring software delivery for the agentic era.'' 2025. \emph{(vendor/consultancy)}
+\bibitem[MSRCT]{msrct} Z.~Cui, M.~Demirer, S.~Jaffe, L.~Musolff, S.~Peng, T.~Salz. ``The Effects of Generative AI on High-Skilled Work: Evidence from Three Field Experiments with Software Developers.'' Management Science, INFORMS, 2026. DOI 10.1287/mnsc.2025.00535. \emph{(peer-reviewed; 3 RCTs, 4{,}867 devs; vendor tool)}
+\bibitem[RELWS]{relws} E.~Ramollari, D.~Dranidis, A.~J.~H.~Simons. ``Reliable Web Service Publication and Discovery through Model-Based Testing and Verification.'' Univ.\ of Sheffield. \emph{(peer-reviewed; X-machine publication gate --- closest prior art for the honesty gate)}
+\bibitem[PACTFLOW]{pactflow} SmartBear/PactFlow. ``Bi-Directional Contract Testing'' (compatibility checks; \texttt{can-i-deploy} deploy gate). \emph{(product docs)}
+\bibitem[MCKINSEY]{mckinsey} McKinsey. ``Rewiring software delivery for the agentic era.'' 2025. \emph{(vendor/consultancy; ``agentic SDLC''/``agent factories'')}
 \bibitem[NVIDIA]{nvidia} NVIDIA. ``AI Factory'' white paper (agentic AI control plane). \emph{(vendor; infrastructure sense)}
 \end{thebibliography}
 
