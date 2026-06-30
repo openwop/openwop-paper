@@ -172,9 +172,29 @@ prose-mined \emph{heuristic} classification (precedence-ordered, 5 unclassified)
 validation pass and report inter-rater agreement before final submission. Add conformance growth
 (scenarios per accepted RFC) via git-history mining (point-in-time: v1.37.0, 370 scenarios, 82 fixtures).}
 
-\paragraph{Study B (honesty experiment; \emph{Demonstrated}).} \TODO{The reproducible
-advertise-without-implement $\rightarrow$ strict-mode-fails $\rightarrow$ implement $\rightarrow$ passes
-experiment, captured into \texttt{evidence/methodology/}.}
+\paragraph{Study B (honesty experiment; \emph{Demonstrated}).} A reference host whose
+\texttt{workflowChainPacks} advertisement is recomputed from live execution state
+(\texttt{existsSync} per \texttt{.well-known/openwop} request) is driven through three honesty
+postures by where its pack registry points --- with \emph{no host-code modification} --- and the
+gated behavioral conformance scenario is run in default and strict
+(\texttt{OPENWOP\_REQUIRE\_BEHAVIOR=true}) mode (harness + captured run in
+\texttt{evidence/honesty-experiment/}):
+\begin{center}\small
+\begin{tabular}{llll}
+\textbf{Posture} & \textbf{Advertises} & \textbf{Mode} & \textbf{Result}\\\hline
+honest + implemented (backed) & yes & strict & \textbf{6/6 pass} (non-vacuous)\\
+honest minimal (no backing) & no & default & 6/6 pass (honest skip)\\
+claims coverage, advertises nothing & no & strict & \textbf{6/6 fail}\\
+\textbf{dishonest} (empty registry) & \textbf{yes} & strict & \textbf{3/6 fail}\\
+\end{tabular}
+\end{center}
+The decisive contrast is the last two honest rows versus the dishonest row: the host advertises
+\texttt{workflowChainPacks:\{supported:true\}} but cannot expand (the behavioral leg returns
+\texttt{pack\_not\_found}), so strict conformance \emph{fails}. \textbf{A host cannot advertise a
+capability it does not deliver without failing its own conformance suite.} Per Section~4 this
+fail-on-dishonest gate is anticipated by prior model-based publication gates and bi-directional
+contract testing [RELWS, PACTFLOW]; the demonstrated increment is the binding of the advertisement
+to \emph{continuous live runtime state}, re-evaluated per request, within the autonomous estate.
 
 \section*{11. Evidence: Cross-Host Contract Evolution}
 \paragraph{The estate (two hosts, one wire contract).} The methodology is exercised across two
