@@ -46,8 +46,8 @@ literature on agentic software engineering treats agent coordination as a proble
 a single development workflow. The unsolved problem is coordination \emph{across} independent
 services: when an agent building one feature needs another service to change its interface.
 We report on a methodology in which autonomous agents propose, negotiate, and adopt
-versioned wire-contract changes across a multi-service estate---to our knowledge the first
-end-to-end account of agent-driven contract evolution at machine speed. Each shared service
+versioned wire-contract changes across a multi-service estate. To our knowledge, no prior published
+account describes agent-driven negotiation of versioned service-contract changes at machine speed. Each shared service
 publishes a versioned contract; embedded per-service architect agents negotiate changes over
 a coordination bus through a governed RFC process (Draft~$\rightarrow$~Active~$\rightarrow$~Accepted,
 with risk-scaled review windows); and every change is verified by a conformance suite. A second
@@ -80,9 +80,10 @@ observing outcomes rather than reading code line by line [VIBE]. Our concern is 
 
 The agentic-software-engineering literature is substantial but treats agent coordination as a problem
 \emph{within} a single development workflow: planning, tool use, and multi-step execution inside one
-repository or task [TOSEM, AGENTPROG]. The problem we address is orthogonal and, to our knowledge,
-unaddressed: coordination \emph{across} independent services, when an agent building one feature needs
-another service to change its published interface. Current agent-interaction protocols do not fill
+repository or task [TOSEM, AGENTPROG]. The problem we address is orthogonal and, to our knowledge, not
+described in prior published work: the \emph{negotiation of versioned service-contract changes} across
+independent services, when an agent building one feature needs another service to change its published
+interface. Current agent-interaction protocols do not fill
 this gap --- across MCP, A2A, and related schemes agents discover capabilities and select a protocol
 version, but none provide a mechanism to propose, negotiate, or version \emph{changes} to a shared
 service contract [A2A, AGENTPROTO]. We report on a methodology in which autonomous agents propose,
@@ -95,7 +96,8 @@ reproducibly; and we trace contract changes graduating across two distinct hosts
 
 \paragraph{Terminology.} Three terms in this area are overloaded, and we fix our usage now. By
 \emph{contract} we mean a versioned service or API \emph{wire contract} --- the externally observable
-interface between services --- not the resource-governance ``agent contract'' (token, time, and budget
+interface between services, in the sense of a machine-readable interface description such as the
+OpenAPI Specification [OPENAPI] --- not the resource-governance ``agent contract'' (token, time, and budget
 bounds on execution) of the multi-agent-systems literature [AGENTCONTRACT]. By \emph{AI software
 factory} we mean a \emph{methodology} for autonomous agents building features across a multi-service
 estate; this is distinct from the vendor sense of ``AI factory'' as model-serving infrastructure
@@ -181,9 +183,10 @@ grows [MICROSVC]. None of this work addresses coordination of contract \emph{cha
 services, which is our subject.
 
 \paragraph{Contract and API governance.} The deterministic baseline our agent layer sits atop is well
-developed and largely AI-free: type systems that statically prevent breaking microservice-contract
-changes [TYPESAFE], and orchestration unifying semantic versioning, contract testing, and CI/CD
-[CDVO]. We adopt these as the substrate, not as competitors; the intersection with LLMs is nascent.
+developed and largely AI-free: the consumer-driven-contracts pattern for evolving service interfaces
+[CDC], type systems that statically prevent breaking microservice-contract changes [TYPESAFE], and
+orchestration unifying semantic versioning, contract testing, and CI/CD [CDVO]. We adopt these as the
+substrate, not as competitors; the intersection with LLMs is nascent.
 
 \paragraph{The inverted SDLC and spec-driven development.} The closest framing prior art is Shift-Up,
 which reinterprets executable requirements, architecture models, and \emph{architecture decision
@@ -203,14 +206,15 @@ their advertised model [RELWS], and bi-directional contract testing that blocks 
 provider's failed self-verification [PACTFLOW]. We therefore do \emph{not} claim the fail-on-dishonest
 gate as novel; our increment (Section~8) is binding the advertisement to \emph{continuous live runtime
 state}, re-evaluated per request, within an autonomous multi-agent estate. Finally, the operating model
-(Section~5) echoes team-topologies and platform-engineering practice; the inversion --- embedding
-shared-function standards \emph{into the contract} rather than a review queue --- is what adapts that
-lineage to an agent-operated estate.% TODO add a team-topologies citation
+(Section~5) echoes the team-topologies and platform-engineering movements [TEAMTOP]; the inversion ---
+embedding shared-function standards \emph{into the contract} rather than a review queue --- is what
+adapts that lineage to an agent-operated estate.
 
 \section*{5. The Operating Model: Builder Teams in an Architect Mesh}
 To sustain machine-speed change without a matching growth in process, the estate replaces siloed
-departments with small, mission-focused \emph{Builder Teams} that form around a problem and dissolve
-when it is solved. A minimal team is three roles: a \emph{Product Owner}, who defines the business
+departments with small, mission-focused \emph{Builder Teams} --- stream-aligned teams in the
+team-topologies sense [TEAMTOP] --- that form around a problem and dissolve when it is solved. A
+minimal team is three roles: a \emph{Product Owner}, who defines the business
 need and proposes new contracts or RFCs; a \emph{UX Designer}, who owns research, design quality, and
 the design-system contract; and an \emph{AI Engineer}, who runs the factory loop (Section~6) to
 implement local logic and integrate external contracts. Teams operate inside an \emph{Architect Mesh}:
@@ -273,7 +277,8 @@ without a new wire RFC (Section~10).
 Changes that do reach the wire are governed by an RFC lifecycle --- \texttt{Draft} (under discussion),
 \texttt{Active} (accepted, wire shape locked), \texttt{Accepted} (implemented and covered by
 conformance) --- with comment windows scaled to risk: additive, breaking, and safety-fix changes
-receive progressively longer windows. Per-service \emph{architect agents} carry this process,
+receive progressively longer windows. The staged lifecycle and rough-consensus discipline deliberately
+mirror the IETF standards process [RFC2026, RFC7282]. Per-service \emph{architect agents} carry this process,
 negotiating changes with one another over a coordination bus under a single human change-control
 authority. The strict, machine-readable schema doubles as the ``friction partner'' of Section~6 --- it
 is the artifact that forces an agent to make a structural decision explicit rather than defer it.
@@ -543,24 +548,29 @@ for that test.
 \begin{thebibliography}{99}
 \small
 \bibitem[TOSEM]{tosem} J.~He, C.~Treude, D.~Lo. ``LLM-Based Multi-Agent Systems for Software Engineering: Literature Review, Vision and the Road Ahead.'' ACM TOSEM, 2025. arXiv:2404.04834.
-\bibitem[AGENTPROG]{agentprog} Y.~Wang et al. ``AI Agentic Programming: A Survey.'' arXiv:2508.11126, 2025. \emph{(preprint)}
-\bibitem[MICROSVC]{microsvc} ``Specification Complexity in Microservice-Based Applications.'' arXiv:2508.20119, 2025. \emph{(preprint)}
+\bibitem[AGENTPROG]{agentprog} H.~Wang, J.~Gong, H.~Zhang, J.~Xu, Z.~Wang. ``AI Agentic Programming: A Survey of Techniques, Challenges, and Opportunities.'' arXiv:2508.11126, 2025. \emph{(preprint)}
+\bibitem[MICROSVC]{microsvc} D.~M.~Yellin. ``LLM Agents for Generating Microservice-based Applications: How Complex is Your Specification?'' arXiv:2508.20119, 2025. \emph{(preprint)}
 \bibitem[APIFIRST]{apifirst} ``From Specification to Service: Accelerating API-First Development Using Multi-Agent Systems.'' arXiv:2510.19274, 2025. \emph{(preprint)}
 \bibitem[TYPESAFE]{typesafe} J.~Costa~Seco et al. ``Robust Contract Evolution in a Type-Safe MicroServices Architecture.'' \textlangle Programming\textrangle{} 2020. arXiv:2002.06185.
-\bibitem[CDVO]{cdvo} ``A Compatibility-Driven Version Orchestrator for Microservice Contract Evolution.'' MDPI Digital 5(3):27, 2025.
-\bibitem[SHIFTUP]{shiftup} V.~Lipsanen, T.~Mikkonen et al. ``Shift-Up: A Framework for Software Engineering Guardrails in AI-native Software Development.'' VibeX 2026. arXiv:2604.20436. \emph{(preprint; initial findings)}
+\bibitem[CDVO]{cdvo} ``Investigating the Evolution of Resilient Microservice Architectures'' (proposes the Compatibility-Driven Version Orchestrator). MDPI Digital 5(3):27, 2025.
+\bibitem[SHIFTUP]{shiftup} P.~Lipsanen, L.~Rannikko, F.~Christophe, K.~Kalliokoski, V.~Stirbu, T.~Mikkonen. ``Shift-Up: A Framework for Software Engineering Guardrails in AI-native Software Development --- Initial Findings.'' VibeX 2026. arXiv:2604.20436. \emph{(preprint)}
 \bibitem[VIBE]{vibe} Y.~Ge et al. ``A Survey of Vibe Coding with LLMs.'' arXiv:2510.12399, 2025. \emph{(preprint)}
 \bibitem[IOA]{ioa} ``Internet of Agents.'' IEEE TCCN, 2025. arXiv:2505.07176.
 \bibitem[AGENTIC-SC]{agenticsc} ``Agentic Services Computing.'' arXiv:2509.24380, 2025. \emph{(preprint)}
 \bibitem[AGENTCONTRACT]{agentcontract} ``Agent Contracts: A Formal Framework for Resource-Bounded Autonomous AI Systems.'' COINE/AAMAS 2026. arXiv:2601.08815.
 \bibitem[A2A]{a2a} Agent2Agent (A2A) Protocol Specification, v1.0, 2026. \url{https://a2a-protocol.org/latest/specification/}. \emph{(primary spec)}
-\bibitem[AGENTPROTO]{agentproto} ``A Survey of AI Agent Protocols (MCP/ACP/A2A/ANP).'' arXiv:2505.02279, 2025. \emph{(preprint)}
+\bibitem[AGENTPROTO]{agentproto} A.~Ehtesham, A.~Singh, G.~K.~Gupta, S.~Kumar. ``A Survey of Agent Interoperability Protocols: MCP, ACP, A2A, and ANP.'' arXiv:2505.02279, 2025. \emph{(preprint)}
 \bibitem[METR]{metr} METR. ``Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity'' (RCT). 2025. arXiv:2507.09089. \emph{(independent)}
 \bibitem[MSRCT]{msrct} Z.~Cui, M.~Demirer, S.~Jaffe, L.~Musolff, S.~Peng, T.~Salz. ``The Effects of Generative AI on High-Skilled Work: Evidence from Three Field Experiments with Software Developers.'' Management Science, INFORMS, 2026. DOI 10.1287/mnsc.2025.00535. \emph{(peer-reviewed; 3 RCTs, 4{,}867 devs; vendor tool)}
 \bibitem[RELWS]{relws} E.~Ramollari, D.~Dranidis, A.~J.~H.~Simons. ``Reliable Web Service Publication and Discovery through Model-Based Testing and Verification.'' Univ.\ of Sheffield. \emph{(peer-reviewed; X-machine publication gate --- closest prior art for the honesty gate)}
 \bibitem[PACTFLOW]{pactflow} SmartBear/PactFlow. ``Bi-Directional Contract Testing'' (compatibility checks; \texttt{can-i-deploy} deploy gate). \emph{(product docs)}
 \bibitem[MCKINSEY]{mckinsey} McKinsey. ``Rewiring software delivery for the agentic era.'' 2025. \emph{(vendor/consultancy; ``agentic SDLC''/``agent factories'')}
 \bibitem[NVIDIA]{nvidia} NVIDIA. ``AI Factory'' white paper (agentic AI control plane). \emph{(vendor; infrastructure sense)}
+\bibitem[TEAMTOP]{teamtop} M.~Skelton, M.~Pais. ``Team Topologies: Organizing Business and Technology Teams for Fast Flow.'' IT Revolution Press, 2019.
+\bibitem[CDC]{cdc} I.~Robinson. ``Consumer-Driven Contracts: A Service Evolution Pattern.'' martinfowler.com, 2006.
+\bibitem[OPENAPI]{openapi} OpenAPI Initiative. ``OpenAPI Specification.'' The Linux Foundation. \url{https://spec.openapis.org/}.
+\bibitem[RFC2026]{rfc2026} S.~Bradner. ``The Internet Standards Process --- Revision 3.'' RFC 2026 (BCP 9), IETF, 1996.
+\bibitem[RFC7282]{rfc7282} P.~Resnick. ``On Consensus and Humming in the IETF.'' RFC 7282, IETF, 2014.
 \end{thebibliography}
 
 \end{document}
