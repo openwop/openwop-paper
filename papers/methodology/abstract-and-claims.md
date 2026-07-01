@@ -30,8 +30,8 @@ Genre: experience report (preprint-first → ICSE SEIP / FSE Industry).
 > within an **inverted SDLC** in which agent compression of Create and Operate moves the
 > binding effort to Plan and Validate, and an operating model of mission-focused **Builder
 > Teams** whose shared functions act as Contract Guardians by embedding standards into the
-> contracts themselves. We present a retrospective over a governance corpus of 110 RFCs and
-> 164 architecture decision records, demonstrate the honesty-enforcement mechanism
+> contracts themselves. We present a retrospective over a governance corpus of 120 RFCs and
+> 166 architecture decision records, demonstrate the honesty-enforcement mechanism
 > reproducibly, and trace contract changes graduating across two distinct hosts on a
 > dual-witness conformance bar, releasing the corpus and harness templates as an artifact.
 > As a single-steward experience report — the two hosts share change control — we make no
@@ -55,9 +55,9 @@ novel.
 | C1 | **Agent-negotiated contract evolution**: embedded per-service architect agents propose and negotiate *versioned wire-contract* changes over a coordination bus, under a governed RFC lifecycle (Draft→Active→Accepted) with risk-scaled windows | **D-trace** + O | **N** | **Study C (`evidence/cross-host-case/`): real cross-host trace** — RFC 0050 graduates `Accepted` when MyndHyve (a second host) advertises + passes conformance 19/19 non-vacuously; the dual-witness bar. *R2-CONFIRMED gap: across MCP/A2A/ACP/ANP agents only discover capabilities or select a version — none negotiate contract changes. Strongest novelty.* |
 | C2 | **An RFC process run BY agents at machine speed** — a human-style change process (comment windows, status lifecycle) executed by agents across the estate | **O** + A | **N** | Study A lifecycle stats. *Closest adjacency: Agentic Services Computing "Evolution" phase (governs agent lifecycles, not a contract-change process).* |
 | C3 | **Honesty by construction**: advertisement bound to live state + strict conformance makes a dishonest capability claim mechanically impossible | **D** ✓ | **P** (settled R3) | **Study B DEMONSTRATED LIVE** (`evidence/honesty-experiment/`): advertise+implement → 6/6 pass; advertise-without-deliver → 3/6 fail under strict mode. *Gate has prior art (Ramollari/Dranidis/Simons; PactFlow BDCT); our delta = continuous live-runtime-state binding in a multi-agent estate. Reproducible demo, not a "first" claim.* |
-| C4 | **The contract gate** classifies change into host-extension / rides-accepted / touches-the-wire at planning time; the strict schema is a "friction partner" that forces explicit decisions | **O** + A | **P** | **Study A, AUDITED (`gate-audit.md`): 155/159 (97.5%) of ADRs needed no new wire RFC; only 4 wire-touching** (the first-pass heuristic's 80% was an under-count). *Delta vs. Shift-Up's guardrails: the three-way machine-speed classification wired to a failing test.* |
+| C4 | **The contract gate** classifies change into host-extension / rides-accepted / touches-the-wire at planning time; the strict schema is a "friction partner" that forces explicit decisions | **O** + A | **P** | **Study A, AUDITED (`gate-audit.md`): 157/161 (97.5%) of ADRs needed no new wire RFC; only 4 wire-touching** (the first-pass heuristic's 80% was an under-count). *Delta vs. Shift-Up's guardrails: the three-way machine-speed classification wired to a failing test.* |
 | C5 | **ADR-local vs RFC-external governance split** applied to agent-driven change | **O** + A | **P** | *Cite Shift-Up (ADRs as GenAI guardrails); delta = the two-tier host-decision vs wire-spec split, which Shift-Up does not have.* |
-| C6 | **A reproducible governance corpus** (110 RFCs, 164 ADRs, conformance v1.37.0 / 370 scenarios, interop matrix, discovery docs) released as an analyzable artifact | **D** | **N** | Released artifact + analysis scripts (Study A, `evidence/corpus-analysis/`). *The corpus itself is a contribution.* |
+| C6 | **A reproducible governance corpus** (120 RFCs, 166 ADRs, conformance v1.46.0 / 380 scenarios, interop matrix, discovery docs) released as an analyzable artifact | **D** | **N** | Released artifact + analysis scripts (Study A, `evidence/corpus-analysis/`). *The corpus itself is a contribution.* |
 | C7 | **Operating model**: Builder Teams in an Architect Mesh with shared functions as Contract Guardians (standards as contract rules, not review queues) | **O** + A | **P** | Description of actual teams. *Delta = org-functions-as-guardian-agents; mechanism (standards-as-rules) has prior art.* |
 | C8 | **The Agentic Harness** (context-as-contracts, skills-as-consumers, hooks-as-obligations, memory) as a transferable artifact | **A** + D | **P** | Released harness templates. *Cite Shift-Up / AGENTS.md-style context conventions as lineage.* |
 | C9 | **Inverted SDLC**: effort shifts to Plan/Validate; the methodology makes the shift non-catastrophic | **A** + O | **B** | *Cite Shift-Up + vibe-coding survey explicitly — this frame is established prior art; our contribution is the cross-service governance that operationalizes it.* |
@@ -116,7 +116,7 @@ the first end-to-end report of running that wager across a real multi-service es
 - [ ] Confirm C10 (economics) stays a *subsection*, never the abstract headline (current
       draft keeps ROI out of the abstract entirely — moved to a single closing clause).
 - [ ] Decide whether the harness templates (C8) ship with the v1 preprint or a follow-up.
-- [x] **Study A ran — counts pinned:** 110 RFCs, 164 ADRs, conformance v1.37.0 (370 scenarios).
+- [x] **Study A ran — counts pinned:** 120 RFCs, 166 ADRs, conformance v1.46.0 (380 scenarios).
       Contract-gate headline: **80% of classifiable ADRs needed no new wire RFC.** Remaining: a
       manual validation pass over the heuristic gate classification + conformance growth via git history.
 - [x] Round-2 resolved: **C1 (agent-negotiated contract evolution) is the confirmed lead

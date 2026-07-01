@@ -109,3 +109,13 @@ num,slug,status,superseded,window,transitions
 0108,self-hosted-openai-compatible-provider-class,Accepted,,waived/bootstrap,2
 0109,conversation-turn-model-provenance,Accepted,,waived/bootstrap,1
 0110,channel-presence,Accepted,,waived/bootstrap,1
+0111,context-economy,Active,,unstated,0
+0112,compact-tool-projection,Accepted,,unstated,1
+0113,memory-injection-budget,Accepted,,unstated,1
+0114,a2ui-surface-deltas,Active,,unstated,0
+0115,run-transport-economy,Accepted,,unstated,1
+0116,prompt-prefix-cache,Active,,unstated,0
+0117,frontend-plugin-packs,Active,,waived/bootstrap,1
+0118,parallel-subworkflow-fan-out-and-join,Accepted,,waived/bootstrap,2
+0119,isolation-model-mechanism-neutrality,Active,,window-cited,1
+0120,connection-pack-api-hosts,Accepted,,unstated,2
