@@ -1,11 +1,17 @@
 # P0 — Abstract & Claims List
 
-**Working title:** *Contracts at Machine Speed: An Inverted SDLC for an Agent-Operated
-Software Factory*
+**Title (set 2026-06-30):** *Contracts at Machine Speed: Agent-Negotiated Wire-Contract
+Evolution Across a Multi-Service Estate*
 
-*(Alternates: "Honest by Construction: Governing a Multi-Service Estate of AI Builder
-Teams"; "The Builder Team Software Factory: Service Contracts as the Backbone of
-Agent-Driven Development.")*
+*Rationale:* leads with the verified-novel contribution (agent-negotiated versioned
+contract change, cross-service) rather than the borrowed "inverted SDLC" frame or the
+non-novel honesty mechanism; deliberately avoids "software factory" / "AI factory" in the
+title (the Terminology paragraph disambiguates those from the NVIDIA / DoD senses).
+
+*(Alternates considered: "Honest by Construction: Agent-Negotiated Contract Evolution at
+Machine Speed"; "Governing Software Change at Machine Speed: An Experience Report on
+Agent-Negotiated Service Contracts"; "Agent-Negotiated Contract Evolution Across a
+Multi-Service Estate".)*
 
 Status: Draft for review — this file pins the framing before any manuscript prose.
 Genre: experience report (preprint-first → ICSE SEIP / FSE Industry).
