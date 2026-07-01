@@ -491,9 +491,9 @@ and changelog wording calls the sibling host ``non-steward''; the governance tax
 that label and we use the corrected one.) A Tier-3 host plus independent external review is the
 decisive next evidence --- deferred to the Validation Agenda (Section~15).
 \paragraph{Other threats.} Several further limitations bound the result. The corpus under study, and a
-substantial part of this manuscript, were produced by the agents the paper describes; we disclose this
-and rely on human review, but it admits a self-evaluation bias we cannot fully exclude, and a selection
-bias in which changes became case studies. The headline contract-gate figure rests on a classification
+substantial part of this manuscript, were produced by the agents the paper describes (see the
+Disclosure of AI Use); we disclose this and rely on human review, but it admits a self-evaluation bias
+we cannot fully exclude, and a selection bias in which changes became case studies. The headline contract-gate figure rests on a classification
 we audited from each record's explicit gate declaration (Section~10); 5 of 166 records remain
 unclassified, and the audit is itself an automated re-reading, not independent human coding. The
 honesty-gate mechanism is anticipated by prior conformance-publication gates [RELWS, PACTFLOW]; our
@@ -543,6 +543,21 @@ what we have not shown: a single steward operates both hosts, the corpus and thi
 agent-authored, and no causal or economic claim is supported. Those are the boundaries an independent
 Tier-3 host would dissolve. We offer the methodology, the corpus, and the harness as a starting point
 for that test.
+
+\section*{Disclosure of AI Use}
+This work uses AI in two distinct roles, and we separate them deliberately. First, AI is the
+\emph{subject and operational substrate} of the estate under study: a large fraction of the governance
+corpus analyzed here --- RFC drafts, architecture decision records, host implementations, conformance
+runs, and cross-host adoption --- was produced by autonomous and semi-autonomous agent sessions, under
+the steward's supervision and sole change-control authority. That is the phenomenon the paper reports
+on, not an incidental tool. Second, AI was used as an \emph{authoring and analysis assistant} for this
+manuscript: the analysis scripts (Sections~10--11) were AI-written and are released for re-execution,
+and the prose was drafted with a large-language-model assistant and revised by the author. All claims,
+figures, and interpretations were reviewed by and are the responsibility of the sole human author; the
+AI systems are not authors and meet no authorship criterion. We flag this openly because it is
+inseparable from the contribution: a paper about agents governing software change is itself, in part,
+a product of that process, and readers should weigh the single-steward, AI-in-the-loop provenance
+accordingly (see Positionality, Section~1, and Threats to Validity, Section~14).
 
 \begin{thebibliography}{99}
 \small
