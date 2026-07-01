@@ -163,3 +163,5 @@ num,slug,status,gate,correction,rfcRefs
 0167,campaign-studio-real-ad-dispatch,Proposed,new-rfc,,5
 0168,headless-profile-and-first-party-cli,Superseded,rides-accepted,yes,2
 0169,rfc-0120-provider-apihosts-witness,Implemented,host-extension,,4
+0170,brand-identity-app-and-marketing-consolidation,Implemented,host-extension,yes,2
+0171,customizable-token-based-theming,Implemented,host-extension,,0

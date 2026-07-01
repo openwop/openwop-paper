@@ -13,7 +13,7 @@ import { fileURLToPath } from 'node:url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DEV_ROOT = process.env.OPENWOP_DEV_ROOT || resolve(__dirname, '../../../../..');
 const ADRS = process.env.OPENWOP_ADRS || join(DEV_ROOT, 'openwop-app', 'docs', 'adr');
-const OUT = join(__dirname, 'out-audit');
+const OUT = join(__dirname, 'out');
 
 // --- v1 (broad whole-text), copied verbatim from analyze-corpus.mjs ---
 function gateV1(text) {

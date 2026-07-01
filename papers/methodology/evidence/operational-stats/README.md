@@ -4,11 +4,11 @@ Descriptive operational throughput of the contract-evolution process (supports c
 **C2, C9**). Tier: **Observed**. Mines the dates recorded in each RFC's `Updated` field to
 measure how fast a contract change goes from first-recorded to `Accepted` across the estate.
 
-## Headline result (snapshot `openwop@d7a635b6`)
+## Headline result (snapshot `openwop@3852e30c`)
 
-- The entire **110-RFC program ran in ~54 days** (2026-05-01 → 2026-06-24).
-- **Median authored→Accepted span = 0 days** (mean 1.1, max 12) over 107 Accepted RFCs.
-- **60/107 (56%) graduated same-day**; 76% within 1 day; 97% within 7 days.
+- The entire **120-RFC program ran in ~59 days** (2026-05-01 → 2026-06-29).
+- **Median authored→Accepted span = 0 days** (mean 1.1, max 12) over 112 Accepted RFCs.
+- **60/112 (54%) graduated same-day**; 77% within 1 day; 97% within 7 days.
 
 See `out-velocity/study-d-summary.md` for the full table and `velocity.csv` for per-RFC data.
 

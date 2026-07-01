@@ -163,3 +163,5 @@ num,v1,v2,conf,agree,authoritative_line
 0167,new-rfc,host-extension,explicit-gate,false,"| **RFC gate** | **None.** Rides the **already-Accepted** RFC **0045** (connector-action model), **0046/0047** (host credentials + OAuth flows), **0079** (crede"
 0168,rides-accepted,unclassified,none,false,""
 0169,host-extension,rides-accepted,inline,false,"`Active → Accepted`. This is host work riding an `Active` RFC (no new RFC needed) — the same"
+0170,host-extension,host-extension,explicit-gate,true,"| **RFC gate** | **None.** Pure host-extension under `/v1/host/openwop-app/*`, exactly like CMS's `/site-page` + `/public-site-config` (ADR 0027). No run-event "
+0171,host-extension,host-extension,explicit-gate,true,"| **RFC gate** | **None.** Pure host-extension — the richer `Brand.identity` rides ADR 0170's existing `/app-brand` + `/public-brand` routes; no run-event field"

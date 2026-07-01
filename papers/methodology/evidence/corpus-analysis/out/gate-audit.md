@@ -13,21 +13,21 @@
   left unclassified as genuinely ambiguous).
 
 ## The correction (why the manual pass mattered)
-The v1 heuristic counted **32 ADRs as `new-rfc` (19.5%)**. That was
+The v1 heuristic counted **32 ADRs as `new-rfc` (19.3%)**. That was
 an ~8× over-count: the regex matched "**new** RFC" *inside the phrase* "**NO new** RFC". The
 audited count of genuinely wire-touching ADRs is **4 (2.4%)**.
-v1↔v2 agreement was only **56.7%** — the heuristic was unreliable on this
+v1↔v2 agreement was only **57.2%** — the heuristic was unreliable on this
 dimension, which is exactly why this validation pass was run.
 
-## Audited distribution (n = 164)
+## Audited distribution (n = 166)
 | Bucket | Count | Share of all | Share of classified |
 |---|---|---|---|
-| host-extension | 120 | 73.2% | 75.5% |
-| rides-accepted | 35 | 21.3% | 22.0% |
+| host-extension | 122 | 73.5% | 75.8% |
+| rides-accepted | 35 | 21.1% | 21.7% |
 | unclassified | 5 | 3.0% | — |
 | new-rfc | 4 | 2.4% | 2.5% |
 
-**Headline (audited):** of the 159 classifiable ADRs, **155 (97.5%)
+**Headline (audited):** of the 161 classifiable ADRs, **157 (97.5%)
 required no new wire RFC** (host-extension or riding an already-accepted RFC); only **4
 (2.5%) were wire-touching**. The earlier heuristic figure (80%) was
 *conservative* — the gate is more selective than it suggested.
