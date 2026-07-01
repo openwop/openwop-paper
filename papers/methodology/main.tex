@@ -25,6 +25,9 @@
 \newcommand{\TODO}[1]{\textbf{\textcolor{red}{[TODO: #1]}}\typeout{TODO: #1}}
 \usepackage{xcolor}
 \lstset{basicstyle=\ttfamily\small,frame=single,breaklines=true,columns=fullflexible}
+\setlength{\emergencystretch}{2.5em} % absorb the small overfull boxes from inline code tokens
+% Breakable rendering of the recurring strict-mode env var (avoids overfull \hbox).
+\newcommand{\envreq}{\texttt{OPENWOP\_\allowbreak REQUIRE\_\allowbreak BEHAVIOR=true}}
 
 \title{Contracts at Machine Speed:\\ An Inverted SDLC for an Agent-Operated Software Factory}
 \author{David S. Tufts\\
@@ -359,7 +362,7 @@ count.
 (\texttt{existsSync} per \texttt{.well-known/openwop} request) is driven through three honesty
 postures by where its pack registry points --- with \emph{no host-code modification} --- and the
 gated behavioral conformance scenario is run in default and strict
-(\texttt{OPENWOP\_REQUIRE\_BEHAVIOR=true}) mode (harness + captured run in
+(\envreq) mode (harness + captured run in
 \texttt{evidence/honesty-experiment/}):
 \begin{center}\small
 \begin{tabular}{llll}
@@ -386,7 +389,7 @@ their \texttt{.well-known/openwop} discovery documents: the open reference host
 host \textbf{MyndHyve} (\texttt{workflow-runtime}, a separate Firebase codebase at
 \texttt{api.myndhyve.ai}). A change graduates \texttt{Active}~$\rightarrow$~\texttt{Accepted} only
 when a \emph{second} host advertises the capability and passes its gated conformance scenarios
-\emph{non-vacuously} (\texttt{OPENWOP\_REQUIRE\_BEHAVIOR=true}) --- the \emph{dual-witness bar}.
+\emph{non-vacuously} (\envreq) --- the \emph{dual-witness bar}.
 Adoption is coordinated by separate per-repo agent sessions exchanging handoff artifacts over a
 message bus; the agents implement, advertise, and run conformance on each host, and the steward is
 the single change-control authority that flips status (\emph{agent-executed, steward-supervised}).
@@ -395,7 +398,7 @@ Full trace and citations in \texttt{evidence/cross-host-case/}.
 \paragraph{Worked example --- RFC 0050 (SAML/SCIM).} Authored \texttt{Draft} 2026-05-24 from a real
 product need; full wire surface landed and promoted to \texttt{Active} 2026-06-01; graduated
 \texttt{Accepted} the same day when MyndHyve advertised
-\texttt{auth.profiles:[openwop-auth-saml,openwop-auth-scim]} and passed the gated legs
+\texttt{auth.profiles:}\allowbreak\texttt{[openwop-auth-saml,}\allowbreak\texttt{openwop-auth-scim]} and passed the gated legs
 \textbf{19/19 non-vacuously} (the count rose 13$\rightarrow$19 once the IdP engaged the behavioral
 legs), with all seven SAML negative variants (incl.\ signature-wrapping) rejected live. At scale the
 record is routine: one cohort graduated \textbf{8 RFCs Draft$\rightarrow$Accepted in a day} on a
