@@ -18,9 +18,7 @@
 \usepackage[hidelinks]{hyperref}
 \usepackage{url}
 \urlstyle{same}
-% Figures compile with OR without the converted PDFs (convert figures/methodology/*.svg).
-\newcommand{\paperfig}[2]{\IfFileExists{#1}{\includegraphics[width=\linewidth]{#1}}%
-{\fbox{\parbox{0.95\linewidth}{\centering\vspace{1.4em}\itshape #2\\[2pt]\textnormal{[figure placeholder --- draw as TikZ or convert \texttt{figures/methodology/*.svg} to PDF]}\vspace{1.4em}}}}}
+% Both figures are inline TikZ (Sections 7 and 11).
 \newcommand{\TODO}[1]{\textbf{\textcolor{red}{[TODO: #1]}}\typeout{TODO: #1}}
 \usepackage{xcolor}
 \lstset{basicstyle=\ttfamily\small,frame=single,breaklines=true,columns=fullflexible}
@@ -362,13 +360,15 @@ The conformance suite at this snapshot is version 1.46.0 (380 scenarios, 84 fixt
 time --- scenarios added per accepted RFC --- is a planned git-history extension to this point-in-time
 count.
 
+% NB: workflowChainPacks (an identifier) is left unbroken by design; this yields one
+% cosmetically-invisible 4.8pt overfull rather than an inconsistent mid-identifier split.
 \paragraph{Study B (honesty experiment; \emph{Demonstrated}).} A reference host whose
 \texttt{workflowChainPacks} advertisement is recomputed from live execution state
-(\texttt{existsSync} per \texttt{.well-known/openwop} request) is driven through three honesty
-postures by where its pack registry points --- with \emph{no host-code modification} --- and the
-gated behavioral conformance scenario is run in default and strict
+(\texttt{existsSync} per \texttt{.well-known/}\allowbreak\texttt{openwop} request) is driven through
+three honesty postures by where its pack registry points --- with \emph{no host-code modification} ---
+and the gated behavioral conformance scenario is run in default and strict
 (\envreq) mode (harness + captured run in
-\texttt{evidence/honesty-experiment/}):
+\texttt{evidence/}\allowbreak\texttt{honesty-experiment/}):
 \begin{center}\small
 \begin{tabular}{llll}
 \textbf{Posture} & \textbf{Advertises} & \textbf{Mode} & \textbf{Result}\\\hline
