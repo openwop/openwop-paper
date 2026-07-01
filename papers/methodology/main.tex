@@ -275,8 +275,29 @@ negotiating changes with one another over a coordination bus under a single huma
 authority. The strict, machine-readable schema doubles as the ``friction partner'' of Section~6 --- it
 is the artifact that forces an agent to make a structural decision explicit rather than defer it.
 \begin{figure}[H]\centering
-  \paperfig{figures/methodology/fig-contract-gate.pdf}{The contract gate: host-extension / rides-accepted / touches-the-wire, wired to a failing test.}
-  \caption{The contract gate as a forcing function.}\label{fig:gate}
+\begin{tikzpicture}[>=Stealth, font=\footnotesize, node distance=9mm and 13mm,
+  b/.style={draw, rounded corners, align=center, inner sep=4pt, minimum height=8mm},
+  g/.style={draw, fill=black!5, align=center, font=\footnotesize\bfseries, inner sep=5pt, minimum height=9mm}]
+  \node[b, align=center] (chg) {Feature\\change};
+  \node[g, right=of chg] (gate) {Contract\\gate};
+  \node[b, right=14mm of gate, yshift=13mm, text width=27mm] (host) {Host-extension (non-normative)};
+  \node[b, right=14mm of gate, text width=27mm] (rides) {Rides an accepted contract};
+  \node[b, right=14mm of gate, yshift=-13mm, text width=27mm] (wire) {Touches the wire};
+  \node[b, right=13mm of rides, text width=27mm] (ship) {No new RFC --- ship behind toggle};
+  \node[b, draw=red!70, right=13mm of wire, text width=27mm] (rfc) {New RFC required};
+  \draw[->] (chg) -- (gate);
+  \draw[->] (gate) -- (host);
+  \draw[->] (gate) -- (rides);
+  \draw[->] (gate) -- (wire);
+  \draw[->] (host) -- (ship);
+  \draw[->] (rides) -- (ship);
+  \draw[->] (wire) -- (rfc);
+  \node[align=center, font=\scriptsize\itshape, below=4mm of rfc, text width=46mm]
+    {advertise without an accepted RFC $\Rightarrow$ strict conformance fails};
+\end{tikzpicture}
+  \caption{The contract gate as a forcing function: at planning time every change is classified into
+  one of three buckets; only wire-touching changes require a new RFC, and the requirement is enforced
+  by conformance, not by policy.}\label{fig:gate}
 \end{figure}
 
 \section*{8. Honesty by Construction}
@@ -400,8 +421,26 @@ zero time. Second, a span is a \emph{recorded-activity} window, not human-effort
 human-hours-saved claim from it (Section~12).
 % figure work remaining: render fig:seq as a TikZ swimlane (spec -> openwop-app -> MyndHyve).
 \begin{figure}[H]\centering
-  \paperfig{figures/methodology/fig-change-sequence.pdf}{spec -> openwop-app -> MyndHyve: a wire change graduating on the dual-witness bar.}
-  \caption{Cross-host contract evolution: a change graduates only on a second host's non-vacuous conformance.}\label{fig:seq}
+\begin{tikzpicture}[>=Stealth, font=\footnotesize,
+  lane/.style={font=\footnotesize\bfseries, align=center},
+  stp/.style={draw, rounded corners, align=center, inner sep=4pt, text width=32mm, minimum height=10mm},
+  lbl/.style={font=\scriptsize\itshape, align=center}]
+  \node[lane] (h1) at (0,0) {Spec corpus};
+  \node[lane] (h2) at (4.6,0) {openwop-app\\(Tier 1)};
+  \node[lane] (h3) at (9.2,0) {MyndHyve\\(Tier 2)};
+  \node[stp] (s1) at (0,-1.5) {Author RFC\\(\texttt{Draft})};
+  \node[stp] (s2) at (4.6,-3.0) {Implement, advertise,\\pass conformance\\(\texttt{Active})};
+  \node[stp] (s3) at (9.2,-4.5) {Adopt, advertise,\\pass conformance\\\emph{non-vacuously}};
+  \node[stp, fill=black!5] (s4) at (4.6,-6.2) {\texttt{Accepted}\\(dual-witness bar met)};
+  \draw[->] (s1) -- (s2) node[lbl, midway, above, sloped] {land wire surface};
+  \draw[->] (s2) -- (s3) node[lbl, midway, above, sloped] {handoff over bus};
+  \draw[->] (s3) -- (s4) node[lbl, midway, above, sloped] {second witness};
+  \draw[->, dashed] (s1.west) to[out=200, in=160] node[lbl, left] {steward\\flips status} (s4.west);
+\end{tikzpicture}
+  \caption{Cross-host contract evolution: a change graduates \texttt{Active}$\rightarrow$\texttt{Accepted}
+  only when a second host advertises the capability and passes its gated conformance non-vacuously.
+  Agents execute each host's implementation, advertisement, and conformance; the steward is the single
+  change-control authority.}\label{fig:seq}
 \end{figure}
 
 \section*{12. Economic Framing (Descriptive, Non-Causal)}
