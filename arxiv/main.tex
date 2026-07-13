@@ -110,13 +110,13 @@ Removing any one construct reintroduces a vendor-specific surface at that seam; 
 \node[draw,rounded corners,fill=black!3,inner sep=3pt,right=36mm of run] (done) {completed};
 \node[draw,rounded corners,fill=black!3,inner sep=3pt,below=4mm of done] (fail) {failed};
 \node[draw,rounded corners,fill=black!3,inner sep=3pt,below=4mm of fail] (canc) {cancelled};
-\node[draw,rounded corners,fill=black!3,inner sep=3pt,below=18mm of run] (intr) {interrupted};
+\node[draw,rounded corners,fill=black!3,inner sep=3pt,below=18mm of run] (intr) {paused};
 \node[font=\scriptsize,above=1mm of run,align=center] {node.started /\\ node.completed ($\times$N)};
 \draw[->] (cr) -- node[below,font=\scriptsize]{run.started} (run);
 \draw[->] (run) -- node[above,font=\scriptsize]{run.completed} (done);
 \draw[->] (run) -- node[sloped,below,font=\scriptsize]{run.failed} (fail);
 \draw[->] (run) -- (canc);
-\draw[->,transform canvas={xshift=-2mm}] (run) -- node[left,font=\scriptsize]{run.interrupted} (intr);
+\draw[->,transform canvas={xshift=-2mm}] (run) -- node[left,font=\scriptsize]{run.paused} (intr);
 \draw[->,transform canvas={xshift=3mm}] (intr) -- node[right,font=\scriptsize]{run.resumed} (run);
 \node[draw,dashed,rounded corners,align=center,font=\scriptsize,below=10mm of intr,text width=9cm] (fork)
  {fork(mode: replay): re-read recorded pins (do not re-resolve) $\to$ new Run reconstructed at checkpoint};
@@ -191,7 +191,7 @@ Two limits bound this result. First, both hosts are steward-authored: this estab
 \node[draw,inner sep=3pt,right=0mm of e0] (e1) {e1: node.started};
 \node[draw,inner sep=3pt,right=0mm of e1] (e2) {e2: node.completed};
 \node[draw,inner sep=3pt,right=0mm of e2] (e3) {e3: node.completed \{pin\}};
-\node[draw,inner sep=3pt,fill=black!3,right=0mm of e3] (e4) {e4: run.interrupted};
+\node[draw,inner sep=3pt,fill=black!3,right=0mm of e3] (e4) {e4: run.paused};
 \node[draw,inner sep=3pt,right=0mm of e4] (eN) {eN: run.completed};
 \node[font=\scriptsize,above=1mm of e2] {EventLog (append-only, ordered)};
 \node[draw,dashed,rounded corners,align=center,below=12mm of e3,text width=11cm] (rc)
