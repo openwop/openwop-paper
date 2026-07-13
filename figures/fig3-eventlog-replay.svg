@@ -12,7 +12,7 @@
     <rect x="158" y="64" width="118" height="46" fill="#ffffff" stroke="#39516e"/><text x="217" y="84" text-anchor="middle">e1 node.started</text>
     <rect x="276" y="64" width="138" height="46" fill="#ffffff" stroke="#39516e"/><text x="345" y="80" text-anchor="middle">e2 node.completed</text><text x="345" y="98" text-anchor="middle" fill="#7a4a1f">{pin}</text>
     <rect x="414" y="64" width="138" height="46" fill="#ffffff" stroke="#39516e"/><text x="483" y="80" text-anchor="middle">e3 node.completed</text><text x="483" y="98" text-anchor="middle" fill="#7a4a1f">{pin: tool-out, ts, id}</text>
-    <rect x="552" y="64" width="100" height="46" fill="#fbf6ea" stroke="#7a6a1f"/><text x="602" y="80" text-anchor="middle">e4 run.</text><text x="602" y="98" text-anchor="middle">interrupted</text>
+    <rect x="552" y="64" width="100" height="46" fill="#fbf6ea" stroke="#7a6a1f"/><text x="602" y="80" text-anchor="middle">e4 run.</text><text x="602" y="98" text-anchor="middle">paused</text>
     <rect x="652" y="64" width="108" height="46" fill="#eaf5ec" stroke="#2f5d3a"/><text x="706" y="84" text-anchor="middle">eN run.completed</text>
   </g>
 

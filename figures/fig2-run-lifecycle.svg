@@ -17,11 +17,11 @@
   <path d="M340,70 C320,40 360,40 350,68" fill="none" stroke="#333" marker-end="url(#a)"/>
   <text x="430" y="52" text-anchor="middle" font-size="11" fill="#555">node.started / node.completed (&#215;N)</text>
 
-  <!-- interrupted -->
+  <!-- paused -->
   <rect x="270" y="180" width="140" height="48" rx="6" fill="#fbf6ea" stroke="#7a6a1f"/>
-  <text x="340" y="209" text-anchor="middle" font-size="13">interrupted</text>
+  <text x="340" y="209" text-anchor="middle" font-size="13">paused</text>
   <line x1="320" y1="118" x2="320" y2="178" stroke="#333" marker-end="url(#a)"/>
-  <text x="250" y="152" font-size="11" fill="#7a6a1f">run.interrupted</text>
+  <text x="262" y="152" font-size="11" fill="#7a6a1f">run.paused</text>
   <line x1="372" y1="178" x2="372" y2="120" stroke="#333" marker-end="url(#a)"/>
   <text x="380" y="152" font-size="11" fill="#7a6a1f">run.resumed</text>
 
