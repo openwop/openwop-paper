@@ -36,9 +36,11 @@ development loop:
 **(a) Contract adoption — spec → openwop-app → MyndHyve (the dual-witness bar).**
 A wire change is authored as an RFC in the spec corpus, its full surface (schemas, events,
 conformance scenarios, `/v1/host/sample/*` test seams) lands at `Draft`, the reference host
-implements it, and it graduates `Draft → Active → Accepted` **only when a second host
-advertises and passes the capability-gated conformance scenarios non-vacuously**
-(`OPENWOP_REQUIRE_BEHAVIOR=true`). MyndHyve is that second host. The handoff is a literal
+implements it, and — under the designed bar — it graduates `Draft → Active → Accepted`
+**when a second host advertises and passes the capability-gated conformance scenarios
+non-vacuously** (`OPENWOP_REQUIRE_BEHAVIOR=true`). MyndHyve is that second host. (A
+late-June/July cohort instead graduated single-witness under a recorded bootstrap steward
+waiver — see §4.) The handoff is a literal
 artifact — `openwop/plans/myndhyve-rfc-adoption-handoff.md` and the whole
 `openwop/docs/openwop-adoption/` directory — exchanged between **separate per-repo agent
 sessions** over the **crosstalk** message bus. So the cross-host contract evolution is
@@ -97,6 +99,15 @@ high-throughput process:
 - **Recent dual-witness pairs (both hosts non-vacuous):** RFC 0095 (connection packs),
   0096–0098, 0099 (external-event triggers), 0100 (durable A2A), 0102 (A2UI — byte-identical
   schema), 0103 (localized content), 0104 (approver routing), 0105/0106 (speech/voice).
+- **Single-witness bootstrap waivers (late June – July 2026):** a cohort of extension
+  RFCs (0108, 0114, 0116, 0117/0119, 0123–0129) graduated `Active → Accepted` on
+  **single-witness** evidence — the tier-1 reference host — under an explicitly recorded
+  *bootstrap steward waiver* in each RFC's `Updated` field and `INTEROP-MATRIX.md` row.
+  Dual-witness status is tracked as follow-up: RFC 0126 went dual-witness live the next
+  day (2026-07-05, openwop-app + MyndHyve), while others carry documented gaps (e.g. RFC
+  0124's G6 — no second host has a chain-expansion path yet). So the **dual-witness bar is
+  the designed graduation rule, not an invariant of every recent record** — the paper must
+  say so (Section 11 does).
 
 **Honest non-adoptions are recorded too** — and they are evidence the gate is real, not a
 rubber stamp:

@@ -49,7 +49,7 @@ function parseRfcs() {
     const text = readFileSync(join(RFCS, f), 'utf8');
     const num = f.slice(0, 4);
     const slug = f.slice(5, -3);
-    const statusM = text.match(/\|\s*\*\*Status\*\*\s*\|\s*`([^`]+)`/);
+    const statusM = text.match(/\|\s*\*\*Status\*\*\s*\|\s*`?([^`\n|]+?)`?\s*(?:\||\n)/);
     let status = statusM ? statusM[1].trim() : 'Unknown';
     const supM = text.match(/\|\s*\*\*Superseded by\*\*\s*\|\s*([^\n|]*)\|/);
     const supersededBy = supM ? supM[1].replace(/[`*\s—-]+/g, '') : '';
@@ -171,10 +171,10 @@ ${mdRow(adrStatus)}
 - ADRs with no parseable \`Status:\` line: **${adrStatus.Missing || 0}**.
 
 ### Contract-gate classification (HEURISTIC — SUPERSEDED, see \`gate-audit.md\`)
-> ⚠ **This broad whole-text heuristic OVER-COUNTS \`new-rfc\` ~8× (it matches "new RFC"
-> inside "NO new RFC"). The validated figure is in \`gate-audit.md\`: audited, the gate is
-> 97.5% no-new-wire-RFC (only 4 ADRs are wire-touching), not the ~80% below.** The table
-> below is retained only to show the heuristic the audit corrected.
+> ⚠ **This broad whole-text heuristic OVER-COUNTS \`new-rfc\` (it matches "new RFC"
+> inside "NO new RFC"). The validated figure is the audited no-new-wire-RFC share in
+> \`gate-audit.md\`, not the heuristic share below.** The table below is retained only to
+> show the heuristic the audit corrected.
 
 Of the ${adrs.length} ADRs, the transparent classifier (rules in \`analyze-corpus.mjs\`)
 assigns each to one bucket; **${adrGate.unclassified || 0}** could not be classified from

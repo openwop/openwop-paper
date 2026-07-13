@@ -4,11 +4,13 @@ Descriptive operational throughput of the contract-evolution process (supports c
 **C2, C9**). Tier: **Observed**. Mines the dates recorded in each RFC's `Updated` field to
 measure how fast a contract change goes from first-recorded to `Accepted` across the estate.
 
-## Headline result (snapshot `openwop@3852e30c`)
+## Headline result (snapshot `openwop@aca1ef59`, 2026-07-13)
 
-- The entire **120-RFC program ran in ~59 days** (2026-05-01 → 2026-06-29).
-- **Median authored→Accepted span = 0 days** (mean 1.1, max 12) over 112 Accepted RFCs.
-- **60/112 (54%) graduated same-day**; 77% within 1 day; 97% within 7 days.
+- The entire **131-RFC program ran in ~67 days** (2026-05-01 → 2026-07-07).
+- **Median authored→Accepted span = 0 days** (mean 1.6, max 46) over 127 Accepted RFCs.
+  (The max is RFC 0043, authored 2026-05-22 and graduated 2026-07-07 after a long
+  parked period — the registry / extension-policy RFC.)
+- **69/127 (54%) graduated same-day**; 75% within 1 day; 94% within 7 days.
 
 See `out-velocity/study-d-summary.md` for the full table and `velocity.csv` for per-RFC data.
 
@@ -27,7 +29,7 @@ This velocity is the machine-speed signal the paper is about, but it must be rea
 conditions stated plainly, or it overclaims:
 
 1. **It is enabled by single-maintainer governance with waived comment windows.** Study A
-   found 40 RFCs explicitly note a *waived/bootstrap* comment window. The RFC process defines
+   found 55 RFCs explicitly note a *waived/bootstrap* comment window. The RFC process defines
    7/30/90-day windows scaled to risk (Section 8); under a sole steward those windows are
    waived by lazy consensus, so the governance brake the windows are designed to impose is
    **not currently binding**. The agents make implementation + conformance + advertisement

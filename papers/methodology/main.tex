@@ -32,7 +32,8 @@ MyndHyve Inc.\\
 \emph{\small Project steward (see Positionality, Section~1)}\\
 Grand Rapids, Michigan, USA\\
 \url{https://davidtufts.me}\quad\url{https://www.linkedin.com/in/davidtufts}}
-\date{2026}
+\date{July 13, 2026\\[3pt]
+{\small Preprint --- DOI: \url{https://doi.org/10.5281/zenodo.21343112}}}
 
 \begin{document}
 \maketitle
@@ -54,7 +55,7 @@ fails any advertised-but-unimplemented claim. The work sits within an \emph{inve
 agent compression of Create and Operate moves the binding effort to Plan and Validate, and an
 operating model of mission-focused Builder Teams whose shared functions act as Contract Guardians by
 embedding standards into the contracts themselves. We present a retrospective over a governance
-corpus of 120 RFCs and 166 architecture decision records,
+corpus of 131 RFCs and 369 architecture decision records,
 demonstrate the honesty-enforcement mechanism reproducibly, and trace contract changes graduating
 across two distinct hosts on a dual-witness conformance bar, releasing the corpus and harness
 templates as an artifact. As a single-steward experience report --- the two hosts share change
@@ -88,7 +89,7 @@ negotiate, and adopt versioned wire-contract changes across a multi-service esta
 Request-for-Comments (RFC) process the agents themselves execute, and verified by a conformance suite
 whose strict mode makes a dishonest capability claim mechanically fail. We describe the architecture,
 the operating model, and the agentic harness; we present a retrospective over a real governance
-corpus of 120 RFCs and 166 architecture decision records; we demonstrate the honesty mechanism
+corpus of 131 RFCs and 369 architecture decision records; we demonstrate the honesty mechanism
 reproducibly; and we trace contract changes graduating across two distinct hosts.
 
 \paragraph{Terminology.} Three terms in this area are overloaded, and we fix our usage now. By
@@ -268,7 +269,7 @@ extension, a feature that rides an already-accepted contract, or a change that t
 therefore requires a new RFC. The classification is consequential because advertising a capability
 whose contract change is not accepted is a dishonest wire claim that the conformance suite will fail
 (Section~8); the gate is thus wired to a test, not to a policy an agent can forget. Empirically the
-gate is highly selective: of 161 classifiable decision records in our estate, 157 (97.5\%) resolved
+gate is highly selective: of 304 classifiable decision records in our estate, 296 (97.4\%) resolved
 without a new wire RFC (Section~10).
 
 Changes that do reach the wire are governed by an RFC lifecycle --- \texttt{Draft} (under discussion),
@@ -342,21 +343,22 @@ context, capabilities, and obligations are contracts. We release templates for i
 \section*{10. Evidence: Corpus Retrospective and the Honesty Experiment}
 \paragraph{Study A (corpus retrospective; \emph{Observed}).} A deterministic analysis of the
 governance corpus (script + per-item data in \texttt{evidence/corpus-analysis/}; snapshot
-\texttt{openwop@3852e30c}, \texttt{openwop-app@eb53aeb0}). This is a living corpus; all figures are as
-of this snapshot, and re-running the released scripts against a later corpus reports proportionally
-larger counts. The RFC corpus is $n=120$ (112 Accepted, 7 Active, 1 Draft), of which 111 record at
-least one lifecycle transition. The decision-record corpus is $n=166$ (146 implemented, 11 Accepted,
-6 Superseded, 2 Proposed, 1 Withdrawn); 65 (39\%) carry a formal correction note, quantifying the
-``correct, don't rewrite history'' discipline. The headline result is the \emph{contract-gate
-distribution}. A first-pass whole-text heuristic over-counted wire-touching changes; a validation pass
-that classifies each record from its \emph{explicit} RFC-gate declaration --- with the residual
-hand-coded (script and audit in \texttt{evidence/corpus-analysis/gate-audit.md}) --- corrects it: of
-161 classifiable decision records, \textbf{157 (97.5\%) required no new wire RFC} (122 host-extension,
-35 riding an already-accepted RFC) versus only \textbf{4 (2.5\%) wire-touching}. (The heuristic's
-$\sim$8$\times$ over-count of the wire-touching bucket --- it matched ``new RFC'' inside ``\emph{no}
-new RFC'' --- and the resulting 57\% heuristic/audit agreement are reported in full; the corrected
+\texttt{openwop@aca1ef59}, \texttt{openwop-app@409d4424}, 2026-07-13). This is a living corpus; all
+figures are as of this snapshot, and re-running the released scripts against a later corpus reports
+proportionally larger counts. The RFC corpus is $n=131$ (127 Accepted, 3 Active, 1 Draft), of which
+124 record at least one lifecycle transition. The decision-record corpus is $n=369$ (308 implemented,
+43 Accepted, 7 Superseded, 5 Proposed, 1 Withdrawn, 5 other/unparsed); 134 (36\%) carry a formal
+correction note, quantifying the ``correct, don't rewrite history'' discipline. The headline result
+is the \emph{contract-gate distribution}. A first-pass whole-text heuristic over-counted wire-touching
+changes; a validation pass that classifies each record from its \emph{explicit} RFC-gate declaration
+--- with the residual and the mixed/umbrella records hand-coded (script and audit in
+\texttt{evidence/corpus-analysis/gate-audit.md}) --- corrects it: of 304 classifiable decision
+records, \textbf{296 (97.4\%) required no new wire RFC} (252 host-extension, 44 riding an
+already-accepted RFC) versus only \textbf{8 (2.6\%) wire-touching}. (The heuristic's
+$\sim$7$\times$ over-count of the wire-touching bucket --- it matched ``new RFC'' inside ``\emph{no}
+new RFC'' --- and the resulting 61\% heuristic/audit agreement are reported in full; the corrected
 figure makes the gate \emph{more} selective than the heuristic suggested, evidencing C1/C2.)
-The conformance suite at this snapshot is version 1.46.0 (380 scenarios, 84 fixtures); its growth over
+The conformance suite at this snapshot is version 1.54.0 (388 scenarios, 84 fixtures); its growth over
 time --- scenarios added per accepted RFC --- is a planned git-history extension to this point-in-time
 count.
 
@@ -392,9 +394,14 @@ genuinely distinct codebases and production deployments that advertise the same 
 their \texttt{.well-known/openwop} discovery documents: the open reference host
 \textbf{openwop-app} (\texttt{workflow-engine}, \texttt{app.openwop.dev}) and the steward's product
 host \textbf{MyndHyve} (\texttt{workflow-runtime}, a separate Firebase codebase at
-\texttt{api.myndhyve.ai}). A change graduates \texttt{Active}~$\rightarrow$~\texttt{Accepted} only
-when a \emph{second} host advertises the capability and passes its gated conformance scenarios
-\emph{non-vacuously} (\envreq) --- the \emph{dual-witness bar}.
+\texttt{api.myndhyve.ai}). Under the designed graduation bar, a change graduates
+\texttt{Active}~$\rightarrow$~\texttt{Accepted} when a \emph{second} host advertises the capability
+and passes its gated conformance scenarios \emph{non-vacuously} (\envreq) --- the \emph{dual-witness
+bar}. The bar is a rule of the governance process, not an invariant of every record: a
+late-June/July cohort of extension RFCs (0108, 0114, 0116, 0117/0119, 0123--0129) graduated on
+\emph{single-witness} evidence --- the tier-1 reference host --- under a bootstrap steward waiver
+recorded explicitly in each RFC's lifecycle field, with dual-witness status tracked as follow-up
+(RFC 0126 went dual-witness live the next day; others carry documented gaps).
 Adoption is coordinated by separate per-repo agent sessions exchanging handoff artifacts over a
 message bus; the agents implement, advertise, and run conformance on each host, and the steward is
 the single change-control authority that flips status (\emph{agent-executed, steward-supervised}).
@@ -407,8 +414,8 @@ product need; full wire surface landed and promoted to \texttt{Active} 2026-06-0
 \textbf{19/19 non-vacuously} (the count rose 13$\rightarrow$19 once the IdP engaged the behavioral
 legs), with all seven SAML negative variants (incl.\ signature-wrapping) rejected live. At scale the
 record is routine: one cohort graduated \textbf{8 RFCs Draft$\rightarrow$Accepted in a day} on a
-single MyndHyve revision (28~PASS / 0~FAIL), and recent changes (RFC 0095, 0099, 0100, 0102, 0103,
-0105/0106) graduated as dual-witness pairs.
+single MyndHyve revision (28~PASS / 0~FAIL), and a mid-June cohort (RFC 0095, 0099, 0100, 0102, 0103,
+0105/0106) graduated as dual-witness pairs before the single-witness waivers noted above began.
 
 \paragraph{Honest non-adoption (the gate is real).} The same estate records \emph{retractions} and
 \emph{opt-outs}: MyndHyve advertised one capability \texttt{(maxNodeExecutions)} in error and
@@ -418,11 +425,12 @@ honesty-by-construction loop (Section~10) observed at estate scale.
 
 \paragraph{Study D (velocity; \emph{Observed}).} Mining the dates recorded in each RFC's
 lifecycle field (script + per-RFC data in \texttt{evidence/operational-stats/}), the entire
-120-RFC program ran in \textbf{$\sim$59 days}, and over the 112 Accepted RFCs the authored-to-Accepted
-span has a \textbf{median of 0 days} (mean 1.1, max 12): \textbf{54\% graduated same-day}, 77\% within
-one day, 97\% within seven. This is the machine-speed signal --- but it must be read with two
+131-RFC program ran in \textbf{$\sim$67 days}, and over the 127 Accepted RFCs the authored-to-Accepted
+span has a \textbf{median of 0 days} (mean 1.6, max 46 --- one deliberately parked RFC): \textbf{54\%
+graduated same-day}, 75\% within one day, 94\% within seven. This is the machine-speed signal --- but
+it must be read with two
 conditions. First, it is enabled by \emph{single-maintainer governance with waived comment windows}
-(Study A: 42 RFCs note a waived/bootstrap window); the risk-scaled windows (Section~8) are the designed
+(Study A: 55 RFCs note a waived/bootstrap window); the risk-scaled windows (Section~8) are the designed
 brake for the multi-reviewer case, which is not yet exercised, so the honest claim is that the
 methodology removes the \emph{implementation/integration} bottleneck, not that governed review takes
 zero time. Second, a span is a \emph{recorded-activity} window, not human-effort time, and we make no
@@ -494,8 +502,9 @@ decisive next evidence --- deferred to the Validation Agenda (Section~15).
 substantial part of this manuscript, were produced by the agents the paper describes (see the
 Disclosure of AI Use); we disclose this and rely on human review, but it admits a self-evaluation bias
 we cannot fully exclude, and a selection bias in which changes became case studies. The headline contract-gate figure rests on a classification
-we audited from each record's explicit gate declaration (Section~10); 5 of 166 records remain
-unclassified, and the audit is itself an automated re-reading, not independent human coding. The
+we audited from each record's explicit gate declaration (Section~10); 65 of 369 records --- mostly
+internal feature records carrying no explicit gate declaration --- remain unclassified, and the
+audit is itself an automated re-reading with steward-coded residuals, not independent human coding. The
 honesty-gate mechanism is anticipated by prior conformance-publication gates [RELWS, PACTFLOW]; our
 contribution is narrowly its continuous-live-state, multi-agent form (Section~8). The velocity result
 is conditioned on single-maintainer governance with waived comment windows (Section~11). And the
@@ -520,7 +529,8 @@ explicit.
 
 \section*{16. Reproducibility and Artifact Availability}
 We release the analyzed governance corpus and the evidence harness as an artifact under a permissive
-license with a Zenodo DOI: the RFC and decision-record corpora, the conformance-result history, the
+license with a Zenodo DOI (this preprint: \texttt{10.5281/zenodo.21343112}; the protocol companion:
+\texttt{10.5281/zenodo.20576239}): the RFC and decision-record corpora, the conformance-result history, the
 analysis scripts that regenerate every number in Sections~10--11 from the corpus snapshots cited there,
 the honesty-experiment harness (Section~10), and the agentic-harness templates (Section~9). The scripts
 are deterministic and stamp the corpus commit into their output, so a reader re-derives our figures or
@@ -536,8 +546,9 @@ humans can review them, the way to keep a multi-service estate coherent is not t
 path of every change but to \emph{move the human judgment into the contract} --- to encode standards as
 conformance rules, make capability advertisement honest by construction, and let agents negotiate
 change within those rails through a governed process they execute themselves. We have described that
-methodology; shown, across a real 120-RFC, two-host estate, that it keeps 97.5\% of change off the wire
-while graduating the rest on a dual-witness conformance bar; and demonstrated reproducibly that a host
+methodology; shown, across a real 131-RFC, two-host estate, that it keeps 97.4\% of change off the wire
+while graduating the rest on a governed conformance bar --- dual-witness by design, with
+single-witness bootstrap waivers recorded openly; and demonstrated reproducibly that a host
 cannot lie about what it implements without failing its own tests. We have been equally explicit about
 what we have not shown: a single steward operates both hosts, the corpus and this paper are partly
 agent-authored, and no causal or economic claim is supported. Those are the boundaries an independent
