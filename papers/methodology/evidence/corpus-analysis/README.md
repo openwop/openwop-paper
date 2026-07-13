@@ -17,20 +17,23 @@ validation pass.
 | `openwop-app/docs/adr/*.md` | ADR number, status bucket, contract-gate class (heuristic), correction-note flag, RFC-reference count |
 | `openwop/conformance` | published suite version, scenario count, fixture count |
 
-## Headline result (snapshot `openwop@3852e30c · openwop-app@eb53aeb0`)
+## Headline result (snapshot `openwop@aca1ef59 · openwop-app@409d4424`, 2026-07-13)
 
-- **RFC corpus (n=120):** 112 Accepted / 7 Active / 1 Draft; 111 record a lifecycle
-  transition; 40 explicitly note a waived/bootstrap comment window.
-- **ADR corpus (n=166):** 146 implemented (88%), 11 Accepted, 6 Superseded, 2 Proposed,
-  1 Withdrawn; **65 (39%) carry a formal correction note** — quantifies the
-  "correct, don't rewrite history" discipline.
-- **Contract gate (the headline — AUDITED, see `out/gate-audit.md`):** of 161 classifiable
-  ADRs, **157 (97.5%) required no new wire RFC** (122 host-extension + 35 rides-accepted) vs
-  only **4 (2.5%) wire-touching** — the empirical evidence for the gate's selectivity (C1/C2).
+- **RFC corpus (n=131):** 127 Accepted / 3 Active / 1 Draft; 124 record a lifecycle
+  transition; 55 explicitly note a waived/bootstrap comment window.
+- **ADR corpus (n=369):** 308 implemented (84%), 43 Accepted, 7 Superseded, 5 Proposed,
+  1 Withdrawn, 4 other, 1 with no parseable status; **134 (36%) carry a formal correction
+  note** — quantifies the "correct, don't rewrite history" discipline.
+- **Contract gate (the headline — AUDITED, see `out/gate-audit.md`):** of 304 classifiable
+  ADRs, **296 (97.4%) required no new wire RFC** (252 host-extension + 44 rides-accepted) vs
+  only **8 (2.6%) wire-touching** — the empirical evidence for the gate's selectivity (C1/C2).
   *(The first-pass whole-text heuristic reported ~80% because it over-counted the
-  wire-touching bucket ~8×, matching "new RFC" inside "NO new RFC"; the validation pass
-  classifies from each ADR's explicit RFC-gate declaration and hand-codes the residual.)*
-- **Conformance:** v1.46.0, 380 scenarios, 84 fixtures.
+  wire-touching bucket ~7× (54 → audited 8), matching "new RFC" inside "NO new RFC"; the
+  validation pass classifies from each ADR's explicit RFC-gate declaration — the
+  `## RFC verdict` / `## Wire/RFC` section or inline `**RFC gate:**` line — and hand-codes
+  the residual plus the mixed/umbrella records. 65 ADRs, mostly internal feature records
+  with no explicit gate declaration, remain unclassified.)*
+- **Conformance:** v1.54.0, 388 scenarios, 84 fixtures.
 
 See `out/study-a-summary.md` for the full tables; `out/*.csv` for the per-item data.
 
@@ -58,8 +61,8 @@ later corpus will move the numbers (the script stamps the live SHAs into the sum
 - The **contract-gate class** was validated: the first-pass whole-text heuristic
   (`analyze-corpus.mjs`) is *superseded* by `audit-gate.mjs` / `out/gate-audit.md`, which
   classifies from each ADR's explicit RFC-gate declaration and hand-codes the residual.
-  **Use the audited figure (97.5% no-new-wire-RFC), not the heuristic's ~80%.** The audit
-  records the v1↔v2 confusion, the ~8× `new-rfc` over-count, and the manual residual coding.
+  **Use the audited figure (97.4% no-new-wire-RFC), not the heuristic's ~80%.** The audit
+  records the v1↔v2 confusion, the ~7× `new-rfc` over-count, and the manual residual coding.
 - The **RFC comment-window treatment** is still a prose heuristic (not yet audited) — treat
   it as an observed estimate.
 - Conformance counts are **point-in-time**. Growth-over-time (scenarios per accepted RFC)

@@ -40,7 +40,7 @@ const files = readdirSync(RFCS)
 const rows = files.map((f) => {
   const text = readFileSync(join(RFCS, f), 'utf8');
   const num = f.slice(0, 4);
-  const statusM = text.match(/\|\s*\*\*Status\*\*\s*\|\s*`([^`]+)`/);
+  const statusM = text.match(/\|\s*\*\*Status\*\*\s*\|\s*`?([^`\n|]+?)`?\s*(?:\||\n)/);
   const status = statusM ? statusM[1].trim() : 'Unknown';
   const cell = updatedCell(text);
   const dates = [...new Set((cell.match(/20\d\d-\d\d-\d\d/g) || []))].sort();

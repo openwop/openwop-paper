@@ -5,36 +5,40 @@
 
 ## Method
 - **v1 (broad)** — the whole-ADR-text regex used in `analyze-corpus.mjs`.
-- **v2 (authoritative line)** — classifies from each ADR's *explicit* RFC-gate declaration
-  (`**RFC gate:**` / `**RFC verdict:**` / "no new RFC" / "rides RFC N" / "RFC-gated"),
-  not incidental whole-text mentions.
-- **Audited (final)** — v2, with the 21 ADRs that have no
-  machine-extractable gate line hand-coded by reading each (the `MANUAL_RESIDUAL` map; 0010
-  left unclassified as genuinely ambiguous).
+- **v2 (authoritative line)** — classifies from each ADR's *explicit* RFC-gate declaration,
+  in priority order: a `## RFC verdict` / `## Wire/RFC` section (post-2026-06 house
+  style), an inline `**RFC gate:**` / `**RFC verdict:**` line, then the first
+  gate-vocabulary line ("no new RFC" / "rides RFC N" / "RFC-gated") — not incidental
+  whole-text mentions.
+- **Audited (final)** — v2, with 28 ADRs hand-coded by
+  reading each (the `MANUAL_RESIDUAL` map): records with no machine-extractable gate line,
+  plus mixed/umbrella records adjudicated per the rule stated in the script (an in-scope
+  RFC-gated phase ⇒ `new-rfc`; a gated non-goal/watch-item ⇒ the ADR's own declared class).
+  0010 is left unclassified as genuinely ambiguous.
 
 ## The correction (why the manual pass mattered)
-The v1 heuristic counted **32 ADRs as `new-rfc` (19.3%)**. That was
-an ~8× over-count: the regex matched "**new** RFC" *inside the phrase* "**NO new** RFC". The
-audited count of genuinely wire-touching ADRs is **4 (2.4%)**.
-v1↔v2 agreement was only **57.2%** — the heuristic was unreliable on this
+The v1 heuristic counted **54 ADRs as `new-rfc` (14.6%)**. That was
+a ~7× over-count: the regex matched "**new** RFC" *inside the phrase* "**NO new** RFC". The
+audited count of genuinely wire-touching ADRs is **8 (2.2%)**.
+v1↔v2 agreement was only **61.0%** — the heuristic was unreliable on this
 dimension, which is exactly why this validation pass was run.
 
-## Audited distribution (n = 166)
+## Audited distribution (n = 369)
 | Bucket | Count | Share of all | Share of classified |
 |---|---|---|---|
-| host-extension | 122 | 73.5% | 75.8% |
-| rides-accepted | 35 | 21.1% | 21.7% |
-| unclassified | 5 | 3.0% | — |
-| new-rfc | 4 | 2.4% | 2.5% |
+| host-extension | 252 | 68.3% | 82.9% |
+| unclassified | 65 | 17.6% | — |
+| rides-accepted | 44 | 11.9% | 14.5% |
+| new-rfc | 8 | 2.2% | 2.6% |
 
-**Headline (audited):** of the 161 classifiable ADRs, **157 (97.5%)
-required no new wire RFC** (host-extension or riding an already-accepted RFC); only **4
-(2.5%) were wire-touching**. The earlier heuristic figure (80%) was
+**Headline (audited):** of the 304 classifiable ADRs, **296 (97.4%)
+required no new wire RFC** (host-extension or riding an already-accepted RFC); only **8
+(2.6%) were wire-touching**. The earlier heuristic figure was
 *conservative* — the gate is more selective than it suggested.
 
-The 4 wire-touching ADRs: 0051, 0086, 0121, 0153.
+The 8 wire-touching ADRs: 0051, 0086, 0121, 0255, 0266, 0268, 0269, 0310.
 
-## Manual residual coding (the 21 ADRs with no extractable gate line)
+## Manual coding (28 ADRs: no extractable gate line, or mixed/umbrella records adjudicated by reading)
 | ADR | hand-coded | quoted gate language |
 |---|---|---|
 | 0001 | host-extension | (see ADR; conf=none in audit.csv) |
@@ -58,6 +62,13 @@ The 4 wire-touching ADRs: 0051, 0086, 0121, 0153.
 | 0149 | host-extension | (see ADR; conf=none in audit.csv) |
 | 0165 | host-extension | (see ADR; conf=none in audit.csv) |
 | 0168 | host-extension | (see ADR; conf=none in audit.csv) |
+| 0243 | host-extension | (see ADR; conf=none in audit.csv) |
+| 0255 | new-rfc | (see ADR; conf=none in audit.csv) |
+| 0266 | new-rfc | (see ADR; conf=none in audit.csv) |
+| 0268 | new-rfc | (see ADR; conf=none in audit.csv) |
+| 0269 | new-rfc | (see ADR; conf=none in audit.csv) |
+| 0310 | new-rfc | (see ADR; conf=none in audit.csv) |
+| 0333 | host-extension | (see ADR; conf=none in audit.csv) |
 
 ---
 *Per-ADR v1/v2/final data: `audit.csv`. Reproduce: `node audit-gate.mjs`.*
