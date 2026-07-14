@@ -32,8 +32,8 @@ MyndHyve Inc.\\
 \emph{\small Project steward (see Positionality, Section~1)}\\
 Grand Rapids, Michigan, USA\\
 \url{https://davidtufts.me}\quad\url{https://www.linkedin.com/in/davidtufts}}
-\date{July 13, 2026\\[3pt]
-{\small Preprint --- DOI: \url{https://doi.org/10.5281/zenodo.21343112}}}
+\date{July 13, 2026 (v2: July 14, 2026)\\[3pt]
+{\small Preprint --- DOI (all versions): \url{https://doi.org/10.5281/zenodo.21343111}}}
 
 \begin{document}
 \maketitle
@@ -528,17 +528,26 @@ of the validation we cannot yet perform, so the gap between what we demonstrate 
 explicit.
 
 \section*{16. Reproducibility and Artifact Availability}
-We release the analyzed governance corpus and the evidence harness as an artifact under a permissive
-license with a Zenodo DOI (this preprint: \texttt{10.5281/zenodo.21343112}; the protocol companion:
-\texttt{10.5281/zenodo.20576239}): the RFC and decision-record corpora, the conformance-result history, the
-analysis scripts that regenerate every number in Sections~10--11 from the corpus snapshots cited there,
-the honesty-experiment harness (Section~10), and the agentic-harness templates (Section~9). The scripts
-are deterministic and stamp the corpus commit into their output, so a reader re-derives our figures or
-detects drift. Two boundaries are stated honestly: cross-host bus transcripts and operational captures
-are \emph{scrubbed} of secrets, tenant identifiers, and internal hostnames before release; and the
-second host is closed source, so its evidence is the published per-RFC conformance record rather than
-its code. Everything needed to reproduce the \emph{observed} and \emph{demonstrated} claims is in the
-artifact; the \emph{argued} claims are, by construction, not reproducible and are labeled as such.
+We release the analyzed governance corpus and the evidence harness under a permissive license with a
+Zenodo DOI (this preprint, all versions: \texttt{10.5281/zenodo.21343111}; the protocol companion:
+\texttt{10.5281/zenodo.20576239}), across three public locations. The \emph{RFC corpus}, the
+conformance suite and its result history, and the durable cross-host coordination artifacts (the
+handoff and adoption-evidence documents) are in the protocol repository
+(\url{https://github.com/openwop/openwop}). The \emph{decision-record corpus} ships with the reference
+host's white-label source distribution (\url{https://github.com/openwop/openwop-app-install},
+\texttt{docs/adr/}; refreshed per release). The \emph{analysis scripts} that regenerate every number
+in Sections~10--11 --- deterministic, stamping the corpus commit into their output so a reader
+re-derives our figures or detects drift --- plus the per-record data they emit (including the quoted
+per-record gate declarations behind the Study~A audit), the honesty-experiment harness (Section~10),
+and the agentic-harness templates (Section~9) are in the paper repository
+(\url{https://github.com/openwop/openwop-paper}, \texttt{papers/methodology/}). Three boundaries are
+stated honestly: released coordination and adoption documents are \emph{scrubbed} of secrets, tenant
+identifiers, and internal hostnames; the coordination bus itself is ephemeral by design (transient
+message queues), so its raw message logs are not retained --- the durable handoff artifacts are the
+released record; and the second host is closed source, so its evidence is the published per-RFC
+conformance record rather than its code. Everything needed to reproduce the \emph{observed} and
+\emph{demonstrated} claims is in the artifact; the \emph{argued} claims are, by construction, not
+reproducible and are labeled as such.
 
 \section*{17. Conclusion}
 The wager of this work is simple to state. When agents propose and apply software changes faster than

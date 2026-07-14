@@ -1,0 +1,51 @@
+# CLAUDE.md — context contract for [PROJECT]
+
+<!-- Context-as-contracts (paper §9): this file is a CONTRACT, not background prose.
+     Every section states rules an agent can violate DETECTABLY. If a rule cannot be
+     checked, either make it checkable or move it to a hook (hooks/). Keep this file
+     under ~150 lines; link out to deeper documents and load them per task. -->
+
+## What this repository is
+
+[One paragraph: the system, its published interfaces, and where the authoritative
+contracts live — e.g. "the wire contract is `spec/`; the conformance suite is
+`conformance/`; local decisions are `docs/adr/`."]
+
+## The contract gate (read before planning any change)
+
+Every change is classified at planning time into exactly one bucket, and the
+classification is DECLARED in the change's decision record (`## Wire/RFC` section):
+
+1. **Host-extension** — non-normative, local-only surface. No external process.
+2. **Rides an accepted contract** — implements an interface change that is already
+   ratified. Cite the contract/RFC number.
+3. **Touches the wire** — changes a published interface. BLOCKED until an external
+   RFC is raised and ratified. Advertising an unratified capability is a
+   conformance failure, not a style violation.
+
+## Non-negotiable rules
+
+- [RULE — e.g. "Never edit `schemas/*.json` without an accepted RFC number in the
+  commit message."]
+- [RULE — e.g. "Every new endpoint lands behind a feature toggle; a half-built
+  feature is dark, not broken."]
+- [RULE — e.g. "Decision records are corrected with a dated correction note, never
+  rewritten."]
+
+## Where decisions live
+
+- Local decisions: `docs/adr/` (template: `docs/adr/0000-template.md`). Accepted
+  ADRs bind future work; check them before proposing structure.
+- Cross-service interface changes: [external RFC process location + lifecycle
+  states, e.g. Draft → Active → Accepted, and who flips status].
+
+## Verification
+
+- [How an agent proves a change conforms — e.g. "run `npm run conformance` (strict
+  mode: `REQUIRE_BEHAVIOR=true`); a capability advertised but not honored is a hard
+  failure."]
+
+## Session hygiene
+
+- [Worktree/branching rules for parallel agent sessions.]
+- [What to record in memory at session end — see memory/ conventions.]
