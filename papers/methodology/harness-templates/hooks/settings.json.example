@@ -1,0 +1,39 @@
+{
+  "$comment": "Hooks-as-obligations examples (Claude Code shape — adapt to your harness). Each hook is a clause the harness enforces; the matcher scopes it to the contract surface it guards. An exit code of 2 from a PreToolUse command blocks the action and feeds stderr back to the agent.",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "$comment": "Contract-gate guard: block direct edits to wire schemas unless the working branch cites a ratified RFC. The check script greps the branch name / staged commit message for 'rfc-NNNN' and verifies that RFC's status is Active or Accepted.",
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "scripts/hooks/require-ratified-rfc.sh"
+          }
+        ]
+      },
+      {
+        "$comment": "Security guardian clause: no secrets in tracked files. Blocks any write that introduces a credential-shaped string outside the env example files.",
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "scripts/hooks/block-secret-material.sh"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "$comment": "Honesty guard: after any edit to the capability advertisement or its sources, run the strict conformance slice for the touched capability. Warn-level (non-blocking) here because the blocking gate is the merge-time suite; tighten to blocking if your loop merges without CI.",
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "scripts/hooks/strict-conformance-slice.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
