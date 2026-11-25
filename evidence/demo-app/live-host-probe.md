@@ -1,5 +1,7 @@
 # Live host probe — `app.openwop.dev`
 
+> **Captured at protocol v1** (`protocolVersion: "1.1"`, `/api/v1` paths). Not re-captured at v2.
+
 **Captured:** 2026-06-06 (UTC). **Method:** anonymous HTTPS against the public demo API at `https://app.openwop.dev/api`, cookie jar held across calls (a cookieless request gets a throwaway `anon:<sid>` tenant; the jar pins one anon tenant for the session). Reproducible with `curl -c jar -b jar`.
 
 This file is **implementability evidence**: the protocol's discovery, readiness, capability-advertisement, and durable-seed surfaces are live and behave as the spec describes. It is **not** adoption or production-maturity evidence.

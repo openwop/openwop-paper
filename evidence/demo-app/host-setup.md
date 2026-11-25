@@ -1,5 +1,7 @@
 # Workflow-engine & reference-host setup
 
+> **v1-era instructions (2026-06-06).** The v1 `in-memory` and v1 Python hosts named here were removed from `openwop-examples` (commit `fc85d4f`); `examples/hosts/python` now holds a different, v2-only host. The v2 hosts and their run commands are recorded in [`../portability-v2/`](../portability-v2/PROVENANCE.md).
+
 How to run the OpenWOP hosts that produced this paper's evidence. Commands verified 2026-06-06. This closes §12 Step 3 ("document workflow-engine setup path").
 
 ## Repositories

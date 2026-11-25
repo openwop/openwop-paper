@@ -1,5 +1,7 @@
 # Cross-host portability experiment — results (Cell A)
 
+> **Historical (protocol v1, 2026-06-06).** This is the earlier measurement, kept as history. It ran on the v1 `in-memory` and v1 Python hosts over `/v1/runs`; both hosts have since been removed and v1 is past end of support. The current result is [`../portability-v2/`](../portability-v2/PROVENANCE.md) (2026-11-25). Where this file calls the Python host "independent", read "steward-authored, cross-language".
+
 **Run date:** 2026-06-06. **Design:** [`experiment-design.md`](./experiment-design.md). **Raw captures:** [`captures/cell-a/`](./captures/cell-a/). **This is the paper's headline empirical result.**
 
 ## Setup

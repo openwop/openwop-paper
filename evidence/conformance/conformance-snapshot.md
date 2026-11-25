@@ -1,5 +1,7 @@
 # Conformance snapshot — `openwop.dev/conformance/`
 
+> **Historical (protocol v1, suite 1.18.1, 2026-06-06).** The hosts and suite below are the v1 ones. v2 conformance records for the Python and SQLite hosts (suite 2.49.14, `--target-major 2`) are in [`../portability-v2/conformance/`](../portability-v2/conformance/). This leaderboard snapshot has not been re-captured at v2.
+
 **Captured:** 2026-06-06 (UTC). **Source:** <https://openwop.dev/conformance/> (leaderboard last updated 2026-06-02). **Suite:** `@openwop/openwop-conformance@1.18.1` (default mode; the published suite has since advanced to `1.20.0`, whose additions are capability-gated scenarios that soft-skip on these hosts — applicable pass-rates unchanged).
 
 > **Self-reported status — read this first.** Every row below is *self-published by the project steward*. The leaderboard's own framing is "a claim plus evidence": the claim is the advertised profile; the evidence is the conformance result published with the host. As of this capture there is **no independent third-party host or non-steward maintainer** (the project's `ROADMAP.md` migration tripwire is unfired; `KNOWN-LIMITS.md` states this). The paper must treat this as *self-reported conformance evidence*, not third-party validation. (See `../../review/paper-evaluation.md` §CRITICAL-2.)

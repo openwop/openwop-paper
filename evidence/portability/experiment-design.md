@@ -1,5 +1,7 @@
 # Cross-host portability experiment — design
 
+> **Design used for both runs.** Written for the v1 run (2026-06-06, [`results.md`](./results.md), historical) and re-used at v2 ([`../portability-v2/`](../portability-v2/PROVENANCE.md), 2026-11-25). Paths here (`/v1/runs`, v1 hosts) are the v1 ones.
+
 **Purpose.** Convert the manuscript's §7.3 portability claim from a hypothesis into a falsifiable, reproducible result. Portability is the paper's "most important and most demanding" claim; this is the one experiment a reviewer of a protocol-portability paper will actually weigh, so the paper should be built around it.
 
 **Operational definition.** *OpenWOP is portable for a workflow W* iff executing the **same** `WorkflowDefinition` W against two compliant hosts yields, after normalizing host-local non-determinism: (1) the same terminal `RunState`; (2) the same canonical ordered sequence of `RunEvent` **types**, each schema-valid against `run-event.schema.json`; (3) equivalent `Artifact` outputs; and (4) — for durable hosts — a replay/fork that re-reads the recorded checkpoint identically.

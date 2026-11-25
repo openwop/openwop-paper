@@ -4,12 +4,12 @@ This folder is the **arXiv submission draft** of the manuscript, generated from 
 
 ## Files
 - `main.tex` — the full, **self-contained** paper. All 3 figures are **native TikZ** (drawn in-document), the bibliography is a manual `thebibliography`, no `.bib` and **no external image files** needed.
-- `main.pdf` — the compiled paper (12 pp).
+- `main.pdf` — the compiled paper (13 pp).
 - [`arxiv-submission.md`](arxiv-submission.md) — arXiv form metadata (title, categories `cs.SE`/`cs.DC`/`cs.AI`, license, abstract to paste).
 - [`cover-note.md`](cover-note.md) — optional cover note for a workshop/venue submission.
 
 ## Compile status — VERIFIED ✓
-Built locally with **Tectonic 0.16.9** (the same XeTeX/package stack Overleaf uses): **`main.pdf`, 12 pages, 0 errors, 0 warnings** (0 overfull, 0 underfull, 0 undefined references). The compiled `main.pdf` is included in this folder. *(I couldn't drive the Overleaf web app — it needs an authenticated browser session — so I compiled with Tectonic, which catches the same errors.)* The earlier underfull-`\hbox` warnings came from justified `p{}` table columns (not the bibliography); fixed by making the table columns `>{\raggedright\arraybackslash}p{...}` (plus a `\raggedright` in `thebibliography`).
+Built locally with **Tectonic 0.16.9** (the same XeTeX/package stack Overleaf uses): **`main.pdf`, 13 pages, 0 errors, 0 warnings** (0 overfull, 0 underfull, 0 undefined references); re-verified 2026-11-25 after the protocol-v2 evidence revision (was 12 pp). The compiled `main.pdf` is included in this folder. *(I couldn't drive the Overleaf web app — it needs an authenticated browser session — so I compiled with Tectonic, which catches the same errors.)* The earlier underfull-`\hbox` warnings came from justified `p{}` table columns (not the bibliography); fixed by making the table columns `>{\raggedright\arraybackslash}p{...}` (plus a `\raggedright` in `thebibliography`).
 
 ## Build (1 step)
 ```sh
