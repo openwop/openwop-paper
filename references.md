@@ -3,7 +3,7 @@
 Replaces the `[CIT: …]` placeholders in [`related-work-draft.md`](./related-work-draft.md) and supplements the manuscript's existing 5 steward sources. **All 25 entries are verified (✓)** — primary sources carry stable URLs a reviewer can check directly; the five academic citations ([9] DBOS, [23] rr, [25] Katz–Shapiro) and the standards ([12] BPMN, [13] WS-BPEL, [14] XPDL, [18] A2A) were confirmed against their authoritative sources on 2026-06-06. Format to the target venue's citation style before submission.
 
 ## Steward / primary OpenWOP sources (label as self-authored)
-- **[1]** OpenWOP v1 specification corpus. https://openwop.dev/spec/v1/ — *steward-authored primary source.*
+- **[1]** OpenWOP specification corpus. v2 (current): https://openwop.dev/spec/v2/ ; v1 (frozen at end of support 2026-10-04; the kernel in §§3–6 was drawn from it): https://github.com/openwop/openwop/tree/main/spec/v1 — *steward-authored primary source.* (Updated 2026-11-25: `openwop.dev/spec/v1/` now redirects to `/spec/v2/`.)
 - **[2]** OpenWOP conformance leaderboard. https://openwop.dev/conformance/ — *self-reported.*
 - **[3]** OpenWOP — "A2A vs MCP vs OpenWOP" comparison. https://openwop.dev/comparisons/ — *steward-authored.*
 - **[4]** OpenWOP workflow-engine reference application. https://github.com/openwop/openwop/tree/main/apps/workflow-engine.
