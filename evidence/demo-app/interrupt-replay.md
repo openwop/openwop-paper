@@ -1,5 +1,7 @@
 # Interrupt / resume + replay-debug capture (durable host)
 
+> **Captured at protocol v1** (2026-06-06). Not re-captured at v2. The v2 portability run includes an interrupt round trip and a replay fork across two hosts ([`../portability-v2/`](../portability-v2/PROVENANCE.md)).
+
 **Captured:** 2026-06-06. **Host:** the OpenWOP reference workflow-engine application (`openwop-app`, run locally on its default SQLite store — a *durable* host advertising the interrupt profiles), port 8080. Raw capture: [`observed-interrupt-run.json`](observed-interrupt-run.json). Closes the interrupt/resume + replay/debug items of the manuscript's §12 (formerly "capture a demo run … interrupts/resume, replay/debug if available").
 
 ## What was driven
